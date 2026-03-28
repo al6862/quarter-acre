@@ -46,7 +46,7 @@ dialog {
 
 a {
   text-decoration: none;
-  color: var(--color-foreground);
+  color: inherit;
 }
 
 p {

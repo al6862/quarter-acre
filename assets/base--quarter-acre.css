@@ -47,6 +47,21 @@ body, .body {
   letter-spacing: 0.01em;
 }
 
+h1 {
+  font-family: var(--font-suisse-intl);
+  font-weight: 700;
+  font-size: 2.375rem;
+  line-height: 100%;
+  letter-spacing: -0.06em;
+  vertical-align: middle;
+}
+@media screen and (min-width: 990px) {
+  h1 {
+    font-size: 6.25rem;
+  }
+}
+
+
 .rte a {
   text-decoration: underline;
 }
