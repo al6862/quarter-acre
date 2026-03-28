@@ -1,8 +1,14 @@
 :root {
   --white: #FFFFFF;
+  --eggshell: #F1ECE5;
+  --light-brown: #543C23;
+  --light-brown-30: #543C234D;
 
-  --font-circular: 'CircularXXTrial'. helvetica, sans-serif;
+  --font-circular: 'CircularXXTrial', helvetica, sans-serif;
   --font-suisse-intl: "Suisse Int'l", helvetica, sans-serif;
+
+  --color-background: var(--eggshell);
+  --color-foreground: var(--light-brown);
 }
 
 .title {
@@ -15,6 +21,15 @@
   vertical-align: middle;
 }
 
+.big-title {
+  font-family: var(--font-suisse-intl);
+  font-weight: 700;
+  font-size: 3.75rem;
+  line-height: 100%;
+  letter-spacing: -0.03em;
+  vertical-align: middle;
+}
+
 .nav {
   font-family: var(--font-circular);
   font-weight: 700;
@@ -22,4 +37,19 @@
   line-height: 114.99999999999999%;
   letter-spacing: -0.01em;
   text-transform: capitalize;
+}
+
+body, .body {
+  font-family: var(--font-circular);
+  font-weight: 500;
+  font-size: 0.75rem;
+  line-height: 100%;
+  letter-spacing: 0.01em;
+}
+
+.rte a {
+  text-decoration: underline;
+}
+.rte * + p {
+  margin-top: 1em;
 }
