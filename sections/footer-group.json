@@ -1,21 +1,79 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "type": "footer",
   "name": "t:general.footer",
   "sections": {
     "footer": {
       "type": "footer",
+      "blocks": {
+        "text_col_Y7Rtrd": {
+          "type": "text_col",
+          "settings": {
+            "first_row_content": "<p><a href=\"mailto:hello@quarteracres.com\" title=\"mailto:hello@quarteracres.com\">hello@quarteracres.com<\/a><\/p>",
+            "second_row_content": "<p>@quarteracres<\/p>"
+          }
+        },
+        "text_col_8Ymxrh": {
+          "type": "text_col",
+          "settings": {
+            "first_row_content": "<p>Roscoe Motel<\/p><p>2054 Old Route 17, \u2028Roscoe, NY 12776<\/p>",
+            "second_row_content": "<p>Learn More<\/p>"
+          }
+        },
+        "text_col_qnacC4": {
+          "type": "text_col",
+          "settings": {
+            "first_row_content": "<p>The Little Store<\/p><p>64 Stewart Avenue, \u2028Roscoe, NY 12776<\/p>",
+            "second_row_content": "<p>Book an Appointment<\/p>"
+          }
+        },
+        "desktop_menu_CgytPe": {
+          "type": "desktop_menu",
+          "settings": {
+            "header": "Info",
+            "menu": "footer"
+          }
+        },
+        "desktop_menu_NaNc3J": {
+          "type": "desktop_menu",
+          "settings": {
+            "header": "Social",
+            "menu": "footer-social-menu-desktop"
+          }
+        },
+        "mobile_menu_9jgW4b": {
+          "type": "mobile_menu",
+          "settings": {
+            "menu": "footer-shop-menu-mobile"
+          }
+        },
+        "mobile_menu_CEXMz3": {
+          "type": "mobile_menu",
+          "settings": {
+            "menu": "footer-privacy-policy-menu-mobile"
+          }
+        },
+        "mobile_menu_4VNXD9": {
+          "type": "mobile_menu",
+          "settings": {
+            "menu": "footer-instagram-menu-mobile"
+          }
+        }
+      },
+      "block_order": [
+        "text_col_Y7Rtrd",
+        "text_col_8Ymxrh",
+        "text_col_qnacC4",
+        "desktop_menu_CgytPe",
+        "desktop_menu_NaNc3J",
+        "mobile_menu_9jgW4b",
+        "mobile_menu_CEXMz3",
+        "mobile_menu_4VNXD9"
+      ],
       "settings": {
-        "menu": "",
-        "show_payment_icons": true
+        "heading": "<p>Sign Up for our newsletter to receive seasonal promotions, product updates, and snail mail<\/p>",
+        "eyebrow": "Our Newsletter",
+        "list_id": "<div class=\"klaviyo-form-TmrPfg\"><\/div>",
+        "disclaimer": "By signing up you are agreeing to our Privacy Policy"
       }
     }
   },
