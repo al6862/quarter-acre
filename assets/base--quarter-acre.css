@@ -39,7 +39,7 @@
   text-transform: capitalize;
 }
 
-body {
+body, .body {
   font-family: var(--font-circular);
   font-weight: 500;
   font-size: 0.75rem;

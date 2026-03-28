@@ -30,25 +30,50 @@
           </div>
         {% endif %}
 
-        {% assign has_mobile_menus = section.blocks | has: 'type', 'desktop_menu' %}
-        {% if has_mobile_menus %}
+        {% assign has_desktop_menus = section.blocks | has: 'type', 'desktop_menu' %}
+        {% if has_desktop_menus or section.settings.video != blank %}
           <div class="footer__desktop-menus">
-            {% for block in section.blocks %}
-              {% if block.type == 'desktop_menu' %}
-                <div class="footer__desktop-menu">
-                  {% if block.settings.header != blank %}
-                    <span>{{ block.settings.header }}</span>
-                  {% endif %}
-                  {% if block.settings.menu != blank %}
-                    <div class="footer__desktop-menu-links">
-                      {% for link in block.settings.menu.links %}
-                        {{ link.title | link_to: link.url }}
-                      {% endfor %}
-                    </div>
-                  {% endif %}
-                </div>
-              {% endif %}
-            {% endfor %}
+            {% if has_desktop_menus %}
+              {% for block in section.blocks %}
+                {% if block.type == 'desktop_menu' %}
+                  <div class="footer__desktop-menu">
+                    {% if block.settings.header != blank %}
+                      <span>{{ block.settings.header }}</span>
+                    {% endif %}
+                    {% if block.settings.menu != blank %}
+                      <div class="footer__desktop-menu-links">
+                        {% for link in block.settings.menu.links %}
+                          {{ link.title | link_to: link.url }}
+                        {% endfor %}
+                      </div>
+                    {% endif %}
+                  </div>
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+            {% if section.settings.video != blank %}
+              <div class="footer__coop-video">
+                <svg
+                  viewBox="0 0 100 100"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    id="circlePath"
+                    d="
+                      M 10, 50
+                      a 40,40 0 1,1 80,0
+                      40,40 0 1,1 -80,0
+                    "
+                  />
+                  <foreignObject height="100%" width="100%">{{ section.settings.video | video_tag: autoplay: true, loop: true, muted: true, image_size: 300, loading: 'lazy' }}</foreignObject>
+                  <text dy="-3%">
+                    <textPath startOffset="35" href="#circlePath" class="body">
+                      From our Quarter Acre
+                    </textPath>
+                  </text>
+                </svg>
+              </div>
+            {% endif %}
           </div>
         {% endif %}
       {% endif %}
@@ -194,6 +219,26 @@
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
+  }
+
+  .footer__coop-video {
+    align-self: end;
+    grid-column: 3;
+    width: 68%;
+    margin-left: auto;
+  }
+  .footer__coop-video svg foreignObject {
+    padding: 10%;
+  }
+  .footer__coop-video svg foreignObject video {
+    border-radius: 50%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+  }
+  .footer__coop-video svg textPath {
+    font-size: 50%;
+    fill: var(--light-brown-30);
+    text-transform: uppercase;
   }
 {% endstylesheet %}
 
