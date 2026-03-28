@@ -44,6 +44,11 @@ dialog {
   color: var(--color-foreground);
 }
 
+a {
+  text-decoration: none;
+  color: var(--color-foreground);
+}
+
 p {
   text-wrap: pretty;
 }
@@ -71,7 +76,6 @@ p:empty {
   margin-block-end: 0;
 }
 
-/** Theme styles below */
 body {
   font-family: var(--font-primary--family);
   background-color: var(--color-background);
