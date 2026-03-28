@@ -15,14 +15,14 @@
         "text_col_8Ymxrh": {
           "type": "text_col",
           "settings": {
-            "first_row_content": "<p>Roscoe Motel<\/p><p>2054 Old Route 17, \u2028Roscoe, NY 12776<\/p>",
+            "first_row_content": "<p>Roscoe Motel<\/p><p>2054 Old Route 17, \u2028<br\/>Roscoe, NY 12776<\/p>",
             "second_row_content": "<p>Learn More<\/p>"
           }
         },
         "text_col_qnacC4": {
           "type": "text_col",
           "settings": {
-            "first_row_content": "<p>The Little Store<\/p><p>64 Stewart Avenue, \u2028Roscoe, NY 12776<\/p>",
+            "first_row_content": "<p>The Little Store<\/p><p>64 Stewart Avenue, \u2028<br\/>Roscoe, NY 12776<\/p>",
             "second_row_content": "<p>Book an Appointment<\/p>"
           }
         },
@@ -70,6 +70,7 @@
         "mobile_menu_4VNXD9"
       ],
       "settings": {
+        "video": "shopify:\/\/files\/videos\/quarter.acre_1760391000_3742571787830839146_54964256270.mp4",
         "heading": "<p>Sign Up for our newsletter to receive seasonal promotions, product updates, and snail mail<\/p>",
         "eyebrow": "Our Newsletter",
         "list_id": "<div class=\"klaviyo-form-TmrPfg\"><\/div>",
