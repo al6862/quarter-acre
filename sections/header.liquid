@@ -32,6 +32,13 @@
 
 {% stylesheet %}
   header-drawer {
+    --header-color: var(--white);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    color: var(--header-color);
     height: 3.375rem;
     padding: 0 1.25rem;
     display: grid;
@@ -42,6 +49,15 @@
     header-drawer {
       padding: 0 2.5rem;
     }
+  }
+  .header__desktop-menu, .header__mobile-menu-container {
+    grid-column: 1;
+  }
+  .header__title {
+    grid-column: 2;
+  }
+  .header__cart {
+    grid-column: 3;
   }
   
   .header__desktop-menu {
@@ -68,6 +84,7 @@
     padding: 1.25rem;
     gap: 1rem;
     background-color: var(--white);
+    color: var(--light-brown);
   }
   .open-menu-button {
     cursor: pointer;
