@@ -9,6 +9,7 @@
  */
 {
   "current": {
+    "foreground_color": "#000000",
     "content_for_index": [],
     "blocks": {
       "855628211100114053": {
