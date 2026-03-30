@@ -66,14 +66,14 @@
     </product-featured-media>
   </div>
 
-  <div class="product__mobile-slideshow swiper">
+  <div class="product__mobile-slideshow swiper desktop-hidden">
     <div class="swiper-wrapper">
       {% if product.selected_or_first_available_variant.featured_media %}
         <div class="swiper-slide">
           {% if product.selected_or_first_available_variant.featured_media.media_type == 'video'  %}
-            {{ product.selected_or_first_available_variant.featured_media | video_tag: image_size: '1440x', loop: true, controls: false, muted: true, autoplay: true }}
+            {{ product.selected_or_first_available_variant.featured_media | video_tag: image_size: '1980x', loop: true, controls: false, muted: true, autoplay: true }}
           {% else %}
-            {{ product.selected_or_first_available_variant.featured_media | image_url: width: 1440 | image_tag }}
+            {{ product.selected_or_first_available_variant.featured_media | image_url: width: 1980 | image_tag }}
           {% endif %}
         </div>
       {% endif %}
@@ -81,9 +81,9 @@
         {% unless media.id == product.selected_or_first_available_variant.featured_media.id %}
           <div class="swiper-slide">
             {% if media.media_type == 'video'  %}
-              {{ media | video_tag: image_size: '1440x', loop: true, controls: false, muted: true, autoplay: true }}
+              {{ media | video_tag: image_size: '1980x', loop: true, controls: false, muted: true, autoplay: true }}
             {% else %}
-              {{ media | image_url: width: 1440 | image_tag }}
+              {{ media | image_url: width: 1980 | image_tag }}
             {% endif %}
           </div>
         {% endunless %}
@@ -397,6 +397,34 @@
   }
   .product__description-variant-selects {
     padding: 0.75rem 1.25rem;
+  }
+  .product__description table {
+    height: unset !important;
+    width: unset !important;
+  }
+  .product__description table * {
+    height: unset !important;
+    width: unset !important;
+  }
+  .product__description table tr td {
+    width: 50% !important;
+  }
+  .product__description table tr:first-child {
+    margin-bottom: 0.5rem;
+  }
+  .product__description table tr td:first-child {
+    padding-right: 1rem;
+  }
+  .product__description table tr td:nth-child(2) {
+    padding-left: 1rem;
+  }
+  @media screen and (min-width: 990px) {
+    .product__description table tr td:first-child {
+      padding-right: 1.875rem;
+    }
+    .product__description table tr td:nth-child(2) {
+      padding-left: 1.875rem;
+    }
   }
   .product__description table td {
     vertical-align: top;

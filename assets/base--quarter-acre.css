@@ -3,8 +3,10 @@
   --eggshell: #F1ECE5;
   --light-brown: #543C23;
   --light-brown-30: #543C234D;
+  --light-brown-60: #543C2399;
 
   --font-circular: 'CircularXXTrial', helvetica, sans-serif;
+  --font-crimson-text: 'Crimson Text', serif;
   --font-suisse-intl: "Suisse Int'l", helvetica, sans-serif;
 
   --color-background: var(--eggshell);
@@ -77,6 +79,15 @@ h1, .h1 {
   letter-spacing: 1%;
 }
 
+.chart-italic {
+  font-family: var(--font-circular);
+  font-weight: 300;
+  font-style: italic;
+  font-size: 0.875rem;
+  line-height: 100%;
+  letter-spacing: 0.01em;
+}
+
 .cta {
   font-family: var(--font-suisse-intl);
   font-weight: 500;
@@ -84,6 +95,14 @@ h1, .h1 {
   line-height: 110.00000000000001%;
   letter-spacing: 0.02em;
   text-align: center;
+}
+
+.fig {
+  font-family: var(--font-crimson-text);
+  font-weight: 600;
+  font-size: 0.75rem;
+  line-height: 110.00000000000001%;
+  letter-spacing: 0%;
 }
 
 .rte a {
