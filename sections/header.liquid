@@ -18,16 +18,11 @@
     </div>
   </div>
 
-
   <h2 class="header__title title">
     {{ shop.name | link_to: routes.root_url }}
   </h2>
 
-  <div class="header__cart">
-    <a class="nav" href="{{ routes.cart_url }}">
-      Cart {{ cart.item_count }}
-    </a>
-  </div>
+  <button class="header__cart nav" aria-haspopup="dialog" aria-controls="cart-drawer" aria-expanded="false">Bag {{ cart.item_count }}</button>
 </header-drawer>
 
 {% stylesheet %}
@@ -83,7 +78,7 @@
     align-items: start;
     padding: 1.25rem;
     gap: 1rem;
-    background-color: var(--white);
+    background-color: var(--eggshell);
     color: var(--light-brown);
   }
   .open-menu-button {
@@ -108,6 +103,9 @@
     position: fixed;
     inset: 0;
     width: 100vw;
+  }
+  body:has(.header__mobile-menu.open) {
+    overflow: hidden;
   }
 {% endstylesheet %}
 
