@@ -16,8 +16,8 @@
   data-product-id="{{ product.id }}"
   data-url="{{ product.url }}"
 >
-  <div class="product__featured-media-container">
-    <product-featured-media data-is-chicken-view="{{ product.metafields.custom.add_chicken_view }}">
+  <div class="product__featured-media-container mobile-hidden">
+    <product-featured-media data-is-chicken-view="{{ product.metafields.custom.add_chicken_view }}" id="featured-media">
       {% liquid
         if product.metafields.custom.add_chicken_view
           assign featured_media_limit = 4
@@ -57,7 +57,7 @@
       {% endif %}
       <h1>{{ product.title }}</h1>
       {% if product.metafields.custom.add_chicken_view %}
-        <div class="views-nav chart">
+        <div class="views-nav chart" aria-controls="featured-media">
           <span>View</span>
           <span class="first-view active">1</span>
           <span class="second-view">2</span>
@@ -66,9 +66,36 @@
     </product-featured-media>
   </div>
 
+  <div class="product__mobile-slideshow swiper">
+    <div class="swiper-wrapper">
+      {% if product.selected_or_first_available_variant.featured_media %}
+        <div class="swiper-slide">
+          {% if product.selected_or_first_available_variant.featured_media.media_type == 'video'  %}
+            {{ product.selected_or_first_available_variant.featured_media | video_tag: image_size: '1440x', loop: true, controls: false, muted: true, autoplay: true }}
+          {% else %}
+            {{ product.selected_or_first_available_variant.featured_media | image_url: width: 1440 | image_tag }}
+          {% endif %}
+        </div>
+      {% endif %}
+      {% for media in product.media %}
+        {% unless media.id == product.selected_or_first_available_variant.featured_media.id %}
+          <div class="swiper-slide">
+            {% if media.media_type == 'video'  %}
+              {{ media | video_tag: image_size: '1440x', loop: true, controls: false, muted: true, autoplay: true }}
+            {% else %}
+              {{ media | image_url: width: 1440 | image_tag }}
+            {% endif %}
+          </div>
+        {% endunless %}
+      {% endfor %}
+    </div>
+    <div class="chart swiper-pagination"></div>
+    <h1>{{ product.title }}</h1>
+  </div>
+
   <div class="product__content">
-    <div class="product__media-thumbnails-container">
-      <product-thumbnails>
+    <div class="product__media-thumbnails-container mobile-hidden">
+      <product-thumbnails aria-controls="featured-media">
         {% liquid
           assign chicken_view_limit = 6
           assign no_chicken_view_limit = 3
@@ -122,7 +149,7 @@
 
     <div class="product__description-variant-selects">
       {% if product.description != blank %}
-        <div class="product__description rte">
+        <div class="product__description rte mobile-hidden">
           {{ product.description }}
         </div>
       {% endif %}
@@ -133,13 +160,13 @@
             <div class="product__option">
               <span class="product__option-title chart">{{ option.name }}</span>
               <option-select>
-                <div class="product__option-select">
+                <div class="product__option-select" aria-controls="{{ option.name }}-container" aria-expanded="false" aria-haspopup="dialog">
                   <span data-index="{{ forloop.index0 }}" class="product__selected-value chart">{{ option.selected_value }}</span>
                   <div class="icon-carat">
                     {{ 'icon-carat.svg' | inline_asset_content }}
                   </div>
                 </div>
-                <div class="product__option-fieldset-container">
+                <div id="{{ option.name }}-container" class="product__option-fieldset-container">
                   <div class="product__option-fieldset-content">
                     <fieldset class="product__option-fieldset">
                       <legend class="hidden">{{ option.name }}</legend>
@@ -254,13 +281,21 @@
         {% endform %}
       </product-form>
     </div>
+
+    {% if product.description != blank %}
+      <div class="product__description rte desktop-hidden">
+        {{ product.description }}
+      </div>
+    {% endif %}
   </div>
 </product-info>
 
 
 {% stylesheet %}
-  product-info {
-    display: flex;
+  @media screen and (min-width: 990px) {
+    product-info {
+      display: flex;
+    }
   }
 
   product-info > * {
@@ -472,7 +507,54 @@
   .product__tech-sheet-download .icon-download {
     padding-right: 0.75rem;
   }
+
+  @media screen and (max-width: 989px) {
+    .product__description {
+      padding: .75rem 1.25rem;
+    }
+  }
+
+  .product__mobile-slideshow {
+    position: relative;
+  }
+  .product__mobile-slideshow h1 {
+    position: absolute;
+    top: 50%;
+    left: 1.25rem;
+    color: var(--white);
+    z-index: 10;
+    pointer-events: none;
+  }
+  .product__mobile-slideshow .swiper-slide {
+    aspect-ratio: 402 / 512;
+  }
+  .product__mobile-slideshow .swiper-slide > * {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .product__mobile-slideshow .swiper-pagination {
+    text-align: right;
+    padding: 1rem 1.25rem;
+    color: var(--white);
+  }
 {% endstylesheet %}
+
+{% javascript %}
+  const swiper = new Swiper('.swiper', {
+    // Optional parameters
+    loop: true,
+
+    // If we need pagination
+    pagination: {
+      el: '.swiper-pagination',
+      type: 'fraction',
+      renderFraction: function (currentClass, totalClass) {
+        return '(<span class="' + currentClass + '"></span>' +'/' + '<span class="' + totalClass + '"></span>)';
+      },
+    },
+  });
+{% endjavascript %}
 
 {% schema %}
 {

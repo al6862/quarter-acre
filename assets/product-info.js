@@ -90,9 +90,11 @@ class OptionSelect extends HTMLElement {
     if (event.target.hasAttribute('checked') || event.currentTarget.classList.contains('product__option-select') ) {
       if (this.querySelector('.product__option-fieldset-container').classList.contains('open')) {
         this.querySelector('.product__option-fieldset-container').classList.remove('open');
+        this.querySelector('.product__option-select').setAttribute('aria-expanded', 'false');
       } else {
         this.closest('.product__variant-selects').querySelectorAll('.product__option-fieldset-container').forEach((ele) => ele.classList.remove('open'));
         this.querySelector('.product__option-fieldset-container').classList.add('open');
+        this.querySelector('.product__option-select').setAttribute('aria-expanded', 'true');
       }
     }
   }
