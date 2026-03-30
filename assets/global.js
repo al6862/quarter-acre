@@ -8,17 +8,18 @@ class HeaderDrawer extends HTMLElement {
 
   connectedCallback() {
     this.mobileMenu = this.querySelector('.header__mobile-menu');
+    this.mobileMenuContainer = this.querySelector('.header__mobile-menu-container');
     this.openButton = this.querySelector('.open-menu-button');
     this.bindedHandleKeyUp = this.handleKeyUp.bind(this);
     this.bindedHandleClick = this.handleClick.bind(this);
 
     this.addEventListener('keyup', this.bindedHandleKeyUp);
-    this.addEventListener('click', this.bindedHandleClick);
+    this.mobileMenuContainer.addEventListener('click', this.bindedHandleClick);
   }
 
   disconnectedCallback() {
     this.removeEventListener('keyup', this.bindedHandleKeyUp);
-    this.removeEventListener('click', this.bindedHandleClick);
+    this.mobileMenuContainer.removeEventListener('click', this.bindedHandleClick);
   }
 
   /**

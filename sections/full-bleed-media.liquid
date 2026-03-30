@@ -7,10 +7,10 @@
     {% endif %}
 
     {% if section.settings.desktop_heading != blank %}
-      <h1 class="{% if section.settings.mobile_heading != blank %}mobile-hidden{% endif %}">{{ section.settings.desktop_heading }}</h1>
+      <h1 class="{% if section.settings.mobile_heading != blank %}mobile-hidden{% endif %} big-h1">{{ section.settings.desktop_heading }}</h1>
     {% endif %}
     {% if section.settings.mobile_heading != blank %}
-      <h1 class="desktop-hidden">{{ section.settings.mobile_heading }}</h1>
+      <h1 class="desktop-hidden big-h1">{{ section.settings.mobile_heading }}</h1>
     {% endif %}
   </div>
 {% endif %}

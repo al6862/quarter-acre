@@ -47,7 +47,7 @@ body, .body {
   letter-spacing: 0.01em;
 }
 
-h1 {
+.big-h1 {
   font-family: var(--font-suisse-intl);
   font-weight: 700;
   font-size: 2.375rem;
@@ -56,15 +56,46 @@ h1 {
   vertical-align: middle;
 }
 @media screen and (min-width: 990px) {
-  h1 {
+  .big-h1 {
     font-size: 6.25rem;
   }
 }
 
+h1, .h1 {
+  font-family: var(--font-suisse-intl);
+  font-weight: 450;
+  font-size: 1.75rem;
+  line-height: 114.99999999999999%;
+  letter-spacing: -0.03;
+}
+
+.chart {
+  font-family: var(--font-circular);
+  font-weight: 450;
+  font-size: 0.875rem;
+  line-height: 135%;
+  letter-spacing: 1%;
+}
+
+.cta {
+  font-family: var(--font-suisse-intl);
+  font-weight: 500;
+  font-size: 0.875rem;
+  line-height: 110.00000000000001%;
+  letter-spacing: 0.02em;
+  text-align: center;
+}
 
 .rte a {
   text-decoration: underline;
 }
 .rte * + p {
   margin-top: 1em;
+}
+
+button[type="submit"] {
+  height: 3.125rem;
+  width: 100%;
+  background-color: var(--light-brown);
+  color: var(--white);
 }
