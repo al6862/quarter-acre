@@ -1,0 +1,374 @@
+<div class="split-media-content{% if section.settings.layout == 'media_on_left' %} media-on-left{% endif %}">
+  <div class="split-media-content__content">
+    <div class="split-media-content__content-eyebrow-heading">
+      {% if section.settings.content_eyebrow != blank %}
+        <span class="split-media-content__content-eyebrow">{{ section.settings.content_eyebrow }}</span>
+      {% endif %}
+      {% if section.settings.content_heading != blank %}
+        <h1>{{ section.settings.content_heading }}</h1>
+      {% endif %}
+    </div>
+
+    {% assign has_rows = section.blocks | has: 'type', 'row' %}
+    {% if has_rows %}
+      <div class="split-media-content__rows mobile-hidden">
+        {% for block in section.blocks %}
+          {% if block.type == 'row' %}
+            <div class="split-media-content__row">
+              <div class="row-heading">
+                {% if block.settings.heading != blank %}
+                  <span class="chart">{{ block.settings.heading }}</span>
+                {% endif %}
+                {% if block.settings.subheading != blank %}
+                  <span class="chart-italic row-heading__subheading">{{ block.settings.subheading }}</span>
+                {% endif %}
+              </div>
+              {% if block.settings.content != blank %}
+                <div class="row-content rte chart">{{ block.settings.content }}</div>
+              {% endif %}
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+
+  {% assign image_blocks = section.blocks | where: 'type', 'image' %}
+  <div class="split-media-content__media">
+    {% if image_blocks.size > 0 %}
+      <div class="split-media-content__big-media{% if image_blocks.size > 1 %} mobile-hidden{% endif %}">
+        {{ image_blocks.first.settings.image | image_url: width: 1440 | image_tag }}
+      </div>
+    {% endif %}
+
+    {% if image_blocks.size > 1 %}
+      <div class="split-media-content__small-media mobile-hidden">
+        {% for block in image_blocks %}
+          {% if forloop.index0 > 0 %}
+            {{ block.settings.image | image_url: width: 1440 | image_tag }}
+          {% endif %}
+        {% endfor %}
+      </div>
+
+      <div class="split-media-content__mobile-media swiper desktop-hidden">
+        <div class="swiper-wrapper">
+        {% for block in image_blocks %}
+          <div class="swiper-slide">
+            {{ block.settings.image | image_url: width: 1440 | image_tag }}
+          </div>
+        {% endfor %}
+        </div>
+        <div class="chart swiper-pagination"></div>
+      </div>
+    {% endif %}
+
+    {% if section.settings.media_eyebrow != blank or section.settings.media_caption != blank %}
+      <div class="split-media-content__media-eyebrow-content">
+        {% if section.settings.media_eyebrow != blank %}
+          <span class="split-media-content__media-eyebrow fig">{{ section.settings.media_eyebrow }}</span>
+        {% endif %}
+        {% if section.settings.media_caption != blank %}
+          <span class="split-media-content__media-content">{{ section.settings.media_caption }}</span>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    {% if has_rows %}
+      <div class="split-media-content__rows desktop-hidden">
+        {% for block in section.blocks %}
+          {% if block.type == 'row' %}
+            <div class="split-media-content__row">
+              <div class="row-heading">
+                {% if block.settings.heading != blank %}
+                  <span class="chart">{{ block.settings.heading }}</span>
+                {% endif %}
+                {% if block.settings.subheading != blank %}
+                  <span class="chart-italic row-heading__subheading">{{ block.settings.subheading }}</span>
+                {% endif %}
+              </div>
+              {% if block.settings.content != blank %}
+                <div class="row-content rte chart">{{ block.settings.content }}</div>
+              {% endif %}
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+{% stylesheet %}
+  .split-media-content {
+    margin-top: 1.875rem;
+    border-top: 1px solid var(--light-brown-60);
+    padding: 1.875rem 1.25rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2.625rem;
+  }
+  @media screen and (min-width: 990px) {
+    .split-media-content {
+      margin-top: 1.25rem;
+      padding: 1.25rem 0 0;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0;
+    }
+
+    .split-media-content.media-on-left  > *:first-child {
+      grid-column: 2;
+      grid-row: 1;
+    }
+
+    .split-media-content.media-on-left  > *:nth-child(2) {
+      grid-column: 1;
+      grid-row: 1;
+    }
+  }
+
+  @media screen and (min-width: 990px) {
+    .split-media-content__content {
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+  }
+  .split-media-content__content-eyebrow {
+    display: block;
+    margin-bottom: 1.25rem;
+  }
+  @media screen and (min-width: 990px) {
+    .split-media-content__content-eyebrow-heading {
+      width: 85%;
+    }
+  }
+
+  .split-media-content__rows {
+    border-top: 1px solid var(--light-brown);
+  }
+  @media screen and (min-width: 990px) {
+    .split-media-content__row + .split-media-content__row {
+      border-top: 1px solid var(--light-brown-30);
+    }
+  }
+  .split-media-content__row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.375rem 0;
+  }
+  @media screen and (min-width: 990px) {
+    .split-media-content__row {
+      padding: 0.75rem 0;
+    }
+  }
+
+  @media screen and (min-width: 990px) {
+    .split-media-content:not(.media-on-left) .split-media-content__media {
+      border-left: 1px solid var(--light-brown-60);
+      padding-left: 1.25rem;
+    }
+    .split-media-content:not(.media-on-left) .split-media-content__media-eyebrow-content {
+      padding-left: 1.25rem;
+    }
+
+    .split-media-content.media-on-left .split-media-content__media {
+      border-right: 1px solid var(--light-brown-60);
+      padding-right: 1.25rem;
+    }
+    .split-media-content.media-on-left .split-media-content__media-eyebrow-content {
+      padding-right: 1.25rem;
+    }
+  }
+
+  .split-media-content__media {
+    position: relative;
+  }
+  .split-media-content__media-eyebrow-content {
+    position: absolute;
+    bottom: 1.2rem;
+    left: 1.25rem;
+    right: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    color: var(--white);
+  }
+  .split-media-content__media-eyebrow, .split-media-content__media-content {
+    white-space: pre;
+  }
+
+  @media screen and (min-width: 990px) {
+    .split-media-content__media:has(.split-media-content__small-media) {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-rows: repeat(2, min-content);
+      gap: 0.25rem;
+    }
+    .split-media-content__media:has(.split-media-content__small-media) .split-media-content__big-media {
+      grid-column: 1 / span 2;
+    }
+    .split-media-content__media:has(.split-media-content__small-media) .split-media-content__small-media {
+      grid-column: 3;
+    }
+    .split-media-content__small-media:not(:empty) {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+    .split-media-content__media:has(.split-media-content__small-media) .split-media-content__media-eyebrow-content {
+      grid-column: 1 / span 2;
+      margin-top: 0.75rem;
+    }
+  }
+  .split-media-content__media:has(.split-media-content__small-media) .split-media-content__media-eyebrow-content {
+    position: unset;
+    padding: unset;
+    color: var(--light-brown);
+  }
+
+  @media screen and (max-width: 989px) {
+    .split-media-content__media:has(.split-media-content__mobile-media) {
+      display: flex;
+      flex-direction: column;
+    }
+    .split-media-content__media:not(:has(.split-media-content__mobile-media)) .split-media-content__rows {
+      margin-top: 2rem;
+    }
+    .split-media-content__media:has(.split-media-content__mobile-media) .split-media-content__rows {
+      order: -1;
+      margin-bottom: 2rem;
+    }
+    .split-media-content__media:has(.split-media-content__mobile-media) .split-media-content__media-eyebrow-content {
+      margin-top: 0.75rem;
+    }
+  }
+
+  .split-media-content__mobile-media .swiper-slide {
+    aspect-ratio: 362 / 450;
+    width: 100% !important;
+  }
+  .split-media-content__mobile-media .swiper-slide > * {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .split-media-content__mobile-media .swiper-pagination {
+    text-align: right;
+    padding: 1rem 1.25rem;
+    color: var(--white);
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  const swiper = new Swiper('.swiper', {
+    // Optional parameters
+    loop: true,
+
+    // If we need pagination
+    pagination: {
+      el: '.swiper-pagination',
+      type: 'fraction',
+      renderFraction: function (currentClass, totalClass) {
+        return '(<span class="' + currentClass + '"></span>' +'/' + '<span class="' + totalClass + '"></span>)';
+      },
+    },
+  });
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Split Media + Content",
+  "disabled_on": {"groups": ["header", "footer"]},
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "content_eyebrow",
+      "label": "Content eyebrow"
+    },
+    {
+      "type": "text",
+      "id": "content_heading",
+      "label": "Content heading",
+    },
+    {
+      "type": "header",
+      "content": "Media"
+    },
+    {
+      "type": "text",
+      "id": "media_eyebrow",
+      "label": "Media eyebrow",
+    },
+    {
+      "type": "richtext",
+      "id": "media_caption",
+      "label": "Media caption",
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Desktop layout",
+      "options": [
+        {
+          "label": "Content on left",
+          "value": "content_on_left"
+        },
+        {
+          "label": "Media on left",
+          "value": "media_on_left"
+        }
+      ],
+      "default": "content_on_left"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Image",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+      ]
+    },
+    {
+      "type": "row",
+      "name": "Row",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+        },
+        {
+          "type": "text",
+          "id": "subheading",
+          "label": "Subheading"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "content",
+          "label": "Content"
+        },
+      ]
+    },
+  ],
+  "presets": [
+    {
+      "name": "Split Media + Content"
+    }
+  ]
+}
+{% endschema %} 
