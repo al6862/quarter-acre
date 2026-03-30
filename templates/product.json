@@ -1,20 +1,272 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
     "main": {
       "type": "product",
       "settings": {}
+    },
+    "split_media_content_QR4QAX": {
+      "type": "split-media-content",
+      "blocks": {
+        "image_pGx4qw": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/342706b4f91b72d5138cfd989f91b3a140856bbd.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "image_pGx4qw"
+      ],
+      "name": "Split Media + Content",
+      "settings": {
+        "content_eyebrow": "Details",
+        "content_heading": "Meet your backyard’s new centerpiece: \u2028a modern, easy-to-use chicken coop designed for simplicity and style.",
+        "media_eyebrow": "",
+        "media_caption": "",
+        "layout": "content_on_left"
+      }
+    },
+    "split_media_content_prfcyG": {
+      "type": "split-media-content",
+      "blocks": {
+        "row_UYjJr9": {
+          "type": "row",
+          "settings": {
+            "heading": "Frame",
+            "subheading": "Dimensions",
+            "content": "34 x 12 x 9’’"
+          }
+        },
+        "row_iiRy3g": {
+          "type": "row",
+          "settings": {
+            "heading": "Run",
+            "subheading": "Dimensions",
+            "content": "34 x 12 x 9’’"
+          }
+        },
+        "row_3aL7C3": {
+          "type": "row",
+          "settings": {
+            "heading": "Capacity",
+            "subheading": "# of Chickens",
+            "content": "4-6 Chickens"
+          }
+        },
+        "row_9FUezV": {
+          "type": "row",
+          "settings": {
+            "heading": "Frame",
+            "subheading": "Materials",
+            "content": "Machine Grade Ply"
+          }
+        },
+        "row_nraeki": {
+          "type": "row",
+          "settings": {
+            "heading": "Accessories",
+            "subheading": "Accessories",
+            "content": "Heavy Duty Steel"
+          }
+        },
+        "image_ydtcBb": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/original_4a6a255a851fa344d2f5510107075c66_1.png"
+          }
+        }
+      },
+      "block_order": [
+        "row_UYjJr9",
+        "row_iiRy3g",
+        "row_3aL7C3",
+        "row_9FUezV",
+        "row_nraeki",
+        "image_ydtcBb"
+      ],
+      "name": "Split Media + Content",
+      "settings": {
+        "content_eyebrow": "Assembly",
+        "content_heading": "Designed with pre-drilled holes, labeled panels, and a simple interlocking frame.",
+        "media_eyebrow": "",
+        "media_caption": "",
+        "layout": "media_on_left"
+      }
+    },
+    "media_slider_4beXia": {
+      "type": "media-slider",
+      "blocks": {
+        "slide_iD7q8n": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/c89002d398500a7e8b497aaa5f41eeeb.png",
+            "eyebrow": "fig. (a)",
+            "content": "<p>Roof (2x2)<\/p><p>Material: Bamboo<\/p><p>This is adjustable lamp that can be filled at various angles and the shape.<\/p>"
+          }
+        },
+        "slide_mtfpK3": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/c89002d398500a7e8b497aaa5f41eeeb_3.png",
+            "eyebrow": "fig. (b)",
+            "content": "<p>Base (12x34)<\/p><p>Material: Plywood<\/p><p>This is adjustable lamp that can be filled at various angles and the shape.<\/p>"
+          }
+        },
+        "slide_w3Gxq3": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/c89002d398500a7e8b497aaa5f41eeeb_2.png",
+            "eyebrow": "fig. (c)",
+            "content": "<p>Roosting Bar (34x34)<\/p><p>Material: Recycled Steel<\/p><p>This is adjustable lamp that can be filled at various angles and the shape.<\/p>"
+          }
+        },
+        "slide_D9WpqT": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/c89002d398500a7e8b497aaa5f41eeeb_1.png",
+            "eyebrow": "fig. (d)",
+            "content": "<p>Nesting Box (12x12)<\/p><p>Material: Recycled Steel<\/p><p>This is adjustable lamp that can be filled at various angles and the shape.<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "slide_iD7q8n",
+        "slide_mtfpK3",
+        "slide_w3Gxq3",
+        "slide_D9WpqT"
+      ],
+      "name": "Media Slider",
+      "settings": {}
+    },
+    "split_media_content_BtDBpN": {
+      "type": "split-media-content",
+      "blocks": {
+        "image_nxNJrn": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/original_0e9b29e90fac91008d3acfb9f345f048_2.png"
+          }
+        }
+      },
+      "block_order": [
+        "image_nxNJrn"
+      ],
+      "name": "Split Media + Content",
+      "settings": {
+        "content_eyebrow": "Cleaning",
+        "content_heading": "A smooth interior surface and removable panels for quick, hassle-free cleaning.",
+        "media_eyebrow": "fig.                (e)",
+        "media_caption": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex.<\/p>",
+        "layout": "media_on_left"
+      }
+    },
+    "split_media_content_RdUV3X": {
+      "type": "split-media-content",
+      "blocks": {
+        "row_khVBUw": {
+          "type": "row",
+          "settings": {
+            "heading": "Compatible Paint",
+            "subheading": "Customization",
+            "content": "Visit"
+          }
+        },
+        "row_8CVphX": {
+          "type": "row",
+          "settings": {
+            "heading": "Compatible Door",
+            "subheading": "Customization",
+            "content": "Visit"
+          }
+        },
+        "row_4kNGym": {
+          "type": "row",
+          "settings": {
+            "heading": "Water Feeder",
+            "subheading": "Customization",
+            "content": "Visit"
+          }
+        },
+        "image_drnaMn": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/9ed9395e7ff8f1d120dd7ae59ab201062e23ec00.png"
+          }
+        },
+        "image_z7h3bz": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/c9d14647b20421a27ffd4565ea8dc089badaaf08.png"
+          }
+        },
+        "image_rxXmTD": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/7f5ce5d54a02a5b100aeaec91a535cd6e30b8f41.png"
+          }
+        }
+      },
+      "block_order": [
+        "row_khVBUw",
+        "row_8CVphX",
+        "row_4kNGym",
+        "image_drnaMn",
+        "image_z7h3bz",
+        "image_rxXmTD"
+      ],
+      "name": "Split Media + Content",
+      "settings": {
+        "content_eyebrow": "Details",
+        "content_heading": "Customize your coop to fit the \u2028style and vibe of your backyard.",
+        "media_eyebrow": "fig.                (f)",
+        "media_caption": "<p>This Coop is painted using Home Depot’s outdoor paint in the shade Winter Green. All paint is weather proof and can be applied with any hardware brush.<\/p>",
+        "layout": "content_on_left"
+      }
+    },
+    "reviews_Y99CwK": {
+      "type": "reviews",
+      "blocks": {
+        "review_yGwKig": {
+          "type": "review",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/deb0d1fb0cd8dec611f116f16ec02f12d7e307c3.jpg",
+            "name": "Martha B.",
+            "quote": "<p>”We absolutely love this coop. It arrived super well-built and thoughtfully designed, but what really sold us was being able to make it our own. We painted it to match our house and added little details for the kids, which made it feel less like a generic farm product and more like part of our home.”<\/p>"
+          }
+        },
+        "review_HwTVQj": {
+          "type": "review",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/342706b4f91b72d5138cfd989f91b3a140856bbd.jpg",
+            "name": "Amber",
+            "quote": "<p>Amber Lorem Ipsum<\/p>"
+          }
+        },
+        "review_pgcMiA": {
+          "type": "review",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/1fd1130cde077d065325ab1fe8e14b00989db5f0.png",
+            "name": "Rachael",
+            "quote": "<p>Rachael Lorem Ipsum<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "review_yGwKig",
+        "review_HwTVQj",
+        "review_pgcMiA"
+      ],
+      "name": "Reviews",
+      "settings": {}
     }
   },
   "order": [
-    "main"
+    "main",
+    "split_media_content_QR4QAX",
+    "split_media_content_prfcyG",
+    "media_slider_4beXia",
+    "split_media_content_BtDBpN",
+    "split_media_content_RdUV3X",
+    "reviews_Y99CwK"
   ]
 }
