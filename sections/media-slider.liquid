@@ -1,0 +1,103 @@
+<div class="media-slider">
+  {% for block in section.blocks %}
+    <div class="media-slider__slide">
+      {% if block.settings.image != blank %}
+        {{ block.settings.image | image_url: width: 360 | image_tag }}
+      {% endif %}
+
+      {% if block.settings.eyebrow != blank or block.settings.content != blank %}
+        <div class="media-slide__content">
+          {% if block.settings.eyebrow != blank %}
+            <span class="fig">{{ block.settings.eyebrow }}</span>
+          {% endif %}
+          {% if block.settings.content != blank %}
+            <div class="rte">{{ block.settings.content }}</div>
+          {% endif %}
+        </div>
+      {% endif %}
+    </div>
+  {% endfor %}
+</div>
+
+{% stylesheet %}
+  .media-slider {
+    padding: 1.25rem 1.25rem 0;
+  }
+  @media screen and (max-width: 989px) {
+    .media-slider {
+      overflow-x: scroll;
+      scrollbar-width: none;
+      scroll-snap-type: x mandatory;
+      scroll-padding-left: 1.25rem;
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 0.75rem;
+    }
+  }
+  @media screen and (min-width: 990px) {
+    .media-slider {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1.25rem;
+    }
+  }
+
+  .media-slider__slide {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+  @media screen and (max-width: 989px) {
+    .media-slider__slide {
+      flex-shrink: 0;
+      width: 80vw;
+      scroll-snap-align: start;
+    }
+  }
+
+  .media-slider__slide img {
+    border-radius: 50%;
+  }
+
+  .media-slide__content {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Media Slider",
+  "disabled_on": {"groups": ["header", "footer"]},
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "eyebrow",
+          "label": "Eyebrow",
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Content"
+        },
+      ]
+    },
+  ],
+  "presets": [
+    {
+      "name": "Media Slider"
+    }
+  ]
+}
+{% endschema %} 
