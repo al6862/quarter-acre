@@ -1,0 +1,298 @@
+<div class="reviews">
+  <desktop-review-slideshow data-last-index="{{ section.blocks.size | minus: 1 }}" class="mobile-hidden">
+    <div class="review-slideshow__content">
+      <div id="review-slideshow">
+        <div class="reviews__names">
+          {% for block in section.blocks %}
+            {% if block.settings.name != blank %}
+              <div data-index="{{ forloop.index0 }}" class="review__name{% if forloop.index0 == 0 %} active{% endif %}">
+                ★★★★★ {{ block.settings.name }}
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+        <div class="reviews__quotes">
+          {% for block in section.blocks %}
+            {% if block.settings.quote != blank %}
+              <h1 data-index="{{ forloop.index0 }}" class="review__quote rte{% if forloop.index0 == 0 %} active{% endif %}">
+                {{ block.settings.quote }}
+              </h1>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+      <div class="pagination" aria-controls="review-slideshow">
+        <div class="icon-arrow prev-arrow">
+          {{ 'icon-arrow.svg' | inline_asset_content }}
+        </div>
+        <span>(<span class="active-review">1</span>/{{ section.blocks.size }})</span>
+        <div class="icon-arrow next-arrow">
+          {{ 'icon-arrow.svg' | inline_asset_content }}
+        </div>
+      </div>
+    </div>
+    <div class="review-slideshow__images">
+      {% for block in section.blocks %}
+        {% if block.settings.image != blank %}
+          <div data-index="{{ forloop.index0 }}" class="review__image{% if forloop.index0 == 0 %} active{% endif %}">
+            {{ block.settings.image | image_url: width: 1440 | image_tag }}
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </desktop-review-slideshow>
+
+  <mobile-review-slideshow class="desktop-hidden">
+    <div class="mobile-big-review">
+      {% for block in section.blocks %}
+          <div data-index="{{ forloop.index0 }}" class="review{% if forloop.index0 == 0 %} active{% endif %}">
+            {% if block.settings.image != blank %}
+              <div class="big-review__image">
+                {{ block.settings.image | image_url: width: 990 | image_tag }}
+              </div>
+            {% endif %}
+            <div class="mobile-review__content">
+              <div class="mobile-review__content-header">
+                <span>({{ forloop.index }}/{{ section.blocks.size }})</span>
+                <span>★★★★★</span>
+                {% if block.settings.name != blank %} 
+                  <span>{{ block.settings.name }}</span>
+                {% endif %}
+              </div>
+              {% if block.settings.quote != blank %} 
+                <span class="rte">{{ block.settings.quote }}</span>
+              {% endif %}
+            </div>
+          </div>
+      {% endfor %}
+    </div>
+
+    <div class="mobile-review-slides">
+      {% for block in section.blocks %}
+          <div data-index="{{ forloop.index0 }}" class="review{% if forloop.index0 == 0 %} active{% endif %}">
+            {% if block.settings.image != blank %}
+              {{ block.settings.image | image_url: width: 990 | image_tag }}
+            {% endif %}
+            <div class="mobile-review__content">
+              <span>({{ forloop.index }}/{{ section.blocks.size }})</span>
+              <span>★★★★★</span>
+              {% if block.settings.name != blank %} 
+                <span>{{ block.settings.name }}</span>
+              {% endif %}
+              {% if block.settings.quote != blank %} 
+                <span class="rte">{{ block.settings.quote }}</span>
+              {% endif %}
+            </div>
+          </div>
+      {% endfor %}
+    </div>
+  </mobile-review-slideshow>
+</div>
+{% stylesheet %}
+  .reviews {
+    margin-top: 1.875rem;
+    border-top: 1px solid var(--light-brown-60);
+    padding: 1.875rem 1.25rem 0;
+  }
+  @media screen and (min-width: 990px) {
+    .reviews {
+      margin-top: 1.25rem;
+      padding: 1.25rem 0 0;
+    }
+  }
+
+  review-slideshow {
+    display: flex;
+    flex-direction: column;
+    gap: 2.625rem;
+  }
+  @media screen and (min-width: 990px) {
+    review-slideshow {
+      height: 100vh;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0;
+    }
+  }
+
+  @media screen and (min-width: 990px) {
+    .review-slideshow__images {
+      border-left: 1px solid var(--light-brown-60);
+      position: relative;
+      height: 100%;
+    }
+    .review__image {
+      margin-left: 1.25rem;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: opacity 300ms ease-out;
+    }
+    .review__image.active {
+      opacity: 1;
+    }
+    .review__image img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  @media screen and (min-width: 990px) {
+    .reviews__names {
+      position: relative;
+      height: 1em;
+      margin-bottom: 1.25rem;
+    }
+    .review__name {
+      position: absolute;
+      top: 0;
+      opacity: 0;
+      transition: opacity 300ms ease-out;
+    }
+    .review__name.active {
+      opacity: 1;
+    }
+  }
+
+  @media screen and (min-width: 990px) {
+    .reviews__quotes {
+      position: relative;
+    }
+    .review__quote {
+      max-width: 35.75rem;
+      position: absolute;
+      top: 0;
+      opacity: 0;
+      transition: opacity 300ms ease-out;
+    }
+    .review__quote.active {
+      opacity: 1;
+    }
+  }
+
+  @media screen and (min-width: 990px) {
+    .review-slideshow__content {
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .review-slideshow__content .pagination {
+      display: flex;
+      align-items: center;
+      gap: 0.875rem;
+    }
+    .review-slideshow__content .pagination .icon-arrow {
+      cursor: pointer;
+      margin: -0.5rem;
+      padding: 0.5rem;
+    }
+    .review-slideshow__content .pagination .prev-arrow {
+      transform: rotate(180deg);
+    }
+  }
+
+  .mobile-review-slides {
+    overflow-x: scroll;
+    scrollbar-width: none;
+    scroll-snap-type: x mandatory;
+    scroll-padding-left: 1.25rem;
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 0.75rem;
+  }
+  .mobile-review-slides .review {
+    flex-shrink: 0;
+    width: 80vw;
+    scroll-snap-align: start;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+  .mobile-review-slides .review img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .mobile-review__content {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+  }
+
+  .mobile-big-review {
+    position: relative;
+    min-height: 37.5rem;
+    margin-bottom: 2rem;
+  }
+  .mobile-big-review .review {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    opacity: 0;
+    transition: opacity 300ms ease-out;
+  }
+  .mobile-big-review .review.active {
+    opacity: 1;
+  }
+  .mobile-big-review .big-review__image {
+    flex-grow: 1;
+    position: relative;
+  }
+  .mobile-big-review .big-review__image img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+  .mobile-review__content-header {
+    display: flex;
+    gap: 1.25rem;
+    margin-bottom: 1.25rem;
+  }
+  .mobile-review__content-header span:first-child {
+    min-width: 6.125rem;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Reviews",
+  "disabled_on": {"groups": ["header", "footer"]},
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "limit": 5,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name",
+        },
+        {
+          "type": "richtext",
+          "id": "quote",
+          "label": "Quote"
+        },
+      ]
+    },
+  ],
+  "presets": [
+    {
+      "name": "Reviews"
+    }
+  ]
+}
+{% endschema %} 
