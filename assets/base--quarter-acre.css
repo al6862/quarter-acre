@@ -45,9 +45,8 @@
   --light-brown-30: #543C234D;
   --light-brown-60: #543C2399;
 
-  --font-circular: 'CircularXXTrial', helvetica, sans-serif;
-  --font-crimson-text: 'Crimson Text', serif;
   --font-suisse-intl: "Suisse Int'l", helvetica, sans-serif;
+  --font-crimson-text: 'Crimson Text', serif;
 
   --color-background: var(--eggshell);
   --color-foreground: var(--light-brown);
@@ -73,7 +72,7 @@
 }
 
 .nav {
-  font-family: var(--font-circular);
+font-family: var(--font-suisse-intl);
   font-weight: 700;
   font-size: 0.75rem;
   line-height: 114.99999999999999%;
@@ -82,7 +81,7 @@
 }
 
 body, .body {
-  font-family: var(--font-circular);
+  font-family: var(--font-suisse-intl);
   font-weight: 500;
   font-size: 0.75rem;
   line-height: 100%;
@@ -112,7 +111,7 @@ h1, .h1 {
 }
 
 .chart {
-  font-family: var(--font-circular);
+  font-family: var(--font-suisse-intl);
   font-weight: 450;
   font-size: 0.875rem;
   line-height: 135%;
@@ -120,8 +119,8 @@ h1, .h1 {
 }
 
 .chart-italic {
-  font-family: var(--font-circular);
-  font-weight: 300;
+  font-family: var(--font-suisse-intl);
+  font-weight: 450;
   font-style: italic;
   font-size: 0.875rem;
   line-height: 100%;
