@@ -1,3 +1,43 @@
+@font-face {
+  font-family: "Suisse Int'l";
+  src: url('SuisseIntl-Light.otf');
+  font-weight: 450;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Suisse Int'l";
+  src: url('SuisseIntl-Book.otf');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Suisse Int'l";
+  src: url('SuisseIntl-Medium.otf');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Crimson Text";
+  src: url('CrimsonText-SemiBold.ttf');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Crimson Text";
+  src: url('CrimsonText-SemiBoldItalic.ttf');
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+
 :root {
   --white: #FFFFFF;
   --eggshell: #F1ECE5;
@@ -68,7 +108,7 @@ h1, .h1 {
   font-weight: 450;
   font-size: 1.75rem;
   line-height: 114.99999999999999%;
-  letter-spacing: -0.03;
+  letter-spacing: -0.03em;
 }
 
 .chart {
