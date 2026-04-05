@@ -12,14 +12,25 @@ class HeaderDrawer extends HTMLElement {
     this.openButton = this.querySelector('.open-menu-button');
     this.bindedHandleKeyUp = this.handleKeyUp.bind(this);
     this.bindedHandleClick = this.handleClick.bind(this);
+    this.bindedHandleScroll = this.handleScroll.bind(this);
 
     this.addEventListener('keyup', this.bindedHandleKeyUp);
     this.mobileMenuContainer.addEventListener('click', this.bindedHandleClick);
+    window.addEventListener('scroll', this.bindedHandleScroll);
   }
 
   disconnectedCallback() {
     this.removeEventListener('keyup', this.bindedHandleKeyUp);
     this.mobileMenuContainer.removeEventListener('click', this.bindedHandleClick);
+    window.removeEventListener('scroll', this.bindedHandleScroll);
+  }
+
+  handleScroll() {
+    if(window.scrollY == 0){
+      this.classList.remove('scrolled');
+    } else {
+      this.classList.add('scrolled');
+    }
   }
 
   /**

@@ -20,11 +20,11 @@
     <product-featured-media data-is-chicken-view="{{ product.metafields.custom.add_chicken_view }}" id="featured-media">
       {% liquid
         if product.metafields.custom.add_chicken_view
-          assign featured_media_limit = 4
-          assign no_featured_media_limit = 6
+          assign featured_media_limit = 8
+          assign no_featured_media_limit = 10
         else
-          assign featured_media_limit = 2
-          assign no_featured_media_limit = 3
+          assign featured_media_limit = 4
+          assign no_featured_media_limit = 5
         endif
       %}
       {% if product.selected_or_first_available_variant.featured_media %}
@@ -89,7 +89,7 @@
         {% endunless %}
       {% endfor %}
     </div>
-    <div class="chart swiper-pagination"></div>
+    <div class="fig swiper-pagination"></div>
     <h1>{{ product.title }}</h1>
   </div>
 
@@ -97,13 +97,13 @@
     <div class="product__media-thumbnails-container mobile-hidden">
       <product-thumbnails aria-controls="featured-media">
         {% liquid
-          assign chicken_view_limit = 6
-          assign no_chicken_view_limit = 3
+          assign chicken_view_limit = 10
+          assign no_chicken_view_limit = 5
         %}
         {% if product.selected_or_first_available_variant.featured_media %}
           {% liquid
-            assign chicken_view_limit = 4
-            assign no_chicken_view_limit = 2
+            assign chicken_view_limit = 8
+            assign no_chicken_view_limit = 4
           %}
           <div data-index="0" class="product__media-thumbnail active">
             {% if product.selected_or_first_available_variant.featured_media.media_type == 'video'  %}
@@ -127,6 +127,7 @@
                 {% else %}
                   {{ media | image_url: width: 1440 | image_tag }}
                 {% endif %}
+                <span class="border-circle"></span>
               </div>
             {% endif %}
           {% endfor %}
@@ -141,6 +142,7 @@
               {% else %}
                 {{ media | image_url: width: 1440 | image_tag }}
               {% endif %}
+              <span class="border-circle"></span>
             </div>
           {% endfor %}
         {% endif %}
@@ -157,47 +159,41 @@
       {% unless product.has_only_default_variant %}
         <div class="product__variant-selects">
           {% for option in product.options_with_values %}
+            {% assign option_forloop_index = forloop.index %}
             <div class="product__option">
               <span class="product__option-title chart">{{ option.name }}</span>
-              <option-select>
-                <div class="product__option-select" aria-controls="{{ option.name }}-container" aria-expanded="false" aria-haspopup="dialog">
-                  <span data-index="{{ forloop.index0 }}" class="product__selected-value chart">{{ option.selected_value }}</span>
-                  <div class="icon-carat">
-                    {{ 'icon-carat.svg' | inline_asset_content }}
-                  </div>
-                </div>
-                <div id="{{ option.name }}-container" class="product__option-fieldset-container">
-                  <div class="product__option-fieldset-content">
-                    <fieldset class="product__option-fieldset">
-                      <legend class="hidden">{{ option.name }}</legend>
-                      {% for value in option.values %}
-                        {%- liquid
-                          assign option_disabled = true
-                          if value.available
-                            assign option_disabled = false
-                          endif
-                        -%}
-                        <input
-                          type="radio"
-                          id="{{ section.id }}-{{ option.position }}-{{ forloop.index0 -}}-{{ product.handle }}"
-                          name="{{ product.title | handleize }}-{{ option.name }}-{{ section.id }}"
-                          value="{{ value | escape }}"
-                          form=form_id
-                          {% if value.selected %}
-                            checked
-                          {% endif %}
-                          {% if option_disabled %}
-                            class="disabled"
-                          {% endif %}
-                          data-product-url="{{ value.product_url }}"
-                          data-option-value-id="{{ value.id }}"
-                        >
-                        <label for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 -}}-{{ product.handle }}" class="chart">{{ value }}</label>
-                      {% endfor %}
-                    </fieldset>
-                  </div>
-                </div>
-              </option-select>
+              <fieldset class="product__option-fieldset">
+                <legend class="hidden">{{ option.name }}</legend>
+                {% for value in option.values %}
+                  {%- liquid
+                    assign option_disabled = true
+                    if value.available
+                      assign option_disabled = false
+                    endif
+                  -%}
+                  <input
+                    type="radio"
+                    id="{{ section.id }}-{{ option.position }}-{{ forloop.index0 -}}-{{ product.handle }}"
+                    name="{{ product.title | handleize }}-{{ option.name }}-{{ section.id }}"
+                    value="{{ value | escape }}"
+                    form=form_id
+                    {% if value.selected %}
+                      checked
+                    {% endif %}
+                    {% if option_disabled %}
+                      class="disabled"
+                    {% endif %}
+                    data-product-url="{{ value.product_url }}"
+                    data-option-value-id="{{ value.id }}"
+                  >
+                  <label for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 -}}-{{ product.handle }}" class="chart">
+                    {{ value }}{% if option_forloop_index == 1 %} | {{ value.variant.price | money_without_trailing_zeros }}{% endif %}
+                    {% if value.swatch.color %}
+                      <span class="swatch" style="--swatch-color: {{ value.swatch.color }}"></span>
+                    {% endif %}
+                  </label>
+                {% endfor %}
+              </fieldset>
             </div>
           {% endfor %}
           <script type="application/json" data-selected-variant>
@@ -207,7 +203,7 @@
       {% endunless %} 
 
       {% if product.metafields.custom.tech_sheet %}
-        <div class="product__tech-sheet">
+        <div class="product__tech-sheet mobile-hidden">
           <span class="chart">Tech Sheet</span>
           <div class="product__tech-sheet-download">
             <a href="{{ product.metafields.custom.tech_sheet.value.url }}" download>
@@ -287,6 +283,20 @@
         {{ product.description }}
       </div>
     {% endif %}
+
+    {% if product.metafields.custom.tech_sheet %}
+      <div class="product__tech-sheet desktop-hidden">
+        <span class="chart">Tech Sheet</span>
+        <div class="product__tech-sheet-download">
+          <a href="{{ product.metafields.custom.tech_sheet.value.url }}" download>
+            <span class="chart">Download</span>
+            <div class="icon-download">
+              {{ 'icon-download.svg' | inline_asset_content }}
+            </div>
+          </a>
+        </div>
+      </div>
+    {% endif %}
   </div>
 </product-info>
 
@@ -361,34 +371,64 @@
   }
 
   product-thumbnails {
+    overflow-x: auto;
+    scrollbar-width: none;
+    scroll-snap-type: x mandatory;
     display: flex;
+    flex-wrap: nowrap;
+    gap: 0.25rem;
+    padding: 0 0.25rem;
   }
   .product__media-thumbnail {
+    flex-shrink: 0;
+    scroll-snap-align: center;
     cursor: pointer;
-    margin-left: 0.25rem;
     width: 33%;
     height: 100%;
     position: relative;
   }
   .product__media-thumbnail:nth-child(3) {
     width: 36%;
-    margin-right: -4rem;
   }
-  .product__media-thumbnail:nth-child(1) > * {
+  .product__media-thumbnail:nth-child(1) img {
     aspect-ratio: 237 / 278;
   }
-  .product__media-thumbnail:nth-child(2) > * {
+  .product__media-thumbnail:nth-child(2) img {
     aspect-ratio: 237 / 190;
   }
-  .product__media-thumbnail:nth-child(3) > * {
+  .product__media-thumbnail:nth-child(3) img {
     aspect-ratio: 278 / 278;
     border-radius: 50%;
   }
-  .product__media-thumbnail.active::after{
+  .product__media-thumbnail:nth-child(4) img {
+    aspect-ratio: 237 / 278;
+  }
+  .product__media-thumbnail:nth-child(5) img {
+    aspect-ratio: 237 / 190;
+  }
+  .product__media-thumbnail:not(:nth-child(3)).active::after{
     content: '';
     border-bottom: 2px solid var(--light-brown);
     position: absolute;
     inset: 0;
+  }
+  .product__media-thumbnail:nth-child(3).active .border-circle {
+    display: block;
+    height: 50%;
+    width: 100%;
+    overflow: hidden;
+    position: absolute;
+    bottom: 0;
+  }
+  .product__media-thumbnail:nth-child(3).active .border-circle::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 200%;
+    border-radius: 50%;
+    border: 2px solid var(--light-brown);
   }
 
   .product__content {
@@ -396,8 +436,16 @@
     flex-direction: column;
     justify-content: space-between;
   }
-  .product__description-variant-selects {
-    padding: 0.75rem 1.25rem;
+  @media screen and (max-width: 989px) {
+    .product__content {
+      padding: 2.5rem 1.25rem 1.875rem;
+      gap: 2.5rem;
+    }
+  }
+  @media screen and (min-width: 990px) {
+    .product__description-variant-selects {
+      padding: 0.75rem 1.25rem;
+    }
   }
   @media screen and (min-width: 990px) {
     .product__description {
@@ -442,23 +490,38 @@
   .product__description table td *:not(:empty) + * {
     margin-top: 0.5rem;
   }
+
   .product__variant-selects {
     border-top: 1px solid var(--light-brown);
   }
-  .product__option {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    position: relative;
+  @media screen and (max-width: 990px) {
+    .product__option {
+      margin-top: 1.25rem;
+    }
   }
-  .product__option + .product__option {
-    border-top: 1px solid var(--light-brown);
+  @media screen and (min-width: 990px) {
+    .product__option {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      align-items: center;
+    }
+    .product__option + .product__option {
+      border-top: 1px solid var(--light-brown-30);
+    }
   }
   .product__option-title {
-    padding: 0.75rem 0;
+    display: block;
+    padding: 0 0 0.75rem;
+  }
+  @media screen and (min-width: 990px) {
+    .product__option-title {
+      padding: 0.75rem 0;
+    }
   }
   .product__option-fieldset {
     border: none;
     padding: 0;
+    display: flex;
   }
   .product__option-fieldset input {
     position: absolute;
@@ -466,61 +529,47 @@
     width: 0;
   }
   .product__option-fieldset label {
-    padding: 0.75rem 2.5rem 0.75rem 0;
-    display: block;
-    width: 100%;
-    text-align: right;
-    cursor: pointer;
-  }
-  .product__option-fieldset label:not(:first-of-type) {
-    border-top: 1px solid var(--light-brown);
-  }
-  option-select {
-    position: relative;
-  }
-  .product__option-select {
     display: flex;
+    gap: 0.625rem;
+    justify-content: center;
     align-items: center;
-    justify-content: end;
-    padding: 0.75rem 2.5rem 0.75rem 0;
-    cursor: pointer;
-    border-right: 1px solid transparent;
-  }
-  .product__option-select .icon-carat {
-    position: absolute;
-    right: 0.75rem;
-    top: calc(50% - 0.2rem);
-    transition: transform 300ms ease-out;
-  }
-  .product__option-fieldset-container {
-    position: absolute;
-    top: 0%;
-    left: 0%;
     width: 100%;
-    display: grid;
-    overflow: hidden;
-    grid-template-rows: 0fr;
-    transition: grid-template-rows 300ms ease-out;
+    cursor: pointer;
+    border: 1px solid var(--light-brown);
+    text-align: center;
+    padding: 0.75rem;
+    margin: -1px -1px -1px 0;
+    transition: background-color 300ms ease-out;
   }
-  .product__option-fieldset-content {
-    min-height: 0;
+  .product__option-fieldset input:checked + label {
+    background-color: var(--white);
   }
-  .product__option-fieldset-container.open {
-    grid-template-rows: 1fr;
-    z-index: 10;
+  .product__option-fieldset label .swatch {
+    display: block;
+    border-radius: 50%;
+    position: relative;
+    width: 1rem;
+    height: 1rem;
+    border: 1px solid var(--dark-brown);
   }
-  .product__option:has(.product__option-fieldset-container.open) .icon-carat {
-    z-index: 20;
-    transform: rotate(180deg);
+  .product__option-fieldset label .swatch::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 0.65rem;
+    height: 0.65rem;
+    background-color: var(--swatch-color);
+    border-radius: 50%;
   }
 
-  .product__option-fieldset {
-    background-color: var(--eggshell);
-    border-left: 1px solid var(--light-brown);
-    border-right: 1px solid var(--light-brown);
-    border-bottom: 1px solid var(--light-brown);
+  @media screen and (max-width: 989px) {
+    product-form {
+      display: block;
+      margin-top: 1.25rem;
+    }
   }
-
   .product__atb {
     display: flex;
     gap: 2rem;
@@ -532,7 +581,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-top: 1px solid var(--light-brown);
+    border-top: 1px solid var(--light-brown-30);
   }
   .product__tech-sheet-download a {
     display: flex;
@@ -543,18 +592,12 @@
     padding-right: 0.75rem;
   }
 
-  @media screen and (max-width: 989px) {
-    .product__description {
-      padding: .75rem 1.25rem;
-    }
-  }
-
   .product__mobile-slideshow {
     position: relative;
   }
   .product__mobile-slideshow h1 {
     position: absolute;
-    top: 50%;
+    bottom: 0.75rem;
     left: 1.25rem;
     color: var(--white);
     z-index: 10;

@@ -1,7 +1,7 @@
 @font-face {
   font-family: "Suisse Int'l";
   src: url('SuisseIntl-Light.otf');
-  font-weight: 450;
+  font-weight: 300;
   font-style: normal;
   font-display: swap;
 }
@@ -9,7 +9,7 @@
 @font-face {
   font-family: "Suisse Int'l";
   src: url('SuisseIntl-Book.otf');
-  font-weight: 500;
+  font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
@@ -17,7 +17,7 @@
 @font-face {
   font-family: "Suisse Int'l";
   src: url('SuisseIntl-Medium.otf');
-  font-weight: 700;
+  font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
@@ -44,12 +44,13 @@
   --light-brown: #543C23;
   --light-brown-30: #543C234D;
   --light-brown-60: #543C2399;
+  --dark-brown: #331A00;
 
   --font-suisse-intl: "Suisse Int'l", helvetica, sans-serif;
   --font-crimson-text: 'Crimson Text', serif;
 
   --color-background: var(--eggshell);
-  --color-foreground: var(--light-brown);
+  --color-foreground: var(--dark-brown);
 }
 
 .title {
@@ -84,7 +85,7 @@ body, .body {
   font-family: var(--font-suisse-intl);
   font-weight: 500;
   font-size: 0.75rem;
-  line-height: 100%;
+  line-height: 133%;
   letter-spacing: 0.01em;
 }
 
@@ -106,13 +107,13 @@ h1, .h1 {
   font-family: var(--font-suisse-intl);
   font-weight: 450;
   font-size: 1.75rem;
-  line-height: 114.99999999999999%;
+  line-height: 133%;
   letter-spacing: -0.03em;
 }
 
 .chart {
   font-family: var(--font-suisse-intl);
-  font-weight: 450;
+  font-weight: 500;
   font-size: 0.875rem;
   line-height: 135%;
   letter-spacing: 1%;
@@ -120,7 +121,7 @@ h1, .h1 {
 
 .chart-italic {
   font-family: var(--font-suisse-intl);
-  font-weight: 450;
+  font-weight: 300;
   font-style: italic;
   font-size: 0.875rem;
   line-height: 100%;
@@ -156,4 +157,7 @@ button[type="submit"] {
   width: 100%;
   background-color: var(--light-brown);
   color: var(--white);
+}
+button.cta[type="submit"] {
+  background-color: var(--dark-brown);
 }

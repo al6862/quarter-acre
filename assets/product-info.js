@@ -50,6 +50,8 @@ class ProductThumbnails extends HTMLElement {
   }
 
   handleThumbnailClick(event) {
+    event.currentTarget.scrollIntoView({ behavior: "smooth", container: 'nearest', inline: "center" });
+
     this.mediaThumbnails.forEach((ele) => {
       if (ele.dataset.index == event.currentTarget.dataset.index) {
         ele.classList.add('active');
@@ -70,38 +72,6 @@ class ProductThumbnails extends HTMLElement {
 
 customElements.define('product-thumbnails', ProductThumbnails);
 
-class OptionSelect extends HTMLElement {
-  constructor() {
-    super();
-  }
-
-  connectedCallback() {
-    this.bindedHandleSelectClick = this.handleSelectClick.bind(this);
-    this.querySelector('.product__option-select').addEventListener('click', this.bindedHandleSelectClick);
-    this.querySelector('.product__option-fieldset-container').addEventListener('click', this.bindedHandleSelectClick);
-  }
-  
-  disconnectedCallback() {
-    this.querySelector('.product__option-select').removeEventListener('click', this.bindedHandleSelectClick);
-    this.querySelector('.product__option-fieldset-container').removeEventListener('click', this.bindedHandleSelectClick);
-  }
-
-  handleSelectClick(event) {
-    if (event.target.hasAttribute('checked') || event.currentTarget.classList.contains('product__option-select') ) {
-      if (this.querySelector('.product__option-fieldset-container').classList.contains('open')) {
-        this.querySelector('.product__option-fieldset-container').classList.remove('open');
-        this.querySelector('.product__option-select').setAttribute('aria-expanded', 'false');
-      } else {
-        this.closest('.product__variant-selects').querySelectorAll('.product__option-fieldset-container').forEach((ele) => ele.classList.remove('open'));
-        this.querySelector('.product__option-fieldset-container').classList.add('open');
-        this.querySelector('.product__option-select').setAttribute('aria-expanded', 'true');
-      }
-    }
-  }
-}
-
-customElements.define('option-select', OptionSelect);
-
 class ProductInfo extends HTMLElement {
   constructor() {
     super();
@@ -113,22 +83,12 @@ class ProductInfo extends HTMLElement {
 
   connectedCallback() {
     this.bindedHandleVariantChange = this.handleVariantChange.bind(this);
-    this.bindedHandleTransitionEnd = this.handleTransitionEnd.bind(this);
 
     this.querySelector('.product__variant-selects')?.addEventListener('change', this.bindedHandleVariantChange);
   }
   
   disconnectedCallback() {
     this.querySelector('.product__variant-selects')?.removeEventListener('change', this.bindedHandleVariantChange);
-  }
-
-  handleTransitionEnd(event) {
-    if (!event.currentTarget.classList.contains('open')) {
-      console.log(this.variantSelects)
-      if (this.variantSelects && this.querySelector('.product__variant-selects')) {
-        this.querySelector('.product__variant-selects').innerHTML = this.variantSelects.innerHTML;
-      }
-    }
   }
 
   handleVariantChange(event) {
@@ -235,13 +195,10 @@ class ProductInfo extends HTMLElement {
   }
 
   updateOptionValues(html) {
-    this.variantSelects = html.querySelector('.product__variant-selects');
-    this.variantSelects.querySelectorAll('.product__selected-value').forEach((ele) => {
-      this.querySelector(`.product__selected-value[data-index="${ele.dataset.index}"]`).innerHTML = ele.innerHTML;
-    })
-    
-    this.querySelector('.product__option-fieldset-container.open').classList.remove('open');
-    this.querySelectorAll('.product__option-fieldset-container').forEach((ele) => ele.addEventListener('transitionend', this.bindedHandleTransitionEnd, {once: true}));
+    const variantSelects = html.querySelector('.product__variant-selects');
+    if (variantSelects && this.querySelector('.product__variant-selects')) {
+      this.querySelector('.product__variant-selects').innerHTML = variantSelects.innerHTML;
+    }
   }
 
   updateVariantInputs(variantId) {
