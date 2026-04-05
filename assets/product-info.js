@@ -50,6 +50,8 @@ class ProductThumbnails extends HTMLElement {
   }
 
   handleThumbnailClick(event) {
+    event.currentTarget.scrollIntoView({ behavior: "smooth", container: 'nearest', inline: "center" });
+
     this.mediaThumbnails.forEach((ele) => {
       if (ele.dataset.index == event.currentTarget.dataset.index) {
         ele.classList.add('active');

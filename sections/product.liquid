@@ -20,11 +20,11 @@
     <product-featured-media data-is-chicken-view="{{ product.metafields.custom.add_chicken_view }}" id="featured-media">
       {% liquid
         if product.metafields.custom.add_chicken_view
-          assign featured_media_limit = 4
-          assign no_featured_media_limit = 6
+          assign featured_media_limit = 8
+          assign no_featured_media_limit = 10
         else
-          assign featured_media_limit = 2
-          assign no_featured_media_limit = 3
+          assign featured_media_limit = 4
+          assign no_featured_media_limit = 5
         endif
       %}
       {% if product.selected_or_first_available_variant.featured_media %}
@@ -97,13 +97,13 @@
     <div class="product__media-thumbnails-container mobile-hidden">
       <product-thumbnails aria-controls="featured-media">
         {% liquid
-          assign chicken_view_limit = 6
-          assign no_chicken_view_limit = 3
+          assign chicken_view_limit = 10
+          assign no_chicken_view_limit = 5
         %}
         {% if product.selected_or_first_available_variant.featured_media %}
           {% liquid
-            assign chicken_view_limit = 4
-            assign no_chicken_view_limit = 2
+            assign chicken_view_limit = 8
+            assign no_chicken_view_limit = 4
           %}
           <div data-index="0" class="product__media-thumbnail active">
             {% if product.selected_or_first_available_variant.featured_media.media_type == 'video'  %}
@@ -127,6 +127,7 @@
                 {% else %}
                   {{ media | image_url: width: 1440 | image_tag }}
                 {% endif %}
+                <span class="border-circle"></span>
               </div>
             {% endif %}
           {% endfor %}
@@ -141,6 +142,7 @@
               {% else %}
                 {{ media | image_url: width: 1440 | image_tag }}
               {% endif %}
+              <span class="border-circle"></span>
             </div>
           {% endfor %}
         {% endif %}
@@ -361,34 +363,64 @@
   }
 
   product-thumbnails {
+    overflow-x: auto;
+    scrollbar-width: none;
+    scroll-snap-type: x mandatory;
     display: flex;
+    flex-wrap: nowrap;
+    gap: 0.25rem;
+    padding: 0 0.25rem;
   }
   .product__media-thumbnail {
+    flex-shrink: 0;
+    scroll-snap-align: center;
     cursor: pointer;
-    margin-left: 0.25rem;
     width: 33%;
     height: 100%;
     position: relative;
   }
   .product__media-thumbnail:nth-child(3) {
     width: 36%;
-    margin-right: -4rem;
   }
-  .product__media-thumbnail:nth-child(1) > * {
+  .product__media-thumbnail:nth-child(1) img {
     aspect-ratio: 237 / 278;
   }
-  .product__media-thumbnail:nth-child(2) > * {
+  .product__media-thumbnail:nth-child(2) img {
     aspect-ratio: 237 / 190;
   }
-  .product__media-thumbnail:nth-child(3) > * {
+  .product__media-thumbnail:nth-child(3) img {
     aspect-ratio: 278 / 278;
     border-radius: 50%;
   }
-  .product__media-thumbnail.active::after{
+  .product__media-thumbnail:nth-child(4) img {
+    aspect-ratio: 237 / 278;
+  }
+  .product__media-thumbnail:nth-child(5) img {
+    aspect-ratio: 237 / 190;
+  }
+  .product__media-thumbnail:not(:nth-child(3)).active::after{
     content: '';
     border-bottom: 2px solid var(--light-brown);
     position: absolute;
     inset: 0;
+  }
+  .product__media-thumbnail:nth-child(3).active .border-circle {
+    display: block;
+    height: 50%;
+    width: 100%;
+    overflow: hidden;
+    position: absolute;
+    bottom: 0;
+  }
+  .product__media-thumbnail:nth-child(3).active .border-circle::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 200%;
+    border-radius: 50%;
+    border: 2px solid var(--light-brown);
   }
 
   .product__content {
