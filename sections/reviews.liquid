@@ -25,7 +25,7 @@
         <div class="icon-arrow prev-arrow">
           {{ 'icon-arrow.svg' | inline_asset_content }}
         </div>
-        <span>(<span class="active-review">1</span>/{{ section.blocks.size }})</span>
+        <span class="fig">(<span class="active-review">1</span>/{{ section.blocks.size }})</span>
         <div class="icon-arrow next-arrow">
           {{ 'icon-arrow.svg' | inline_asset_content }}
         </div>
@@ -53,7 +53,7 @@
             {% endif %}
             <div class="mobile-review__content">
               <div class="mobile-review__content-header">
-                <span>({{ forloop.index }}/{{ section.blocks.size }})</span>
+                <span class="fig">({{ forloop.index }}/{{ section.blocks.size }})</span>
                 <span>★★★★★</span>
                 {% if block.settings.name != blank %} 
                   <span>{{ block.settings.name }}</span>
@@ -92,7 +92,6 @@
   .reviews {
     margin-top: 1.875rem;
     border-top: 1px solid var(--light-brown-60);
-    padding: 1.875rem 1.25rem 0;
   }
   @media screen and (min-width: 990px) {
     .reviews {
@@ -196,6 +195,7 @@
   }
 
   .mobile-review-slides {
+    padding: 0 1.25rem;
     overflow-x: auto;
     scrollbar-width: none;
     scroll-snap-type: x mandatory;
@@ -226,7 +226,7 @@
   .mobile-big-review {
     position: relative;
     min-height: 37.5rem;
-    margin-bottom: 2rem;
+    margin: 1.875rem 1.25rem 2rem;
   }
   .mobile-big-review .review {
     position: absolute;
