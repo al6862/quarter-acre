@@ -1,7 +1,7 @@
 @font-face {
   font-family: "Suisse Int'l";
   src: url('SuisseIntl-Light.otf');
-  font-weight: 450;
+  font-weight: 300;
   font-style: normal;
   font-display: swap;
 }
@@ -9,7 +9,7 @@
 @font-face {
   font-family: "Suisse Int'l";
   src: url('SuisseIntl-Book.otf');
-  font-weight: 500;
+  font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
@@ -17,7 +17,7 @@
 @font-face {
   font-family: "Suisse Int'l";
   src: url('SuisseIntl-Medium.otf');
-  font-weight: 700;
+  font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
@@ -84,7 +84,7 @@ body, .body {
   font-family: var(--font-suisse-intl);
   font-weight: 500;
   font-size: 0.75rem;
-  line-height: 100%;
+  line-height: 133%;
   letter-spacing: 0.01em;
 }
 

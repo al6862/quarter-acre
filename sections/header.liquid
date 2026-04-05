@@ -28,17 +28,24 @@
 {% stylesheet %}
   header-drawer {
     --header-color: var(--white);
+    --header-bg-color: transparent;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     z-index: 10;
     color: var(--header-color);
+    background-color: var(--header-bg-color);
     height: 3.375rem;
     padding: 0 1.25rem;
     display: grid;
     grid-template-columns: 1fr max-content 1fr;
     align-items: center;
+    transition: color 300ms ease-out, background-color 300ms ease-out;
+  }
+  header-drawer.scrolled {
+    --header-color: var(--light-brown);
+    --header-bg-color: var(--eggshell);
   }
   @media screen and (min-width: 990px) {
     header-drawer {
@@ -57,7 +64,7 @@
   
   .header__desktop-menu {
     display: flex;
-    gap: 1rem;
+    gap: 5rem;
   }
   .header__cart {
     margin-left: auto;
