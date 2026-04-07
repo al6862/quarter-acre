@@ -39,6 +39,7 @@
 }
 
 :root {
+  --grey: #978D82;
   --white: #FFFFFF;
   --eggshell: #F1ECE5;
   --light-brown: #543C23;
@@ -81,9 +82,17 @@ font-family: var(--font-suisse-intl);
   text-transform: capitalize;
 }
 
-body, .body {
+.body-bold {
   font-family: var(--font-suisse-intl);
   font-weight: 500;
+  font-size: 0.75rem;
+  line-height: 133%;
+  letter-spacing: 0.01em;
+}
+
+body, .body {
+  font-family: var(--font-suisse-intl);
+  font-weight: 400;
   font-size: 0.75rem;
   line-height: 133%;
   letter-spacing: 0.01em;

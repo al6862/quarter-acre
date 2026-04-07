@@ -1,0 +1,303 @@
+{% if section.blocks.size > 0 %}
+  <drawers-element class="drawers">
+    <div class="drawers-element__desktop mobile-hidden">
+      <div class="drawers-element__headings">
+        {% for block in section.blocks %}
+          {% if block.settings.heading != blank %}
+            <span class="chart drawers-element__heading{% if forloop.index0 == 0 %} active{% endif %}" data-index="{{ forloop.index0 }}">{{ block.settings.heading }}</span>
+          {% endif %}
+        {% endfor %}
+        <span class="marker"></span>
+      </div>
+      {% for block in section.blocks %}
+        <div class="drawers-element__block{% if forloop.index0 == 0 %} active{% endif %}" data-index="{{ forloop.index0 }}">
+          {% if block.settings.content != blank %}
+            <div class="drawers-element__content rte body-bold">{{ block.settings.content }}</div>
+          {% endif %}
+          {% if block.settings.first_image != blank or block.settings.second_image != blank %}
+            <div class="drawers-element__images">
+              {% if block.settings.first_image != blank %}
+                <div class="drawers-element__first-image">
+                  {{ block.settings.first_image | image_url: width: 1980 | image_tag }}
+                  {% if block.settings.first_caption != blank %}
+                    <span class="drawers-element__first-image-caption">
+                      <span class="fig">fig.                (a)</span>
+                      <span>{{ block.settings.first_caption }}</span>
+                    </span>
+                  {% endif %}
+                </div>
+              {% endif %}
+              {% if block.settings.second_image != blank %}
+                <div class="drawers-element__second-image">
+                  {{ block.settings.second_image | image_url: width: 1980 | image_tag }}
+                  {% if block.settings.second_caption != blank %}
+                    <span class="drawers-element__second-image-caption">
+                      <span class="fig">fig.                (b)</span>
+                      <span>{{ block.settings.second_caption }}</span>
+                    </span>
+                  {% endif %}
+                </div>
+              {% endif %}
+            </div>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+    <div class="drawers-element__mobile desktop-hidden">
+      {% for block in section.blocks %}
+        {% if block.settings.heading != blank %}
+          <details>
+            <summary class="chart drawers-element__heading">
+              {{ block.settings.heading }}
+              {{ 'icon-open.svg' | inline_asset_content }}
+            </summary>
+            <div class="drawers-element__container">
+              <div class="drawers-element__content-images-container">
+                <div class="drawers-element__content-images">
+                  {% if block.settings.content != blank %}
+                    <div class="drawers-element__content rte body">{{ block.settings.content }}</div>
+                  {% endif %}
+                  {% if block.settings.first_image != blank %}
+                    <div class="drawers-element__first-image">
+                      {{ block.settings.first_image | image_url: width: 1980 | image_tag }}
+                      {% if block.settings.first_caption != blank %}
+                        <span class="drawers-element__first-image-caption">
+                          <span class="fig">fig.                (a)</span>
+                          <span>{{ block.settings.first_caption }}</span>
+                        </span>
+                      {% endif %}
+                    </div>
+                  {% endif %}
+                  {% if block.settings.second_image != blank %}
+                    <div class="drawers-element__second-image">
+                      {{ block.settings.second_image | image_url: width: 1980 | image_tag }}
+                      {% if block.settings.second_caption != blank %}
+                        <span class="drawers-element__second-image-caption">
+                          <span class="fig">fig.                (b)</span>
+                          <span>{{ block.settings.second_caption }}</span>
+                        </span>
+                      {% endif %}
+                    </div>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </details>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </drawers-element>
+{% endif %}
+
+{% style %}
+  .drawers {
+    display: block;
+    margin-top: 1.875rem;
+    border-top: 1px solid var(--light-brown-60);
+    padding: 2.5rem 1.25rem 0;
+  }
+  @media screen and (min-width: 990px) {
+    .drawers {
+      margin-top: 1.25rem;
+      padding: 1.25rem 1.25rem 0;
+    }
+  }
+
+  .drawers-element__desktop {
+    display: grid;
+    gap: 8.625rem;
+    grid-template-columns: max-content 1fr;
+    grid-template-areas: 'headings block';
+    min-height: calc(100vh - var(--header-height));
+  }
+
+  .drawers-element__desktop .drawers-element__headings {
+    grid-area: headings;
+  }
+  .drawers-element__desktop .drawers-element__heading {
+    display: block;
+    padding-right: 8.75rem;
+    line-height: 2.75rem;
+    border-top: 1px solid var(--light-brown-30);
+    color: var(--grey);
+    text-wrap: nowrap;
+    cursor: pointer;
+    transition: color 300ms ease-out, border 300ms ease-out;
+  }
+  .drawers-element__desktop .drawers-element__heading.active {
+    border-top: 1px solid var(--light-brown);
+    color: var(--color-foreground);
+  }
+  .drawers-element__desktop .drawers-element__headings {
+    position: relative;
+  }
+  .drawers-element__desktop .drawers-element__headings .marker {
+    display: block;
+    width: 0.5625rem;
+    height: 0.5625rem;
+    border-radius: 50%;
+    background-color: var(--dark-brown);
+    position: absolute;
+    top: calc(1.375rem + 1px - 0.5 * 0.5625rem);
+    right: 0;
+    transition: top 300ms ease-out;
+  }
+
+  .drawers-element__desktop .drawers-element__block {
+    grid-area: block;
+    border-top: 1px solid var(--dark-brown);
+    padding-top: 1.25rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 300ms ease-out;
+  }
+  .drawers-element__desktop .drawers-element__block.active {
+    opacity: 1;
+    pointer-events: unset;
+  }
+  .drawers-element__desktop .drawers-element__content {
+    margin-bottom: 2.5rem;
+  }
+  .drawers-element__desktop .drawers-element__images {
+    display: grid;
+    grid-template-columns: repeat(20, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+  .drawers-element__desktop .drawers-element__first-image {
+    grid-column: 1 / span 11;
+  }
+  .drawers-element__desktop .drawers-element__first-image img {
+    width: 100%;
+    object-fit: cover;
+    aspect-ratio: 572 / 730;
+  }
+  .drawers-element__desktop .drawers-element__first-image-caption {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.75rem;
+  }
+  .drawers-element__desktop .drawers-element__first-image-caption .fig {
+    white-space: pre;
+  }
+  .drawers-element__desktop .drawers-element__second-image {
+    grid-column: 12 / span 9;
+  }
+  .drawers-element__desktop .drawers-element__second-image img {
+    width: 100%;
+    object-fit: cover;
+    aspect-ratio: 453 / 575;
+  }
+  .drawers-element__desktop .drawers-element__second-image-caption {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.75rem;
+  }
+  .drawers-element__desktop .drawers-element__second-image-caption .fig {
+    white-space: pre;
+  }
+
+  .drawers-element__mobile details {
+    border-top: 1px solid var(--light-brown-30)
+  }
+  .drawers-element__mobile details summary {
+    cursor: pointer;
+  }
+  .drawers-element__mobile details summary::marker {
+    display: none;
+  }
+  .drawers-element__mobile .drawers-element__heading {
+    padding: 1.25rem 0;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .drawers-element__mobile .drawers-element__container {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 300ms ease-out;
+    overflow: hidden;
+  }
+  .drawers-element__mobile .drawers-element__content-images-container {
+    min-height: 0;
+  }
+  .drawers-element__mobile details[open] .drawers-element__container {
+    grid-template-rows: 1fr;
+  }
+  .drawers-element__mobile details.closing .drawers-element__container {
+    grid-template-rows: 0fr;
+  }
+  .drawers-element__mobile details .icon-open .plus-line {
+    transition: opacity 300ms ease-out;
+  }
+  .drawers-element__mobile details[open] .icon-open .plus-line {
+    opacity: 0;
+  }
+
+  .drawers-element__mobile .drawers-element__content-images {
+    padding: 1.25rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+  .drawers-element__mobile :is(.drawers-element__first-image-caption, .drawers-element__second-image-caption) {
+    margin-top: 0.75rem;
+    display: flex;
+    justify-content: space-between;
+  }
+  .drawers-element__mobile .drawers-element__second-image {
+    width: 70%;
+  }
+  .drawers-element__mobile :is(.drawers-element__first-image-caption, .drawers-element__second-image-caption) .fig {
+    white-space: pre;
+  }
+{% endstyle %}
+
+{% schema %}
+{
+  "name": "Drawers",
+  "disabled_on": {"groups": ["header", "footer"]},
+  "blocks": [
+    {
+      "type": "drawer",
+      "name": "Drawer",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Content"
+        },
+        {
+          "type": "image_picker",
+          "id": "first_image",
+          "label": "First Image"
+        },
+        {
+          "type": "text",
+          "id": "first_caption",
+          "label": "First Caption"
+        },
+        {
+          "type": "image_picker",
+          "id": "second_image",
+          "label": "Second Image"
+        },
+        {
+          "type": "text",
+          "id": "second_caption",
+          "label": "Second Caption"
+        },
+      ]
+    },
+  ],
+  "presets": [
+    {
+      "name": "Drawers"
+    }
+  ]
+}
+{% endschema %} 

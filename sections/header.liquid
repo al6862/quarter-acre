@@ -26,6 +26,10 @@
 </header-drawer>
 
 {% stylesheet %}
+  :root {
+    --header-height: 3.375rem;
+  }
+
   header-drawer {
     --header-color: var(--white);
     --header-bg-color: transparent;
@@ -44,8 +48,8 @@
     transition: color 300ms ease-out, background-color 300ms ease-out;
   }
   header-drawer.scrolled {
-    --header-color: var(--light-brown);
-    --header-bg-color: var(--eggshell);
+    --header-color: var(--color-foreground);
+    --header-bg-color: var(--color-background);
   }
   @media screen and (min-width: 990px) {
     header-drawer {
@@ -85,8 +89,8 @@
     align-items: start;
     padding: 1.25rem;
     gap: 1rem;
-    background-color: var(--eggshell);
-    color: var(--light-brown);
+    background-color: var(--color-background);
+    color: var(--color-foreground);
   }
   .open-menu-button {
     cursor: pointer;

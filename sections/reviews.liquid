@@ -107,7 +107,7 @@
   }
   @media screen and (min-width: 990px) {
     desktop-review-slideshow {
-      height: 100vh;
+      height: calc(100vh - var(--header-height));
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 0;
