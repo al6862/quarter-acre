@@ -150,3 +150,64 @@ class MobileReviewSlideshow extends HTMLElement {
 }
 
 customElements.define('mobile-review-slideshow', MobileReviewSlideshow);
+
+class DrawersElement extends HTMLElement {
+  constructor() {
+    super();
+  }
+
+  connectedCallback() {
+    this.drawerHeadings = this.querySelectorAll('.drawers-element__desktop .drawers-element__heading');
+    this.drawerBlocks = this.querySelectorAll('.drawers-element__desktop .drawers-element__block');
+    this.marker = this.querySelector('.drawers-element__desktop .marker');
+    this.detailSummaries = this.querySelectorAll('.drawers-element__mobile summary');
+
+    this.bindedHandleDesktopClick = this.handleDesktopClick.bind(this);
+    this.bindedHandleMobileClick = this.handleMobileClick.bind(this);
+
+    this.drawerHeadings.forEach((ele) => ele.addEventListener('click', this.bindedHandleDesktopClick));
+    this.detailSummaries.forEach((ele) => ele.addEventListener('click', this.bindedHandleMobileClick));
+  }
+
+  disconnectedCallback() {
+    this.drawerHeadings.forEach((ele) => ele.removeEventListener('click', this.bindedHandleDesktopClick));
+    this.detailSummaries.forEach((ele) => ele.removeEventListener('click', this.bindedHandleMobileClick));
+  }
+
+  handleDesktopClick(event) {
+    const currIndex = event.currentTarget.dataset.index;
+
+    this.marker.style.top = `calc(1.375rem + (2.75rem + 1px) * ${currIndex} - 0.5 * 0.5625rem)`;
+
+    this.drawerHeadings.forEach((ele) => {
+      if (ele.dataset.index == currIndex) {
+        ele.classList.add('active');
+      } else {
+        ele.classList.remove('active');
+      }
+    })
+
+    this.drawerBlocks.forEach((ele) => {
+      if (ele.dataset.index == currIndex) {
+        ele.classList.add('active');
+      } else {
+        ele.classList.remove('active');
+      }
+    })
+  }
+
+  handleMobileClick(event) {
+    const details = event.currentTarget.closest('details');
+    if (details.hasAttribute('open')) {
+      event.preventDefault();
+
+      details.classList.add('closing');
+      details.querySelector('.drawers-element__container').addEventListener('transitionend', () => {
+        details.classList.remove('closing');
+        details.removeAttribute('open');
+      }, {once: true});
+    }
+  }
+}
+
+customElements.define('drawers-element', DrawersElement);
