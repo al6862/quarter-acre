@@ -10,6 +10,7 @@ class HeaderDrawer extends HTMLElement {
     this.mobileMenu = this.querySelector('.header__mobile-menu');
     this.mobileMenuContainer = this.querySelector('.header__mobile-menu-container');
     this.openButton = this.querySelector('.open-menu-button');
+    this.closeButton = this.querySelector('.close-menu-button')
     this.bindedHandleKeyUp = this.handleKeyUp.bind(this);
     this.bindedHandleClick = this.handleClick.bind(this);
     this.bindedHandleScroll = this.handleScroll.bind(this);
@@ -46,7 +47,7 @@ class HeaderDrawer extends HTMLElement {
    * Open menu when menu button clicked
    */
   handleClick = (event) => {
-    if (!event.target.closest('.header__mobile-menu')) {
+    if (!event.target.closest('.header__mobile-menu') || event.target.closest('.close-menu-button')) {
       this.mobileMenu.classList.contains('open')? this.close() : this.open();
     }
   }
@@ -56,6 +57,7 @@ class HeaderDrawer extends HTMLElement {
    */
   open() {
     this.openButton.setAttribute('aria-expanded', 'true');
+    this.closeButton.setAttribute('aria-expanded', 'true');
     this.mobileMenu.classList.add('open');
   }
 
@@ -64,6 +66,7 @@ class HeaderDrawer extends HTMLElement {
    */
   close() {
     this.openButton.setAttribute('aria-expanded', 'false');
+    this.closeButton.setAttribute('aria-expanded', 'false');
     this.mobileMenu.classList.remove('open');
   }
 }

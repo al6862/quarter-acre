@@ -1,3 +1,87 @@
+function debounce(fn, wait) {
+  let t;
+  return (...args) => {
+    clearTimeout(t);
+    t = setTimeout(() => fn.apply(this, args), wait);
+  };
+}
+
+class CartQuantity extends HTMLElement {
+  constructor() {
+    super();
+  }
+
+  connectedCallback() {
+    this.minusButton = this.querySelector('.cart-quantity__minus');
+    this.plusButton = this.querySelector('.cart-quantity__plus');
+    this.input = this.querySelector('input');
+    this.bindedHandleMinusButtonClick = this.handleMinusButtonClick.bind(this);
+    this.bindedHandlePlusButtonClick = this.handlePlusButtonClick.bind(this);
+    this.bindedHandleInputChange = debounce((event) => {this.handleInputChange(event);}, 300).bind(this)
+
+    this.minusButton.addEventListener('click', this.bindedHandleMinusButtonClick);
+    this.plusButton.addEventListener('click', this.bindedHandlePlusButtonClick);
+    this.input.addEventListener('change', this.bindedHandleInputChange);
+  }
+
+  disconnectedCallback() {
+    this.minusButton.removeEventListener('click', this.bindedHandleMinusButtonClick);
+    this.plusButton.removeEventListener('click', this.bindedHandlePlusButtonClick);
+    this.input.removeEventListener('change', this.bindedHandleInputChange);
+  }
+  
+  handleMinusButtonClick(event) {
+    event.preventDefault();
+
+    this.changeQuantity(parseInt(this.input.value) - 1);
+  }
+
+  handlePlusButtonClick(event) {
+    event.preventDefault();
+
+    this.changeQuantity(parseInt(this.input.value) + 1);
+  }
+
+  handleInputChange(event) {
+    event.preventDefault();
+
+    this.changeQuantity(parseInt(this.input.value));
+  }
+
+  changeQuantity(quantity) {
+    const body = JSON.stringify({
+      line: this.dataset.index,
+      quantity,
+      sections: ['header', 'cart-drawer'],
+      sections_url: window.location.pathname,
+    });
+
+    fetch(`${routes.cart_change_url}`, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: `application/json`}, ...{ body } })
+      .then((response) => {
+        return response.json();
+      })
+      .then((response) => {
+        if (response.errors) {
+          const errors = document.getElementById('cart-errors');
+          errors.textContent = response.errors;
+          return;
+        }
+
+        const newCart = new DOMParser().parseFromString(response.sections["cart-drawer"], "text/html");
+        document.querySelector('.cart-drawer__container').innerHTML = newCart.querySelector('.cart-drawer__container').innerHTML;
+
+        const newHeader = new DOMParser().parseFromString(response.sections["header"], "text/html");
+        document.querySelector('.header__cart').innerHTML = newHeader.querySelector('.header__cart').innerHTML;
+      })
+      .catch(() => {
+        const errors = document.getElementById('cart-errors');
+        errors.textContent = 'Error occured while updating cart.';
+      })
+  }
+}
+
+customElements.define('cart-quantity', CartQuantity);
+
 class CartRemoveButton extends HTMLElement {
   constructor() {
     super();
