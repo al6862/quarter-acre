@@ -46,6 +46,8 @@
   --light-brown-30: #543C234D;
   --light-brown-60: #543C2399;
   --dark-brown: #331A00;
+  --light-eggshell: #F8F5F2;
+  --grey: #978D82;
 
   --font-suisse-intl: "Suisse Int'l", helvetica, sans-serif;
   --font-crimson-text: 'Crimson Text', serif;
@@ -146,6 +148,17 @@ h1, .h1 {
   text-align: center;
 }
 
+.cta-2 {
+  font-family: var(--font-suisse-intl);
+  font-weight: 700;
+  font-size: 0.75rem;
+  line-height: 130%;
+  letter-spacing: 0.04em;
+  text-align: center;
+  text-transform: uppercase;
+
+}
+
 .fig {
   font-family: var(--font-crimson-text);
   font-weight: 600;
@@ -161,12 +174,20 @@ h1, .h1 {
   margin-top: 1em;
 }
 
-button[type="submit"] {
+button[type="button"], .button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 3.125rem;
   width: 100%;
   background-color: var(--light-brown);
   color: var(--white);
 }
-button.cta[type="submit"] {
+.button--dark-brown {
   background-color: var(--dark-brown);
+}
+.button--outline {
+  border: 1px solid var(--dark-brown);
+  color: var(--dark-brown);
+  background-color: transparent;
 }

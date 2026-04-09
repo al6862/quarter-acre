@@ -6,10 +6,11 @@
   </div>
 
   <div class="header__mobile-menu-container desktop-hidden">
-    <span class="open-menu-button nav" aria-controls="mobile-menu" aria-expanded="false" aria-haspopup="menu">Menu</span>
+    <span class="open-menu-button nav" aria-controls="mobile-menu" aria-expanded="false" aria-haspopup="menu" aria-label="open menu">Menu</span>
     <div role="menu" id="mobile-menu" class="header__mobile-menu">
       <div class="header__mobile-menu-content-container">
         <div class="header__mobile-menu-content">
+          <button class="close-menu-button" aria-controls="mobile-menu" aria-expanded="false" aria-haspopup="menu" aria-label="close">{{ 'icon-close.svg' | inline_asset_content }}</button>
           {% for link in section.settings.menu.links %}
             {{ link.title | link_to: link.url, class: 'nav' }}
           {% endfor %}
@@ -22,7 +23,7 @@
     {{ shop.name | link_to: routes.root_url }}
   </h2>
 
-  <button class="header__cart nav" aria-haspopup="dialog" aria-controls="cart-drawer" aria-expanded="false">Bag {{ cart.item_count }}</button>
+  <button class="header__cart nav" aria-haspopup="dialog" aria-controls="cart-drawer" aria-expanded="false">Cart {{ cart.item_count }}</button>
 </header-drawer>
 
 {% stylesheet %}
@@ -87,13 +88,19 @@
     display: flex;
     flex-direction: column;
     align-items: start;
-    padding: 1.25rem;
+    padding: 2rem 1.25rem;
     gap: 1rem;
     background-color: var(--color-background);
     color: var(--color-foreground);
   }
   .open-menu-button {
     cursor: pointer;
+  }
+  .close-menu-button {
+    cursor: pointer;
+    position: absolute;
+    top: 2rem;
+    right: 1.25rem;
   }
 
   .header__mobile-menu {

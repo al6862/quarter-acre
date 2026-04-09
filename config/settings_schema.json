@@ -1,1 +1,18 @@
-[]
+[
+  {
+    "name": "Cart",
+    "settings": [
+      {
+        "type": "text",
+        "id": "announcement_bar",
+        "label": "Announcement bar"
+      },
+
+      {
+        "type": "url",
+        "id": "continue_shopping_link",
+        "label": "Continue Shopping link"
+      },
+    ]
+  },
+]
