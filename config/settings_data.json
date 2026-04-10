@@ -9,6 +9,8 @@
  */
 {
   "current": {
+    "announcement_bar": "Free shipping on all orders",
+    "continue_shopping_link": "shopify://products/the-chicken-coop",
     "foreground_color": "#000000",
     "content_for_index": [],
     "blocks": {
