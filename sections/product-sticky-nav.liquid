@@ -2,7 +2,6 @@
 
 <sticky-nav>
   <product-info 
-    class="product__sticky-nav"
     data-section="{{ section.id }}"
     data-product-id="{{ product.id }}"
     data-url="{{ product.url }}"
@@ -194,22 +193,22 @@
     transform: unset;
   }
 
-  .product__sticky-nav {
+  sticky-nav product-info {
     padding: 0.75rem 1.25rem;
     background-color: var(--eggshell);
   }
   @media screen and (min-width: 990px) {
-    .product__sticky-nav {
+    sticky-nav product-info {
       padding: 1.25rem;
       background-color: var(--light-eggshell);
     }
   }
 
-  .product__sticky-nav {
+  sticky-nav product-info {
     display: block;
   }
   @media screen and (min-width: 990px) {
-    .product__sticky-nav {
+    sticky-nav product-info {
       display: flex;
       justify-content: space-between;
     }
@@ -303,21 +302,21 @@
     grid-template-rows: 1fr;
   }
 
-  .product__sticky-nav product-form form {
+  sticky-nav product-info product-form form {
     height: 100%;
   }
   @media screen and (max-width: 989px) {
-    .product__sticky-nav product-form {
+    sticky-nav product-info product-form {
       margin-top: 0;
       width: 100%;
       height: 3.125rem;
     }
   }
-  .product__sticky-nav .product__atb {
+  sticky-nav product-info .product__atb {
     height: 100%;
     padding: 0 3rem;
   }
-  .product__sticky-nav .product__atb span {
+  sticky-nav product-info .product__atb span {
     text-wrap: nowrap;
   }
 {% endstylesheet %}

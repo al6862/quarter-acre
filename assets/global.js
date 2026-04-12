@@ -224,11 +224,10 @@ class StickyNav extends HTMLElement {
     this.bindedHandleObserve = this.handleObserve.bind(this);
     const options = {
       rootMargin: "-54px 0px 0px 0px",
-      threshold: 1.0,
     };
 
     const observer = new IntersectionObserver(this.bindedHandleObserve, options);
-    observer.observe(document.querySelector('.main-product product-form'));
+    observer.observe(document.querySelector('.main-product'));
   }
 
   handleObserve(entries) {
