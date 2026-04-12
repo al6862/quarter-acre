@@ -11,7 +11,7 @@
 {% assign form_id = 'product-form-' | append: section.id %}
 
 <product-info 
-  class="product-info"
+  class="main-product product-info"
   data-section="{{ section.id }}"
   data-product-id="{{ product.id }}"
   data-url="{{ product.url }}"
@@ -300,12 +300,12 @@
 
 {% stylesheet %}
   @media screen and (min-width: 990px) {
-    product-info {
+    .product-info {
       display: flex;
     }
   }
 
-  product-info > * {
+  .product-info > * {
     flex: 1;
   }
 

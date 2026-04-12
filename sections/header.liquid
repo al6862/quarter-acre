@@ -112,6 +112,9 @@
   .header__mobile-menu-content-container {
     min-height: 0;
   }
+  header-drawer:has(.header__mobile-menu.open) {
+    z-index: 30;
+  }
   .header__mobile-menu.open {
     grid-template-rows: 1fr;
     z-index: 10;

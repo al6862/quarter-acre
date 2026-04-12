@@ -1,0 +1,338 @@
+{% assign form_id = 'product-form-' | append: section.id %}
+
+<sticky-nav>
+  <product-info 
+    class="product__sticky-nav"
+    data-section="{{ section.id }}"
+    data-product-id="{{ product.id }}"
+    data-url="{{ product.url }}"
+  >
+    <div class="mobile-hidden sticky-nav__title-thumbnail">
+      <h1>{{ product.title }}</h1>
+      {% if product.metafields.custom.product_sticky_nav_thumbnail != blank %}
+        {{ product.metafields.custom.product_sticky_nav_thumbnail.value | image_url: width: 80 | image_tag  }}
+      {% endif %}
+    </div>
+    <div class="sticky-nav__variant-selects-atb">
+      {% unless product.has_only_default_variant %}
+        <div class="mobile-hidden sticky-nav__variant-selects product__variant-selects">
+          {% for option in product.options_with_values %}
+            {% assign option_forloop_index = forloop.index %}
+            <option-select id="{{ option.name }}-container" aria-expanded="false">
+              <fieldset class="sticky-nav__option-fieldset">
+                <legend class="hidden">{{ option.name }}</legend>
+                {% assign selected_value = option.values | find: 'selected', true %}
+                {%- liquid
+                    assign option_disabled = true
+                    if selected_value.available
+                      assign option_disabled = false
+                    endif
+                  -%}
+                <input
+                  type="radio"
+                  id="{{ section.id }}-{{ option.position }}-initial-{{ product.handle }}"
+                  name="{{ product.title | handleize }}-{{ option.name }}-{{ section.id }}"
+                  value="{{ selected_value | escape }}"
+                  form=form_id
+                  checked
+                  {% if option_disabled %}
+                    class="disabled"
+                  {% endif %}
+                  data-product-url="{{ selected_value.product_url }}"
+                  data-option-value-id="{{ selected_value.id }}"
+                >
+                <label for="{{ section.id }}-{{ option.position }}-initial-{{ product.handle }}" class="chart">
+                  <span>{{ selected_value }}{% if option_forloop_index == 1 %} | {{ selected_value.variant.price | money_without_trailing_zeros }}{% endif %}</span>
+                  <div class="icon-carat">
+                    {{ 'icon-carat.svg' | inline_asset_content }}
+                  </div>
+                </label>
+                <div class="sticky-nav__hidden-options">
+                  <div class="sticky-nav__hidden-options-container">
+                    {% for value in option.values %}
+                      {% if value.selected == false %}
+                        {%- liquid
+                          assign option_disabled = true
+                          if value.available
+                            assign option_disabled = false
+                          endif
+                        -%}
+                        <input
+                          type="radio"
+                          id="{{ section.id }}-{{ option.position }}-{{ forloop.index0 -}}-{{ product.handle }}"
+                          name="{{ product.title | handleize }}-{{ option.name }}-{{ section.id }}"
+                          value="{{ value | escape }}"
+                          form=form_id
+                          {% if option_disabled %}
+                            class="disabled"
+                          {% endif %}
+                          data-product-url="{{ value.product_url }}"
+                          data-option-value-id="{{ value.id }}"
+                        >
+                        <label for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 -}}-{{ product.handle }}" class="chart">{{ value }}{% if option_forloop_index == 1 %} | {{ value.variant.price | money_without_trailing_zeros }}{% endif %}</label>
+                      {% endif %}
+                    {% endfor %}
+                  </div>
+                </div>
+                <div class="sticky-nav__non-selected-options">
+                  <div class="sticky-nav__non-selected-options-container">
+                    {% for value in option.values %}
+                      {% if value.selected == false %}
+                        {%- liquid
+                          assign option_disabled = true
+                          if value.available
+                            assign option_disabled = false
+                          endif
+                        -%}
+                        <input
+                          type="radio"
+                          id="{{ section.id }}-{{ option.position }}-{{ forloop.index0 -}}-{{ product.handle }}"
+                          name="{{ product.title | handleize }}-{{ option.name }}-{{ section.id }}"
+                          value="{{ value | escape }}"
+                          form=form_id
+                          {% if option_disabled %}
+                            class="disabled"
+                          {% endif %}
+                          data-product-url="{{ value.product_url }}"
+                          data-option-value-id="{{ value.id }}"
+                        >
+                        <label for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 -}}-{{ product.handle }}" class="chart">{{ value }}{% if option_forloop_index == 1 %} | {{ value.variant.price | money_without_trailing_zeros }}{% endif %}</label>
+                      {% endif %}
+                    {% endfor %}
+                  </div>
+                </div>
+              </fieldset>
+            </option-select>
+          {% endfor %}
+          <script type="application/json" data-selected-variant>
+            {{ product.selected_or_first_available_variant | json }}
+          </script>
+        </div>
+      {% endunless %}
+
+      <product-form>
+        <div class="product-form__error-message-wrapper" role="alert" hidden>
+          <span class="product-form__error-message"></span>
+        </div>
+        {%- form 'product',
+          product,
+          id: form_id,
+          class: 'form',
+          novalidate: 'novalidate',
+          data-type: 'add-to-cart-form'
+        -%}
+          {%- liquid
+            assign check_against_inventory = true
+            if product.selected_or_first_available_variant.inventory_management != 'shopify' or product.selected_or_first_available_variant.inventory_policy == 'continue'
+              assign check_against_inventory = false
+            endif
+            if product.selected_or_first_available_variant.quantity_rule.min > product.selected_or_first_available_variant.inventory_quantity and check_against_inventory
+              assign quantity_rule_soldout = true
+            endif
+          -%}
+          <input
+            type="hidden"
+            name="id"
+            value="{{ product.selected_or_first_available_variant.id }}"
+            {% if product.selected_or_first_available_variant.available == false
+              or quantity_rule_soldout
+              or product.selected_or_first_available_variant == null
+            %}
+              disabled
+            {% endif %}
+            class="product-variant-id"
+          >
+          <button 
+            id="ProductSubmitButton-{{ section.id }}"
+            class="product__atb button button--dark-brown cta" 
+            type="submit"
+            {% if product.selected_or_first_available_variant.available == false
+              or quantity_rule_soldout
+              or product.selected_or_first_available_variant == null
+            %}
+              disabled
+            {% endif %}
+          >
+            <span class="product__atb-text">
+              {%- if product.selected_or_first_available_variant.available -%}
+                Add to Bag
+              {%- else -%}
+                Sold Out
+              {%- endif -%}
+            </span>
+            <span>|</span>
+            <span class="product__price">
+              {{ product.selected_or_first_available_variant.price | money_without_trailing_zeros }}
+            </span>
+          </button>
+        {% endform %}
+      </product-form>
+    </div>
+  </product-info>
+</sticky-nav>
+
+{% stylesheet %}
+  .shopify-section:has(sticky-nav) {
+    z-index: 20;
+    position: fixed;
+    width: 100%;
+    transition: transform 300ms ease-out;
+  }
+  @media screen and (max-width: 989px) {
+    .shopify-section:has(sticky-nav) {
+      bottom: 0;
+      transform: translateY(100%);
+    }
+  }
+  @media screen and (min-width: 990px) {
+    .shopify-section:has(sticky-nav) {
+      top: 0;
+      transform: translateY(-100%);
+    }
+  }
+  .shopify-section:has(sticky-nav.active) {
+    transform: unset;
+  }
+
+  .product__sticky-nav {
+    padding: 0.75rem 1.25rem;
+    background-color: var(--eggshell);
+  }
+  @media screen and (min-width: 990px) {
+    .product__sticky-nav {
+      padding: 1.25rem;
+      background-color: var(--light-eggshell);
+    }
+  }
+
+  .product__sticky-nav {
+    display: block;
+  }
+  @media screen and (min-width: 990px) {
+    .product__sticky-nav {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+
+  .sticky-nav__title-thumbnail {
+    display: flex;
+    align-items: center;
+    gap: 1.125rem;
+  }
+  .sticky-nav__title-thumbnail h1 {
+    text-wrap: nowrap;
+  }
+  .sticky-nav__title-thumbnail img {
+    object-fit: contain;
+    width: 2.5rem;
+  }
+
+  .sticky-nav__variant-selects-atb {
+    display: flex;
+    gap: 1.25rem;
+  }
+  .sticky-nav__variant-selects.product__variant-selects {
+    border: none;
+  }
+  .sticky-nav__variant-selects {
+    display: flex;
+    gap: 1.25rem;
+  } 
+  .sticky-nav__option-fieldset {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--white);
+    border: none;
+    position: relative;
+  }
+  .sticky-nav__option-fieldset input {
+    position: absolute;
+    height: 0;
+    width: 0;
+  }
+  .sticky-nav__option-fieldset label {
+    cursor: pointer;
+    padding: 1rem 1.25rem;
+    text-wrap: nowrap;
+  }
+  .sticky-nav__option-fieldset > label:first-of-type {
+    border: 1px solid var(--light-brown-60);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.25rem;
+  }
+  .sticky-nav__option-fieldset > label:first-of-type .icon-carat {
+    flex-shrink: 0;
+  }
+  .sticky-nav__hidden-options {
+    overflow: hidden;
+    height: 0;
+  }
+  .sticky-nav__hidden-options-container {
+    min-height: 0;
+  }
+  :is(.sticky-nav__non-selected-options, .sticky-nav__hidden-options-container) label {
+    display: block;
+    border-left: 1px solid var(--light-brown-60);
+    border-right: 1px solid var(--light-brown-60);
+  }
+  .sticky-nav__non-selected-options label:not(:first-of-type) {
+    border-top: 1px solid var(--light-brown-60);
+  }
+  .sticky-nav__non-selected-options label:last-of-type {
+    border-bottom: 1px solid var(--light-brown-60);
+  }
+  .sticky-nav__non-selected-options {
+    background-color: var(--white);
+    overflow: hidden;
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 300ms ease-out;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    transform: translateY(100%);
+  }
+  .sticky-nav__non-selected-options-container {
+    min-height: 0;
+  }
+  option-select.open .sticky-nav__non-selected-options {
+    grid-template-rows: 1fr;
+  }
+
+  .product__sticky-nav product-form form {
+    height: 100%;
+  }
+  @media screen and (max-width: 989px) {
+    .product__sticky-nav product-form {
+      margin-top: 0;
+      width: 100%;
+      height: 3.125rem;
+    }
+  }
+  .product__sticky-nav .product__atb {
+    height: 100%;
+    padding: 0 3rem;
+  }
+  .product__sticky-nav .product__atb span {
+    text-wrap: nowrap;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Product Sticky Nav",
+  "settings": [],
+  "enabled_on": {
+    "templates": ["product"],
+  },
+  "presets": [
+    {
+      "name": "Product Sticky Nav"
+    }
+  ]
+}
+{% endschema %}

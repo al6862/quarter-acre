@@ -214,3 +214,32 @@ class DrawersElement extends HTMLElement {
 }
 
 customElements.define('drawers-element', DrawersElement);
+
+class StickyNav extends HTMLElement {
+  constructor() {
+    super();
+  }
+
+  connectedCallback() {
+    this.bindedHandleObserve = this.handleObserve.bind(this);
+    const options = {
+      rootMargin: "-54px 0px 0px 0px",
+      threshold: 1.0,
+    };
+
+    const observer = new IntersectionObserver(this.bindedHandleObserve, options);
+    observer.observe(document.querySelector('.main-product product-form'));
+  }
+
+  handleObserve(entries) {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        this.classList.remove('active');
+      } else {
+        this.classList.add('active');
+      }
+    });
+  }
+}
+
+customElements.define('sticky-nav', StickyNav);
