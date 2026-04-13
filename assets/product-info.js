@@ -72,6 +72,43 @@ class ProductThumbnails extends HTMLElement {
 
 customElements.define('product-thumbnails', ProductThumbnails);
 
+class OptionSelect extends HTMLElement {
+  constructor() {
+    super();
+  }
+
+  connectedCallback() {
+    this.bindedHandleClick = this.handleClick.bind(this);
+    this.bindedHandleCheckedClick = this.handleCheckedClick.bind(this);
+    this.querySelector('input:checked + label').addEventListener('click', this.bindedHandleCheckedClick);
+    this.querySelectorAll('input:not(:checked) + label').forEach((ele) => ele.addEventListener('click', this.bindedHandleClick));
+  }
+  
+  disconnectedCallback() {
+    this.querySelector('input:checked + label').removeEventListener('click', this.bindedHandleCheckedClick);
+    this.querySelectorAll('input:not(:checked) + label').forEach((ele) => ele.removeEventListener('click', this.bindedHandleClick));
+  }
+
+  handleClick(event) {
+    this.closest('product-info').querySelectorAll('option-select').forEach((ele) => {
+      this.classList.remove('open');
+      this.setAttribute('aria-expanded', 'false');
+    });
+  }
+
+  handleCheckedClick() {
+    if (this.classList.contains('open')) {
+      this.classList.remove('open');
+      this.setAttribute('aria-expanded', 'false');
+    } else {
+      this.classList.add('open');
+      this.setAttribute('aria-expanded', 'true');
+    }
+  }
+}
+
+customElements.define('option-select', OptionSelect);
+
 class ProductInfo extends HTMLElement {
   constructor() {
     super();
@@ -100,13 +137,15 @@ class ProductInfo extends HTMLElement {
     this.pendingRequestUrl = productUrl;
     const shouldFetchFullPage = this.dataset.url !== productUrl;
 
-    this.renderProductInfo({
-      requestUrl: this.buildRequestUrlWithParams(productUrl, selectedOptionValues, shouldFetchFullPage),
-      targetId: event.target.id,
-      callback: shouldFetchFullPage
-        ? this.handleSwapProduct(productUrl, shouldFetchFullPage)
-        : this.handleUpdateProductInfo(productUrl),
-    });
+    document.querySelectorAll('product-info').forEach((ele) => {
+      ele.renderProductInfo({
+        requestUrl: ele.buildRequestUrlWithParams(productUrl, selectedOptionValues, shouldFetchFullPage),
+        targetId: event.target.id,
+        callback: shouldFetchFullPage
+          ? ele.handleSwapProduct(productUrl, shouldFetchFullPage)
+          : ele.handleUpdateProductInfo(productUrl),
+      });
+    })
   }
 
   resetProductFormState() {
@@ -154,7 +193,9 @@ class ProductInfo extends HTMLElement {
         // might have to change later if add scripts to product page since by default, scripts are disabled when using element.innerHTML.
         document.querySelector('main').innerHTML = html.querySelector('main').innerHTML;
       } else {
-        document.querySelector('product-info').innerHTML = html.querySelector('product-info').innerHTML;
+        document.querySelectorAll('product-info').forEach((ele, i) => {
+          ele.innerHTML = Array.from(html.querySelectorAll('product-info'))[i].innerHTML;
+        })
       }
     };
   }
