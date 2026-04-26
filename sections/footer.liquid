@@ -1,3 +1,9 @@
+{% liquid
+  assign has_text_cols = section.blocks | has: 'type', 'text_col'
+  assign has_social_links = section.blocks | has: 'type', 'social_link'
+  assign has_menus = section.blocks | has: 'type', 'menu'
+%}
+
 <footer>
   <div class="footer__container">
     <div class="footer__desktop-content mobile-hidden">
@@ -11,73 +17,79 @@
         </div>
       {% endif %}
 
-      {% if section.blocks.size > 0 %}
-        {% assign has_text_cols = section.blocks | has: 'type', 'text_col' %}
-        {% if has_text_cols %}
-          <div class="footer__text-cols">
+      {% if has_text_cols or has_social_links %}
+        <div class="footer__text-cols">
+          {% if has_social_links %}
+            <div class="footer__text-col">
             {% for block in section.blocks %}
-              {% if block.type == 'text_col' %}
-                <div class="footer__text-col">
-                  {% if block.settings.first_row_content != blank %}
-                    <div class="rte">{{ block.settings.first_row_content }}</div>
+              {% if block.type == 'social_link' and block.settings.text != blank and block.settings.url != blank %}
+                <a href="{{ block.settings.url }}">{{ block.settings.text }}</a>
+              {% endif %}
+            {% endfor %}
+            </div>
+          {% endif %}
+          {% for block in section.blocks %}
+            {% if block.type == 'text_col' %}
+              <div class="footer__text-col">
+                {% if block.settings.first_row_content != blank %}
+                  <div class="rte">{{ block.settings.first_row_content }}</div>
+                {% endif %}
+                {% if block.settings.second_row_content != blank %}
+                  <div class="rte">{{ block.settings.second_row_content }}</div>
+                {% endif %}
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      {% if has_menus or section.settings.video != blank %}
+        <div class="footer__menus">
+          {% if has_menus %}
+            {% for block in section.blocks %}
+              {% if block.type == 'menu' %}
+                <div class="footer__menu">
+                  {% if block.settings.header != blank %}
+                    <span>{{ block.settings.header }}</span>
                   {% endif %}
-                  {% if block.settings.second_row_content != blank %}
-                    <div class="rte">{{ block.settings.second_row_content }}</div>
+                  {% if block.settings.menu != blank %}
+                    <div class="footer__menu-links">
+                      {% for link in block.settings.menu.links %}
+                        {{ link.title | link_to: link.url }}
+                      {% endfor %}
+                    </div>
                   {% endif %}
                 </div>
               {% endif %}
             {% endfor %}
-          </div>
-        {% endif %}
-
-        {% assign has_desktop_menus = section.blocks | has: 'type', 'desktop_menu' %}
-        {% if has_desktop_menus or section.settings.video != blank %}
-          <div class="footer__desktop-menus">
-            {% if has_desktop_menus %}
-              {% for block in section.blocks %}
-                {% if block.type == 'desktop_menu' %}
-                  <div class="footer__desktop-menu">
-                    {% if block.settings.header != blank %}
-                      <span>{{ block.settings.header }}</span>
-                    {% endif %}
-                    {% if block.settings.menu != blank %}
-                      <div class="footer__desktop-menu-links">
-                        {% for link in block.settings.menu.links %}
-                          {{ link.title | link_to: link.url }}
-                        {% endfor %}
-                      </div>
-                    {% endif %}
-                  </div>
-                {% endif %}
-              {% endfor %}
-            {% endif %}
-            {% if section.settings.video != blank %}
-              <div class="footer__coop-video">
-                <svg
-                  viewBox="0 0 100 100"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    id="circlePath"
-                    d="
-                      M 10, 50
-                      a 40,40 0 1,1 80,0
-                      40,40 0 1,1 -80,0
-                    "
-                  />
-                  <foreignObject height="100%" width="100%">{{ section.settings.video | video_tag: autoplay: true, loop: true, muted: true, image_size: 300, loading: 'lazy' }}</foreignObject>
-                  <text dy="-3%">
-                    <textPath startOffset="35" href="#circlePath" class="body">
-                      From our Quarter Acre
-                    </textPath>
-                  </text>
-                </svg>
-              </div>
-            {% endif %}
-          </div>
-        {% endif %}
+          {% endif %}
+          {% if section.settings.video != blank %}
+            <div class="footer__coop-video">
+              <svg
+                viewBox="0 0 100 100"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  id="circlePath"
+                  d="
+                    M 10, 50
+                    a 40,40 0 1,1 80,0
+                    40,40 0 1,1 -80,0
+                  "
+                />
+                <foreignObject height="100%" width="100%">{{ section.settings.video | video_tag: autoplay: true, loop: true, muted: true, image_size: 300, loading: 'lazy' }}</foreignObject>
+                <text dy="-3%">
+                  <textPath startOffset="35" href="#circlePath" class="body">
+                    From our Quarter Acre
+                  </textPath>
+                </text>
+              </svg>
+            </div>
+          {% endif %}
+        </div>
       {% endif %}
     </div>
+
     <div class="footer__mobile-content desktop-hidden">
       {% if section.settings.list_id != blank %}
         <div class="footer__newsletter">
@@ -87,32 +99,64 @@
         </div>
       {% endif %}
 
-      {% if section.blocks.size > 0 %}
-        {% assign has_mobile_menus = section.blocks | has: 'type', 'mobile_menu' %}
-        {% if has_mobile_menus %}
-          <div class="footer__mobile-menus">
-            {% for block in section.blocks %}
-              {% if block.type == 'mobile_menu' %}
-                <div class="footer__mobile-menu">
-                  {% if block.settings.menu != blank %}
+      {% if has_menus %}
+        <div class="footer__menus">
+          {% for block in section.blocks %}
+            {% if block.type == 'menu' %}
+              <div class="footer__menu">
+                {% if block.settings.header != blank %}
+                  <span>{{ block.settings.header }}</span>
+                {% endif %}
+                {% if block.settings.menu != blank %}
+                  <div class="footer__menu-links">
                     {% for link in block.settings.menu.links %}
                       {{ link.title | link_to: link.url }}
                     {% endfor %}
-                  {% endif %}
-                </div>
+                  </div>
+                {% endif %}
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      {% if has_text_cols %}
+        <div class="footer__text-cols">
+          {% for block in section.blocks %}
+            {% if block.type == 'text_col' %}
+              <div class="footer__text-col">
+                {% if block.settings.first_row_content != blank %}
+                  <div class="rte">{{ block.settings.first_row_content }}</div>
+                {% endif %}
+                {% if block.settings.second_row_content != blank %}
+                  <div class="rte">{{ block.settings.second_row_content }}</div>
+                {% endif %}
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      <div class="footer__title">
+        {{ 'icon-wordmark.svg' | inline_asset_content }}
+        
+        {% if has_social_links %}
+          <div class="footer__mobile-social-links">
+            {% for block in section.blocks %}
+              {% if block.type == 'social_link' and block.settings.text != blank and block.settings.url != blank %}
+                <a href="{{ block.settings.url }}">{{ block.settings.text }}</a>
               {% endif %}
             {% endfor %}
           </div>
         {% endif %}
-      {% endif %}
-
-      <span class="footer__title big-title">Quarter Acre</span>
+      </div>
     </div>
   </div>
 </footer>
 
 {% stylesheet %}
   footer {
+    color: var(--light-brown);
     padding: 1.875rem 0 0;
   }
   @media screen and (min-width: 990px) {
@@ -138,19 +182,19 @@
     column-gap: 1.25rem;
     row-gap: 2rem;
   }
-  .footer__title {
+  .footer__desktop-content .footer__title {
     grid-column: 1;
     grid-row: 1;
   }
-  .footer__newsletter {
+  .footer__desktop-content .footer__newsletter {
     grid-column: 1;
     grid-row: 2;
   }
-  .footer__text-cols {
+  .footer__desktop-content .footer__text-cols {
     grid-column: 2;
     grid-row: 1;
   }
-  .footer__desktop-menus {
+  .footer__desktop-content .footer__menus {
     grid-column: 2;
     grid-row: 2;
   }
@@ -179,12 +223,17 @@
     }
   }
 
-  .footer__text-cols, .footer__desktop-menus {
+  .footer__text-cols, .footer__menus {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1.25rem;
   }
-  .footer__text-col, .footer__desktop-menu {
+  @media screen and (min-width: 990px) {
+    .footer__text-cols, .footer__menus {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+  .footer__text-col, .footer__menu {
     display: flex;
     flex-direction: column;
     gap: 1.875rem;
@@ -192,38 +241,27 @@
   .footer__text-col {
     justify-content: space-between;
   }
-  .footer__text-col .rte a {
-    text-decoration: none;
-  }
-  .footer__desktop-menu-links {
+  .footer__menu-links {
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
     align-items: start;
   }
-
+  .footer__menu {
+    border-top: 1px solid var(--light-brown-30);
+    padding-top: 0.75rem;
+  }
   @media screen and (min-width: 990px) {
-    .footer__newsletter, .footer__desktop-menu {
+    .footer__newsletter {
       border-top: 1px solid var(--light-brown-30);
       padding-top: 0.75rem;
     }
   }
-
-  .footer__mobile-content {
-    display: flex;
-    flex-direction: column;
-    gap: 3.75rem;
-  }
-  .footer__mobile-menus {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 1.25rem;
-  }
-  .footer__mobile-menu {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    align-items: start;
+  @media screen and (max-width: 989px) {
+    .footer__text-cols {
+      padding-top: 0.75rem;
+      border-top: 1px solid var(--light-brown-30);
+    }
   }
 
   .footer__coop-video {
@@ -242,8 +280,24 @@
   }
   .footer__coop-video svg textPath {
     font-size: 50%;
-    fill: var(--light-brown-30);
+    fill: var(--grey);
     text-transform: uppercase;
+  }
+
+
+  .footer__mobile-content {
+    display: flex;
+    flex-direction: column;
+    gap: 3.75rem;
+  }
+  .footer__mobile-content .footer__title svg {
+    width: 100%;
+    height: auto;
+  }
+  .footer__mobile-social-links {
+    margin-top: 0.75rem;
+    display: flex;
+    gap: 2.5rem;
   }
 {% endstylesheet %}
 
@@ -282,9 +336,26 @@
     }
   ],
   "blocks": [
+
     {
-      "type": "desktop_menu",
-      "name": "Desktop Menu",
+      "type": "social_link",
+      "name": "Social Link",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "URL"
+        }
+      ]
+    },
+    {
+      "type": "menu",
+      "name": "Menu",
       "limit": 2,
       "settings": [
         {
@@ -300,21 +371,9 @@
       ]
     },
     {
-      "type": "mobile_menu",
-      "name": "Mobile Menu",
-      "limit": 3,
-      "settings": [
-        {
-          "type": "link_list",
-          "id": "menu",
-          "label": "Menu"
-        }
-      ]
-    },
-    {
       "type": "text_col",
       "name": "Text Column",
-      "limit": 3,
+      "limit": 2,
       "settings": [
         {
           "type": "richtext",
