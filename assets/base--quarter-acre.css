@@ -116,7 +116,7 @@ body, .body {
 
 h1, .h1 {
   font-family: var(--font-suisse-intl);
-  font-weight: 450;
+  font-weight: 400;
   font-size: 1.75rem;
   line-height: 133%;
   letter-spacing: -0.03em;
@@ -190,4 +190,8 @@ button[type="button"], .button {
   border: 1px solid var(--dark-brown);
   color: var(--dark-brown);
   background-color: transparent;
+}
+.button--white {
+  background-color: var(--white);
+  color: var(--dark-brown);
 }
