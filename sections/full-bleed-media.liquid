@@ -6,8 +6,18 @@
       {{ section.settings.image | image_url: width: 2880 | image_tag  }}
     {% endif %}
 
-    {% if section.settings.desktop_heading != blank %}
-      <h1 class="mobile-hidden big-h1">{{ section.settings.desktop_heading }}</h1>
+    {% if section.settings.eyebrow != blank or section.settings.content != blank or section.settings.cta_url != blank and section.settings.cta_text != blank %}
+      <div class="full-bleed-media__content">
+        {% if section.settings.eyebrow != blank %}
+          <span class="body-bold">{{ section.settings.eyebrow }}</span>
+        {% endif %}
+        {% if section.settings.content != blank %}
+          <div class="rte">{{ section.settings.content }}</div>
+        {% endif %}
+        {% if section.settings.cta_url != blank and section.settings.cta_text != blank %}
+          <a href="{{ section.settings.cta_url }}" class="button button--white">{{ section.settings.cta_text }}</a>
+        {% endif %}
+      </div>
     {% endif %}
   </div>
 {% endif %}
@@ -23,20 +33,30 @@
     height: 100%;
     object-fit: cover;
   }
-  .full-bleed-media h1 {
+  .full-bleed-media__content {
     color: var(--white);
     position: absolute;
-    top: 6.75rem;
-    left: 50%;
-    transform: translateX(-50%);
+    bottom: 1.875rem;
+    left: 1.25rem;
+    right: 1.25rem;
+  }
+  @media screen and (min-width: 990px) {
+    .full-bleed-media__content {
+      max-width: 34.375rem;
+      bottom: 3.75rem;
+      left: 2.5rem;
+    }
   }
 
+  .full-bleed-media__content .rte {
+    margin-top: 1.25rem;
+  }
+  .full-bleed-media__content .button {
+    margin-top: 2.5rem;
+  }
   @media screen and (min-width: 990px) {
-    .full-bleed-media h1 {
-      top: 50%;
-      left: unset;
-      transform: translateY(-50%);
-      padding: 0 2.5rem;
+    .full-bleed-media__content .button {
+      max-width: 19.6875rem;
     }
   }
 {% endstylesheet %}
@@ -48,8 +68,23 @@
   "settings": [
     {
       "type": "text",
-      "id": "desktop_heading",
-      "label": "Desktop heading"
+      "id": "eyebrow",
+      "label": "Eyebrow"
+    },
+    {
+      "type": "richtext",
+      "id": "content",
+      "label": "Content"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA Text"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "CTA URL"
     },
     {
       "type": "video",

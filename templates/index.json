@@ -1,12 +1,23 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "full_bleed_media_AHwzdM": {
       "type": "full-bleed-media",
       "name": "Full Bleed Media",
       "settings": {
-        "desktop_heading": "1\/4 Acre",
-        "mobile_heading": "Quarter Acre",
-        "image": "shopify:\/\/shop_images\/ed3c9dfed445975f2f59bc11f85c8b8b1ab31557.png"
+        "eyebrow": "The Coop",
+        "content": "<h1>Meet your backyard’s new centerpiece:  a modern, easy-to-use chicken coop designed for simplicity and style.</h1>",
+        "cta_text": "Shop Now",
+        "cta_url": "shopify://products/the-chicken-coop",
+        "image": "shopify://shop_images/ed3c9dfed445975f2f59bc11f85c8b8b1ab31557.png"
       }
     }
   },
