@@ -92,14 +92,14 @@
 {% style %}
   .drawers {
     display: block;
-    margin-top: 1.875rem;
+    margin-top: 3.75rem;
     border-top: 1px solid var(--light-brown-60);
-    padding: 2.5rem 1.25rem 0;
+    padding: 3.75rem 1.25rem 0;
   }
   @media screen and (min-width: 990px) {
     .drawers {
       margin-top: 1.25rem;
-      padding: 1.25rem 1.25rem 0;
+      padding: 3.75rem 1.25rem 2.5rem;
     }
   }
 
@@ -108,7 +108,6 @@
     gap: 8.625rem;
     grid-template-columns: max-content 1fr;
     grid-template-areas: 'headings block';
-    min-height: calc(100vh - var(--header-height));
   }
 
   .drawers-element__desktop .drawers-element__headings {
@@ -145,8 +144,6 @@
 
   .drawers-element__desktop .drawers-element__block {
     grid-area: block;
-    border-top: 1px solid var(--dark-brown);
-    padding-top: 1.25rem;
     opacity: 0;
     pointer-events: none;
     transition: opacity 300ms ease-out;

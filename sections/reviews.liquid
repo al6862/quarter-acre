@@ -90,7 +90,7 @@
 </div>
 {% stylesheet %}
   .reviews {
-    margin-top: 1.875rem;
+    margin-top: 3.75rem;
     border-top: 1px solid var(--light-brown-60);
   }
   @media screen and (min-width: 990px) {
@@ -197,6 +197,7 @@
   .mobile-review-slides {
     padding: 0 1.25rem;
     overflow-x: auto;
+    overflow-y: hidden;
     scrollbar-width: none;
     scroll-snap-type: x mandatory;
     scroll-padding-left: 1.25rem;
@@ -228,7 +229,7 @@
   .mobile-big-review {
     position: relative;
     min-height: 37.5rem;
-    margin: 1.875rem 1.25rem 2rem;
+    margin: 3.75rem 1.25rem 2rem;
   }
   .mobile-big-review .review {
     position: absolute;
@@ -252,6 +253,7 @@
     position: absolute;
     width: 100%;
     height: 100%;
+    object-fit: cover;
   }
   .mobile-review__content-header {
     display: flex;

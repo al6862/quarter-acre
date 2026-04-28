@@ -93,6 +93,7 @@
     <div class="footer__mobile-content desktop-hidden">
       {% if section.settings.list_id != blank %}
         <div class="footer__newsletter">
+          <div class="footer__newsletter-heading rte">{{ section.settings.heading }}</div>
           <span class="footer__newsletter-eyebrow">{{ section.settings.eyebrow }}</span>
           <div class="footer__newsletter-form">{{ section.settings.list_id }}</div>
           <span class="footer__newsletter-disclaimer">{{ section.settings.disclaimer }}</span>
@@ -157,17 +158,17 @@
 {% stylesheet %}
   footer {
     color: var(--light-brown);
-    padding: 1.875rem 0 0;
+    padding: 3.75rem 1.25rem 2.5rem;
   }
   @media screen and (min-width: 990px) {
     footer {
-      padding: 1.875rem 1.25rem 3.75rem;
+      padding: 1.25rem 1.25rem 3.75rem;
     }
   }
 
   .footer__container {
     border-top: 1px solid var(--light-brown);
-    padding: 2rem 1.25rem 3rem;
+    padding: 0.75rem 0 0;
   }
   @media screen and (min-width: 990px) {
     .footer__container {
@@ -199,6 +200,10 @@
     grid-row: 2;
   }
 
+
+  .footer__newsletter-heading {
+    margin-bottom: 3rem;
+  }
   .footer__newsletter-eyebrow {
     display: block;
     margin-bottom: 0.75rem;
@@ -210,7 +215,6 @@
   @media screen and (min-width: 990px) {
     .footer__newsletter-heading {
       max-width: 16rem;
-      margin-bottom: 3rem;
     }
     .footer__newsletter-eyebrow {
       max-width: 24rem;

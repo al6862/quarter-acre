@@ -41,7 +41,12 @@
                   data-option-value-id="{{ selected_value.id }}"
                 >
                 <label for="{{ section.id }}-{{ option.position }}-initial-{{ product.handle }}" class="chart">
-                  <span>{{ selected_value }}{% if option_forloop_index == 1 %} | {{ selected_value.variant.price | money_without_trailing_zeros }}{% endif %}</span>
+                  <span class="label__value-swatch">
+                    <span>{{ selected_value }}{% if option_forloop_index == 1 %} | {{ selected_value.variant.price | money_without_trailing_zeros }}{% endif %}</span>
+                    {% if selected_value.swatch.color %}
+                      <span class="swatch" style="--swatch-color: {{ selected_value.swatch.color }}"></span>
+                    {% endif %}
+                  </span>
                   <div class="icon-carat">
                     {{ 'icon-carat.svg' | inline_asset_content }}
                   </div>
@@ -68,7 +73,14 @@
                           data-product-url="{{ value.product_url }}"
                           data-option-value-id="{{ value.id }}"
                         >
-                        <label for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 -}}-{{ product.handle }}" class="chart">{{ value }}{% if option_forloop_index == 1 %} | {{ value.variant.price | money_without_trailing_zeros }}{% endif %}</label>
+                        <label for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 -}}-{{ product.handle }}" class="chart">
+                          <span class="label__value-swatch">
+                            <span>{{ value }}{% if option_forloop_index == 1 %} | {{ value.variant.price | money_without_trailing_zeros }}{% endif %}</span>
+                            {% if value.swatch.color %}
+                              <span class="swatch" style="--swatch-color: {{ value.swatch.color }}"></span>
+                            {% endif %}
+                          </span>
+                        </label>
                       {% endif %}
                     {% endfor %}
                   </div>
@@ -95,7 +107,14 @@
                           data-product-url="{{ value.product_url }}"
                           data-option-value-id="{{ value.id }}"
                         >
-                        <label for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 -}}-{{ product.handle }}" class="chart">{{ value }}{% if option_forloop_index == 1 %} | {{ value.variant.price | money_without_trailing_zeros }}{% endif %}</label>
+                        <label for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 -}}-{{ product.handle }}" class="chart">
+                          <span class="label__value-swatch">
+                            <span>{{ value }}{% if option_forloop_index == 1 %} | {{ value.variant.price | money_without_trailing_zeros }}{% endif %}</span>
+                            {% if value.swatch.color %}
+                              <span class="swatch" style="--swatch-color: {{ value.swatch.color }}"></span>
+                            {% endif %}
+                          </span>
+                        </label>
                       {% endif %}
                     {% endfor %}
                   </div>
@@ -318,6 +337,30 @@
   }
   sticky-nav product-info .product__atb span {
     text-wrap: nowrap;
+  }
+
+  .sticky-nav__option-fieldset label .swatch {
+    display: block;
+    border-radius: 50%;
+    position: relative;
+    width: 1rem;
+    height: 1rem;
+    border: 1px solid var(--dark-brown);
+  }
+  .sticky-nav__option-fieldset label .swatch::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 0.65rem;
+    height: 0.65rem;
+    background-color: var(--swatch-color);
+    border-radius: 50%;
+  }
+  .sticky-nav__option-fieldset label .label__value-swatch {
+    display: flex;
+    gap: 0.625rem;
   }
 {% endstylesheet %}
 
