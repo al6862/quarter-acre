@@ -146,7 +146,6 @@ class MobileReviewSlideshow extends HTMLElement {
   }
 
   handleSlideClick(event) {
-    console.log('clicked')
     this.querySelector('.mobile-big-review .review.active').classList.remove('active');
     this.querySelector(`.mobile-big-review .review[data-index="${event.currentTarget.dataset.index}"]`).classList.add('active');
   }
@@ -228,13 +227,14 @@ class StickyNav extends HTMLElement {
 
     const observer = new IntersectionObserver(this.bindedHandleObserve, options);
     observer.observe(document.querySelector('.main-product'));
+    observer.observe(document.querySelector('footer'));
   }
 
   handleObserve(entries) {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         this.classList.remove('active');
-        this.querySelectorAll('option-select').forEach((ele) => ele.handleClick());
+        this.querySelectorAll('option-select')?.forEach((ele) => ele.handleClick());
       } else {
         this.classList.add('active');
       }
