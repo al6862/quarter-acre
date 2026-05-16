@@ -45,7 +45,7 @@
   --light-brown: #543C23;
   --light-brown-30: #543C234D;
   --light-brown-60: #543C2399;
-  --dark-brown: #331A00;
+  --dark-brown: #250400;
   --light-eggshell: #F8F5F2;
 
   --font-suisse-intl: "Suisse Int'l", helvetica, sans-serif;
@@ -178,6 +178,11 @@ button[type="button"], .button {
   align-items: center;
   height: 3.125rem;
   width: 100%;
+  background-color: var(--light-brown);
+  color: var(--white);
+  transition: background-color 300ms ease-out, color 300ms ease-out;
+}
+button[type="button"]:hover, .button:hover {
   background-color: var(--light-brown);
   color: var(--white);
 }
