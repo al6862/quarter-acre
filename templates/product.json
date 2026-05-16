@@ -13,83 +13,33 @@
       "type": "product",
       "settings": {}
     },
+    "product_sticky_nav_k4hKeG": {
+      "type": "product-sticky-nav",
+      "disabled": true,
+      "name": "Product Sticky Nav",
+      "settings": {}
+    },
     "split_media_content_QR4QAX": {
       "type": "split-media-content",
       "blocks": {
-        "image_pGx4qw": {
+        "image_CffbMH": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/342706b4f91b72d5138cfd989f91b3a140856bbd.jpg"
+            "image": "shopify://shop_images/aedf3dedc1776d917d2195e15305398777ea9860.png"
           }
         }
       },
       "block_order": [
-        "image_pGx4qw"
+        "image_CffbMH"
       ],
       "name": "Split Media + Content",
       "settings": {
         "content_eyebrow": "Details",
-        "content_heading": "Meet your backyard’s new centerpiece:  a modern, easy-to-use chicken coop designed for simplicity and style.",
+        "content_heading": "Simple, modular, and built to last. Made from marine-grade plywood with a precision interlocking structure, it brings a quiet, architectural presence to your backyard.",
         "media_eyebrow": "",
         "media_caption": "",
         "layout": "content_on_left"
       }
-    },
-    "drawers_7HjxCW": {
-      "type": "drawers",
-      "blocks": {
-        "drawer_mWbBfy": {
-          "type": "drawer",
-          "settings": {
-            "heading": "Easy Door",
-            "content": "<p>Designed with pre-drilled holes, labeled panels, and a simple interlocking frame.</p>",
-            "first_image": "shopify://shop_images/1fd1130cde077d065325ab1fe8e14b00989db5f0.png",
-            "first_caption": "Nesting Box",
-            "second_image": "shopify://shop_images/03d7f888ab1851244cdce3b57f2fc2fb6923daf0.png",
-            "second_caption": "Egg Collection"
-          }
-        },
-        "drawer_RPhigr": {
-          "type": "drawer",
-          "settings": {
-            "heading": "Nest Boxes",
-            "content": "<p>Nest Boxes Content</p>",
-            "first_image": "shopify://shop_images/1fd1130cde077d065325ab1fe8e14b00989db5f0.png",
-            "first_caption": "Nesting Box",
-            "second_image": "shopify://shop_images/03d7f888ab1851244cdce3b57f2fc2fb6923daf0.png",
-            "second_caption": ""
-          }
-        },
-        "drawer_fm4biT": {
-          "type": "drawer",
-          "settings": {
-            "heading": "Egg Collection",
-            "content": "<p>Egg Collection Content</p>",
-            "first_image": "shopify://shop_images/1fd1130cde077d065325ab1fe8e14b00989db5f0.png",
-            "first_caption": "Nesting Box",
-            "second_caption": ""
-          }
-        },
-        "drawer_yKjawW": {
-          "type": "drawer",
-          "settings": {
-            "heading": "Roosting Bar",
-            "content": "",
-            "first_image": "shopify://shop_images/1fd1130cde077d065325ab1fe8e14b00989db5f0.png",
-            "first_caption": "Nesting Box",
-            "second_image": "shopify://shop_images/03d7f888ab1851244cdce3b57f2fc2fb6923daf0.png",
-            "second_caption": "Egg Collection"
-          }
-        }
-      },
-      "block_order": [
-        "drawer_mWbBfy",
-        "drawer_RPhigr",
-        "drawer_fm4biT",
-        "drawer_yKjawW"
-      ],
-      "name": "Drawers",
-      "settings": {}
     },
     "split_media_content_prfcyG": {
       "type": "split-media-content",
@@ -130,7 +80,7 @@
           "type": "row",
           "settings": {
             "heading": "Accessories",
-            "subheading": "Accessories",
+            "subheading": "Materials",
             "content": "Heavy Duty Steel"
           }
         },
@@ -152,7 +102,7 @@
       "name": "Split Media + Content",
       "settings": {
         "content_eyebrow": "Assembly",
-        "content_heading": "Designed with pre-drilled holes, labeled panels, and a simple interlocking frame.",
+        "content_heading": "Designed to feel straightforward from the start. Each panel is labeled and pre-drilled, allowing the structure to come together with minimal tools and time.",
         "media_eyebrow": "",
         "media_caption": "",
         "layout": "media_on_left"
@@ -209,7 +159,7 @@
         "image_nxNJrn": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/original_0e9b29e90fac91008d3acfb9f345f048_2.png"
+            "image": "shopify://shop_images/fd32b358782b23afe017b4b99ccd077c7225a48b.png"
           }
         }
       },
@@ -220,10 +170,55 @@
       "settings": {
         "content_eyebrow": "Cleaning",
         "content_heading": "A smooth interior surface and removable panels for quick, hassle-free cleaning.",
-        "media_eyebrow": "fig.                (e)",
+        "media_eyebrow": "",
         "media_caption": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex.</p>",
-        "layout": "media_on_left"
+        "layout": "content_on_left"
       }
+    },
+    "drawers_7HjxCW": {
+      "type": "drawers",
+      "blocks": {
+        "drawer_mWbBfy": {
+          "type": "drawer",
+          "settings": {
+            "heading": "Easy Door",
+            "content": "<p>Wide access doors with ventilation are designed to make feeding, cleaning, and everyday care feel simple and intuitive.</p>",
+            "first_image": "shopify://shop_images/original_1997ecc3cf0d0edc8b383b93cfad3fa2_13.png",
+            "first_caption": "Nesting Box",
+            "second_image": "shopify://shop_images/original_1997ecc3cf0d0edc8b383b93cfad3fa2_14.png",
+            "second_caption": "Egg Collection"
+          }
+        },
+        "drawer_RPhigr": {
+          "type": "drawer",
+          "settings": {
+            "heading": "Nest Boxes",
+            "content": "<p>Integrated nest boxes provide a quiet, comfortable space for laying while remaining easily accessible for collection.</p>",
+            "first_image": "shopify://shop_images/eca484019ebe1a6fe3995503d40d8e4c011f3ac0-2250x3000_4_d21389de-5cd3-431e-9d27-d3c5bb77cf14.png",
+            "first_caption": "Egg Collection",
+            "second_image": "shopify://shop_images/787717c2a050d143b2776359565d76314cfa18f9.png",
+            "second_caption": "Nesting Box"
+          }
+        },
+        "drawer_fm4biT": {
+          "type": "drawer",
+          "settings": {
+            "heading": "Roosting Bar",
+            "content": "<p>A built-in roosting bar gives chickens a secure, elevated place to rest overnight, and easy to remove and clean when needed.</p>",
+            "first_image": "shopify://shop_images/original_1997ecc3cf0d0edc8b383b93cfad3fa2_14_1.png",
+            "first_caption": "Egg Collection",
+            "second_image": "shopify://shop_images/original_1997ecc3cf0d0edc8b383b93cfad3fa2_14_2.png",
+            "second_caption": "Egg Collection"
+          }
+        }
+      },
+      "block_order": [
+        "drawer_mWbBfy",
+        "drawer_RPhigr",
+        "drawer_fm4biT"
+      ],
+      "name": "Drawers",
+      "settings": {}
     },
     "split_media_content_RdUV3X": {
       "type": "split-media-content",
@@ -282,10 +277,10 @@
       "name": "Split Media + Content",
       "settings": {
         "content_eyebrow": "Details",
-        "content_heading": "Customize your coop to fit the  style and vibe of your backyard.",
+        "content_heading": "Customize your coop to fit the  style and vibe of your backyard. This coop is ready to paint and adapt whether it blends into the landscape or stands out as a focal point, the structure is designed to evolve with your space.",
         "media_eyebrow": "fig.                (f)",
         "media_caption": "<p>This Coop is painted using Home Depot’s outdoor paint in the shade Winter Green. All paint is weather proof and can be applied with any hardware brush.</p>",
-        "layout": "content_on_left"
+        "layout": "media_on_left"
       }
     },
     "reviews_Y99CwK": {
@@ -323,21 +318,16 @@
       ],
       "name": "Reviews",
       "settings": {}
-    },
-    "product_sticky_nav_k4hKeG": {
-      "type": "product-sticky-nav",
-      "name": "Product Sticky Nav",
-      "settings": {}
     }
   },
   "order": [
     "main",
     "product_sticky_nav_k4hKeG",
     "split_media_content_QR4QAX",
-    "drawers_7HjxCW",
     "split_media_content_prfcyG",
     "media_slider_4beXia",
     "split_media_content_BtDBpN",
+    "drawers_7HjxCW",
     "split_media_content_RdUV3X",
     "reviews_Y99CwK"
   ]
