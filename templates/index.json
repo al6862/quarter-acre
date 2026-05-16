@@ -13,10 +13,10 @@
       "type": "full-bleed-media",
       "name": "Full Bleed Media",
       "settings": {
-        "eyebrow": "The Coop",
-        "content": "<h1>Meet your backyard’s new centerpiece:  a modern, easy-to-use chicken coop designed for simplicity and style.</h1>",
-        "cta_text": "Shop Now",
-        "cta_url": "shopify://products/the-chicken-coop",
+        "eyebrow": "",
+        "content": "",
+        "cta_text": "",
+        "cta_url": "",
         "image": "shopify://shop_images/ed3c9dfed445975f2f59bc11f85c8b8b1ab31557.png"
       }
     }
