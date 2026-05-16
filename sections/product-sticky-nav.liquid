@@ -6,8 +6,8 @@
     data-product-id="{{ product.id }}"
     data-url="{{ product.url }}"
   >
-    <div class="mobile-hidden sticky-nav__title-thumbnail">
-      <h1>{{ product.title }}</h1>
+    <div class="sticky-nav__title-thumbnail">
+      <h1 class="mobile-hidden">{{ product.title }}</h1>
       {% if product.metafields.custom.product_sticky_nav_thumbnail != blank %}
         {{ product.metafields.custom.product_sticky_nav_thumbnail.value | image_url: width: 80 | image_tag  }}
       {% endif %}
@@ -213,42 +213,40 @@
   }
 
   sticky-nav product-info {
-    padding: 0.75rem 1.25rem;
+    padding: 1.25rem;
     background-color: var(--eggshell);
-  }
-  @media screen and (min-width: 990px) {
-    sticky-nav product-info {
-      padding: 1.25rem;
-      background-color: var(--light-eggshell);
-    }
   }
 
   sticky-nav product-info {
-    display: block;
-  }
-  @media screen and (min-width: 990px) {
-    sticky-nav product-info {
-      display: flex;
-      justify-content: space-between;
-    }
+    display: flex;
+    justify-content: space-between;
+    gap: 1.5rem;
   }
 
   .sticky-nav__title-thumbnail {
     display: flex;
     align-items: center;
     gap: 1.125rem;
+
+    @media screen and (max-width:989px) {
+      flex-shrink: 0;
+    }
   }
   .sticky-nav__title-thumbnail h1 {
     text-wrap: nowrap;
   }
   .sticky-nav__title-thumbnail img {
     object-fit: contain;
-    width: 2.5rem;
+    width: 3.375rem;
   }
 
   .sticky-nav__variant-selects-atb {
     display: flex;
     gap: 1.25rem;
+
+    @media screen and (max-width: 989px) {
+      flex-grow: 1;
+    }
   }
   .sticky-nav__variant-selects.product__variant-selects {
     border: none;
@@ -333,7 +331,10 @@
   }
   sticky-nav product-info .product__atb {
     height: 100%;
-    padding: 0 3rem;
+    
+    @media screen and (min-width: 990px) {
+      padding: 0 3rem;
+    }
   }
   sticky-nav product-info .product__atb span {
     text-wrap: nowrap;
