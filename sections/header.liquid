@@ -1,22 +1,8 @@
-<header-drawer>
-  <div class="header__desktop-menu mobile-hidden">
+<header>
+  <div class="header__menu">
     {% for link in section.settings.menu.links %}
       {{ link.title | link_to: link.url, class: 'nav' }}
     {% endfor %}
-  </div>
-
-  <div class="header__mobile-menu-container desktop-hidden">
-    <span class="open-menu-button nav" aria-controls="mobile-menu" aria-expanded="false" aria-haspopup="menu" aria-label="open menu">Menu</span>
-    <div role="menu" id="mobile-menu" class="header__mobile-menu">
-      <div class="header__mobile-menu-content-container">
-        <div class="header__mobile-menu-content">
-          <button class="close-menu-button" aria-controls="mobile-menu" aria-expanded="false" aria-haspopup="menu" aria-label="close">{{ 'icon-close.svg' | inline_asset_content }}</button>
-          {% for link in section.settings.menu.links %}
-            {{ link.title | link_to: link.url, class: 'nav' }}
-          {% endfor %}
-        </div>
-      </div>
-    </div>
   </div>
 
   <h2 class="header__title title">
@@ -24,14 +10,14 @@
   </h2>
 
   <button class="header__cart nav" aria-haspopup="dialog" aria-controls="cart-drawer" aria-expanded="false">Cart {{ cart.item_count }}</button>
-</header-drawer>
+</header>
 
 {% stylesheet %}
   :root {
     --header-height: 3.375rem;
   }
 
-  header-drawer {
+  header {
     --header-color: var(--white);
     --header-bg-color: transparent;
     position: fixed;
@@ -48,16 +34,16 @@
     align-items: center;
     transition: color 300ms ease-out, background-color 300ms ease-out;
   }
-  header-drawer.scrolled {
+  header.scrolled {
     --header-color: var(--color-foreground);
     --header-bg-color: var(--color-background);
   }
   @media screen and (min-width: 990px) {
-    header-drawer {
+    header {
       padding: 0 2.5rem;
     }
   }
-  .header__desktop-menu, .header__mobile-menu-container {
+  .header__menu, .header__mobile-menu-container {
     grid-column: 1;
   }
   .header__title {
@@ -67,7 +53,7 @@
     grid-column: 3;
   }
   
-  .header__desktop-menu {
+  .header__menu {
     display: flex;
     gap: 5rem;
   }
@@ -112,7 +98,7 @@
   .header__mobile-menu-content-container {
     min-height: 0;
   }
-  header-drawer:has(.header__mobile-menu.open) {
+  header:has(.header__mobile-menu.open) {
     z-index: 30;
   }
   .header__mobile-menu.open {
