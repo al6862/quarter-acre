@@ -17,7 +17,8 @@
         "content": "",
         "cta_text": "",
         "cta_url": "",
-        "image": "shopify://shop_images/ed3c9dfed445975f2f59bc11f85c8b8b1ab31557.png"
+        "desktop_image": "shopify://shop_images/aedf3dedc1776d917d2195e15305398777ea9860.png",
+        "mobile_image": "shopify://shop_images/original_4a6a255a851fa344d2f5510107075c66_1_2.png"
       }
     }
   },

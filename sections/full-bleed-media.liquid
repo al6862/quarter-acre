@@ -1,9 +1,19 @@
-{% if section.settings.video != blank or section.settings.image != blank %}
+{% if section.settings.desktop_video != blank or section.settings.desktop_image != blank %}
   <div class="full-bleed-media">
-    {% if section.settings.video != blank %}
-      {{ section.settings.video | video_tag: image_size: '2880x', loop: true, controls: false, muted: true, autoplay: true }}
+    {% if section.settings.mobile_video != blank or section.settings.mobile_image != blank %}
+      {% assign desktop_media_class = 'mobile-hidden' %}
+    {% endif %}
+
+    {% if section.settings.desktop_video != blank %}
+      {{ section.settings.desktop_video | video_tag: image_size: '2880x', loop: true, controls: false, muted: true, autoplay: true, class: desktop_media_class }}
     {% else %}
-      {{ section.settings.image | image_url: width: 2880 | image_tag  }}
+      {{ section.settings.desktop_image | image_url: width: 2880 | image_tag: class: desktop_media_class }}
+    {% endif %}
+
+    {% if section.settings.mobile_video != blank %}
+      {{ section.settings.mobile_video | video_tag: image_size: '1980x', loop: true, controls: false, muted: true, autoplay: true, class: 'desktop-hidden' }}
+    {% elsif section.settings.mobile_image != blank %}
+      {{ section.settings.mobile_image | image_url: width: 1980 | image_tag: class: 'desktop-hidden' }}
     {% endif %}
 
     {% if section.settings.eyebrow != blank or section.settings.content != blank or section.settings.cta_url != blank and section.settings.cta_text != blank %}
@@ -88,14 +98,26 @@
     },
     {
       "type": "video",
-      "id": "video",
-      "label": "Video",
+      "id": "desktop_video",
+      "label": "Desktop Video",
       "info": "If video field blank, image field used instead."
     },
     {
       "type": "image_picker",
-      "id": "image",
-      "label": "Image"
+      "id": "desktop_image",
+      "label": "Desktop Image"
+    },
+    {
+      "type": "video",
+      "id": "mobile_video",
+      "label": "Mobile Video",
+      "info": "If mobile fields blank, desktop fields used instead."
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "Mobile Image",
+      "info": "If mobile fields blank, desktop fields used instead."
     },
   ],
   "presets": [
