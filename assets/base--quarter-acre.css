@@ -180,7 +180,7 @@ button[type="button"], .button {
   width: 100%;
   background-color: var(--light-brown);
   color: var(--white);
-  transition: background-color 300ms ease-out, color 300ms ease-out;
+  transition: background-color 300ms ease-out, color 300ms ease-out, border 300ms ease-out;
 }
 button[type="button"]:hover, .button:hover {
   background-color: var(--light-brown);
@@ -193,6 +193,9 @@ button[type="button"]:hover, .button:hover {
   border: 1px solid var(--dark-brown);
   color: var(--dark-brown);
   background-color: transparent;
+}
+.button--outline:hover {
+  border: 1px solid var(--light-brown);
 }
 .button--white {
   background-color: var(--white);
