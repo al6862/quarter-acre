@@ -234,7 +234,7 @@ class StickyNav extends HTMLElement {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         this.classList.remove('active');
-        this.querySelectorAll('option-select')?.forEach((ele) => ele.handleClick());
+        // this.querySelectorAll('option-select')?.forEach((ele) => ele.handleClick());
       } else {
         this.classList.add('active');
       }
@@ -243,3 +243,40 @@ class StickyNav extends HTMLElement {
 }
 
 customElements.define('sticky-nav', StickyNav);
+
+class IncludeRunModal extends HTMLElement {
+  constructor() {
+    super();
+  }
+
+  connectedCallback() {
+    this.openButton = this.querySelector('button[aria-label="open"]');
+    this.closeButton = this.querySelector('button[aria-label="close"]');
+    this.dialog = this.querySelector('dialog');
+    this.handleClick = this.handleClick.bind(this);
+
+
+    this.addEventListener('click', this.handleClick);
+  }
+
+  disconnectedCallback() {
+
+  }
+
+  handleClick(event) {
+    event.preventDefault();
+    if (!event.target.closest('.include-run-modal__dialog') || event.target.closest('.include-run-modal__close-button')) {
+      if (this.dialog.hasAttribute('open')) {
+        this.dialog.classList.add('closing');
+        this.addEventListener('transitionend', () => {
+          this.dialog.removeAttribute('open');
+          this.dialog.classList.remove('closing')
+        }, {once: true});
+      } else {
+        this.dialog.setAttribute('open', 'open');
+      }
+    }
+  }
+}
+
+customElements.define('include-run-modal', IncludeRunModal);
