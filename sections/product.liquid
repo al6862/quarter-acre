@@ -151,16 +151,25 @@
 
     <h1 class="big-h1 desktop-hidden">{{ product.title }}</h1>
     <div class="product__description-variant-selects">
-      {% if product.description != blank %}
+      {% if product.description != blank or product.metafields.custom.description_columns %}
         <div class="product__description rte mobile-hidden">
           {{ product.description }}
+          {% if product.metafields.custom.description_columns %}
+            <div class="product__description-columns">
+              {% for col in product.metafields.custom.description_columns.value %}
+                <div>
+                  <span class="body-bold">{{ col.heading }}</span>
+                  {{ col.content | metafield_tag }}
+                </div>
+              {% endfor %}
+            </div>
+          {% endif %}
         </div>
       {% endif %}
 
       {% unless product.has_only_default_variant %}
         <div class="product__variant-selects">
           {% for option in product.options_with_values %}
-            {% assign option_forloop_index = forloop.index %}
             <div class="product__option">
               <span class="product__option-title body-bold">{{ option.name }}</span>
               <fieldset class="product__option-fieldset">
@@ -188,7 +197,20 @@
                     data-option-value-id="{{ value.id }}"
                   >
                   <label for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 -}}-{{ product.handle }}" class="chart">
-                    {{ value }}{% if option_forloop_index == 1 %} | {{ value.variant.price | money_without_trailing_zeros }}{% endif %}
+                    {{ value }}
+                    {% if value.name == 'Include Run' and product.metafields.custom.include_run_modal_content %}
+                      <include-run-modal>
+                        <button aria-haspopup="dialog" aria-controls="include-run-modal" aria-label="open">
+                          {{ 'icon-info.svg' | inline_asset_content }}
+                        </button>
+                        <dialog id="include-run-modal" class="include-run-modal__dialog">
+                          <button class="include-run-modal__close-button" aria-controls="include-run-modal" aria-label="close">
+                            {{ 'icon-close.svg' | inline_asset_content }}
+                          </button>
+                          {{ product.metafields.custom.include_run_modal_content | metafield_tag }}
+                        </dialog>
+                      </include-run-modal>
+                    {% endif %}
                     {% if value.swatch.color %}
                       <span class="swatch" style="--swatch-color: {{ value.swatch.color }}"></span>
                     {% endif %}
@@ -277,9 +299,19 @@
       </product-form>
     </div>
 
-    {% if product.description != blank %}
+    {% if product.description != blank or product.metafields.custom.description_columns %}
       <div class="product__description rte desktop-hidden">
         {{ product.description }}
+        {% if product.metafields.custom.description_columns %}
+          <div class="product__description-columns">
+            {% for col in product.metafields.custom.description_columns.value %}
+              <div>
+                <span class="body-bold">{{ col.heading }}</span>
+                {{ col.content | metafield_tag }}
+              </div>
+            {% endfor %}
+          </div>
+        {% endif %}
       </div>
     {% endif %}
   </div>
@@ -441,43 +473,14 @@
       margin: 0 0 5rem;
     }
   }
-  .product__description table {
-    max-width: 30.875rem;
-    height: unset !important;
-    width: unset !important;
-  }
-  .product__description table * {
-    height: unset !important;
-    width: unset !important;
-  }
-  .product__description table tr td {
-    width: 50% !important;
-  }
-  .product__description table tr:first-child {
-    margin-bottom: 0.5rem;
-  }
-  .product__description table tr td:first-child {
-    padding-right: 1rem;
-  }
-  .product__description table tr td:nth-child(2) {
-    padding-left: 1rem;
-  }
-  @media screen and (min-width: 990px) {
-    .product__description table tr td:first-child {
-      padding-right: 1.875rem;
+  .product__description-columns {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+
+    @media screen and (min-width: 990px) {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
     }
-    .product__description table tr td:nth-child(2) {
-      padding-left: 1.875rem;
-    }
-  }
-  .product__description table td {
-    vertical-align: top;
-  }
-  .product__description table td span {
-    font-weight: 500;
-  }
-  .product__description table td *:not(:empty) + * {
-    margin-top: 0.5rem;
   }
 
   @media screen and (min-width: 990px) {
@@ -611,6 +614,78 @@
     width: unset;
     right: 1.25rem;
     bottom: 1.125rem;
+  }
+
+  include-run-modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .include-run-modal__dialog {
+    position: fixed;
+    top: 50%;
+    left: 0.625rem;
+    right: 0.625rem;
+    border: none;
+    transform: translateY(-50%);
+    background-color: var(--eggshell);
+    text-align: left;
+    z-index: 10;
+    padding: 5rem 1.25rem 3.75rem;
+    transition: opacity 300ms ease-out;
+    
+    @media screen and (min-width: 990px) {
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 5rem;
+    }
+  }
+  .include-run-modal__dialog[open] {
+    animation: fadein 300ms ease-out;
+  }
+  @keyframes fadein{
+    0%{
+      opacity: 0;
+    }
+    100%{
+      opacity: 1;
+    }
+  }
+  .include-run-modal__dialog[open].closing {
+    opacity: 0;
+  }
+  .include-run-modal__dialog .metafield-rich_text_field > * + * {
+    margin-top: 1.25rem;
+  }
+  .include-run-modal__close-button {
+    position: absolute;
+    top: 1.875rem;
+    right: 1.875rem;
+  }
+  include-run-modal::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-color: black;
+    z-index: 10;
+    transition: opacity 300ms ease-out;
+    display: none;
+  }
+  include-run-modal:has(.include-run-modal__dialog[open])::before {
+    display: block;
+    opacity: 0.6;
+    animation: fadein60 300ms ease-out;
+  }
+  @keyframes fadein60{
+    0%{
+      opacity: 0;
+    }
+    100%{
+      opacity: 0.6;
+    }
+  }
+  include-run-modal:has(.include-run-modal__dialog[open].closing)::before {
+    opacity: 0;
   }
 {% endstylesheet %}
 
