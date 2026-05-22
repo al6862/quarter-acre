@@ -632,6 +632,7 @@
     text-align: left;
     z-index: 10;
     padding: 5rem 1.25rem 3.75rem;
+    opacity: 0;
     transition: opacity 300ms ease-out;
     
     @media screen and (min-width: 990px) {
@@ -640,19 +641,8 @@
       padding: 5rem;
     }
   }
-  .include-run-modal__dialog[open] {
-    animation: fadein 300ms ease-out;
-  }
-  @keyframes fadein{
-    0%{
-      opacity: 0;
-    }
-    100%{
-      opacity: 1;
-    }
-  }
-  .include-run-modal__dialog[open].closing {
-    opacity: 0;
+  .include-run-modal__dialog.open {
+    opacity: 1;
   }
   .include-run-modal__dialog .metafield-rich_text_field > * + * {
     margin-top: 1.25rem;
@@ -668,24 +658,16 @@
     inset: 0;
     background-color: black;
     z-index: 10;
+    opacity: 0;
     transition: opacity 300ms ease-out;
     display: none;
   }
-  include-run-modal:has(.include-run-modal__dialog[open])::before {
+  include-run-modal:has(.include-run-modal__dialog.open)::before {
     display: block;
     opacity: 0.6;
-    animation: fadein60 300ms ease-out;
   }
-  @keyframes fadein60{
-    0%{
-      opacity: 0;
-    }
-    100%{
-      opacity: 0.6;
-    }
-  }
-  include-run-modal:has(.include-run-modal__dialog[open].closing)::before {
-    opacity: 0;
+  body:has(.include-run-modal__dialog.open) {
+    overflow: hidden;
   }
 {% endstylesheet %}
 
