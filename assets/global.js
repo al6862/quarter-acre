@@ -267,13 +267,13 @@ class IncludeRunModal extends HTMLElement {
     event.preventDefault();
     if (!event.target.closest('.include-run-modal__dialog') || event.target.closest('.include-run-modal__close-button')) {
       if (this.dialog.hasAttribute('open')) {
-        this.dialog.classList.add('closing');
+        this.dialog.classList.remove('open');
         this.addEventListener('transitionend', () => {
           this.dialog.removeAttribute('open');
-          this.dialog.classList.remove('closing')
         }, {once: true});
       } else {
         this.dialog.setAttribute('open', 'open');
+        setTimeout(() => {this.dialog.classList.add('open')});
       }
     }
   }
