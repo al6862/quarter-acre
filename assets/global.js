@@ -191,9 +191,7 @@ class DrawersElement extends HTMLElement {
 
     this.drawerBlocks.forEach((ele) => {
       if (ele.dataset.index == currIndex) {
-        ele.classList.add('active');
-      } else {
-        ele.classList.remove('active');
+        ele.scrollIntoView({block: 'start', behavior: 'smooth'})
       }
     })
   }
