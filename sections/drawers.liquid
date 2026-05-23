@@ -9,39 +9,61 @@
         {% endfor %}
         <span class="marker"></span>
       </div>
-      {% for block in section.blocks %}
-        <div class="drawers-element__block{% if forloop.index0 == 0 %} active{% endif %}" data-index="{{ forloop.index0 }}">
-          {% if block.settings.content != blank %}
-            <div class="drawers-element__content rte body-bold">{{ block.settings.content }}</div>
-          {% endif %}
-          {% if block.settings.first_image != blank or block.settings.second_image != blank %}
-            <div class="drawers-element__images">
-              {% if block.settings.first_image != blank %}
-                <div class="drawers-element__first-image">
-                  {{ block.settings.first_image | image_url: width: 1980 | image_tag }}
-                  {% if block.settings.first_caption != blank %}
-                    <span class="drawers-element__first-image-caption">
-                      <span class="fig">fig.                (a)</span>
-                      <span>{{ block.settings.first_caption }}</span>
-                    </span>
-                  {% endif %}
-                </div>
-              {% endif %}
-              {% if block.settings.second_image != blank %}
-                <div class="drawers-element__second-image">
-                  {{ block.settings.second_image | image_url: width: 1980 | image_tag }}
-                  {% if block.settings.second_caption != blank %}
-                    <span class="drawers-element__second-image-caption">
-                      <span class="fig">fig.                (b)</span>
-                      <span>{{ block.settings.second_caption }}</span>
-                    </span>
-                  {% endif %}
-                </div>
-              {% endif %}
-            </div>
-          {% endif %}
-        </div>
-      {% endfor %}
+      <div class="drawers-element__blocks">
+        {% for block in section.blocks %}
+          <div class="drawers-element__block" data-index="{{ forloop.index0 }}">
+            {% if block.settings.content != blank %}
+              <div class="drawers-element__content rte body-bold">{{ block.settings.content }}</div>
+            {% endif %}
+            {% if block.settings.first_video != blank or block.settings.first_image != blank or block.settings.second_video != blank or block.settings.second_image != blank %}
+              <div class="drawers-element__images">
+                {% if block.settings.first_video != blank or block.settings.first_image != blank %}
+                  <div class="drawers-element__first-image">
+                    {% if block.settings.first_video != blank %}
+                      {{ block.settings.first_video | video_tag: image_size: '1980x', loop: true, controls: false, muted: true, autoplay: true }}
+                    {% elsif block.settings.first_image != blank %}
+                      {{ block.settings.first_image | image_url: width: 1980 | image_tag }}
+                    {% endif %}
+
+                    {% if block.settings.first_caption != blank %}
+                      <span class="drawers-element__first-image-caption">
+                        <span class="fig">(e)</span>
+                        <span>{{ block.settings.first_caption }}</span>
+                      </span>
+                    {% endif %}
+                    {% if block.settings.first_image_content != blank %}
+                      <div class="drawers-element__first-image-content">
+                        {{ block.settings.first_image_content }}
+                      </div>
+                    {% endif %}
+                  </div>
+                {% endif %}
+                {% if block.settings.second_video != blank or block.settings.second_image != blank %}
+                  <div class="drawers-element__second-image">
+                    {% if block.settings.second_video != blank %}
+                      {{ block.settings.second_video | video_tag: image_size: '1980x', loop: true, controls: false, muted: true, autoplay: true }}
+                    {% elsif block.settings.second_image != blank %}
+                      {{ block.settings.second_image | image_url: width: 1980 | image_tag }}
+                    {% endif %}
+
+                    {% if block.settings.second_caption != blank %}
+                      <span class="drawers-element__second-image-caption">
+                        <span class="fig">(e)</span>
+                        <span>{{ block.settings.second_caption }}</span>
+                      </span>
+                    {% endif %}
+                    {% if block.settings.second_image_content != blank %}
+                      <div class="drawers-element__second-image-content">
+                        {{ block.settings.second_image_content }}
+                      </div>
+                    {% endif %}
+                  </div>
+                {% endif %}
+              </div>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
     </div>
     <div class="drawers-element__mobile desktop-hidden">
       {% for block in section.blocks %}
@@ -57,25 +79,45 @@
                   {% if block.settings.content != blank %}
                     <div class="drawers-element__content rte body">{{ block.settings.content }}</div>
                   {% endif %}
-                  {% if block.settings.first_image != blank %}
+                  {% if block.settings.first_video != blank or block.settings.first_image != blank %}
                     <div class="drawers-element__first-image">
-                      {{ block.settings.first_image | image_url: width: 1980 | image_tag }}
+                      {% if block.settings.first_video != blank %}
+                        {{ block.settings.first_video | video_tag: image_size: '1980x', loop: true, controls: false, muted: true, autoplay: true }}
+                      {% elsif block.settings.first_image != blank %}
+                        {{ block.settings.first_image | image_url: width: 1980 | image_tag }}
+                      {% endif %}
+
                       {% if block.settings.first_caption != blank %}
                         <span class="drawers-element__first-image-caption">
-                          <span class="fig">fig.                (a)</span>
+                          <span class="fig">(e)</span>
                           <span>{{ block.settings.first_caption }}</span>
                         </span>
                       {% endif %}
+                      {% if block.settings.first_image_content != blank %}
+                        <div class="drawers-element__first-image-content">
+                          {{ block.settings.first_image_content }}
+                        </div>
+                      {% endif %}
                     </div>
                   {% endif %}
-                  {% if block.settings.second_image != blank %}
+                  {% if block.settings.second_video != blank or block.settings.second_image != blank %}
                     <div class="drawers-element__second-image">
-                      {{ block.settings.second_image | image_url: width: 1980 | image_tag }}
+                      {% if block.settings.second_video != blank %}
+                        {{ block.settings.second_video | video_tag: image_size: '1980x', loop: true, controls: false, muted: true, autoplay: true }}
+                      {% elsif block.settings.second_image != blank %}
+                        {{ block.settings.second_image | image_url: width: 1980 | image_tag }}
+                      {% endif %}
+
                       {% if block.settings.second_caption != blank %}
                         <span class="drawers-element__second-image-caption">
-                          <span class="fig">fig.                (b)</span>
+                          <span class="fig">(e)</span>
                           <span>{{ block.settings.second_caption }}</span>
                         </span>
+                      {% endif %}
+                      {% if block.settings.second_image_content != blank %}
+                        <div class="drawers-element__second-image-content">
+                          {{ block.settings.second_image_content }}
+                        </div>
                       {% endif %}
                     </div>
                   {% endif %}
@@ -104,15 +146,11 @@
   }
 
   .drawers-element__desktop {
-    display: grid;
+    display: flex;
+    align-items: start;
     gap: 8.625rem;
-    grid-template-columns: max-content 1fr;
-    grid-template-areas: 'headings block';
   }
 
-  .drawers-element__desktop .drawers-element__headings {
-    grid-area: headings;
-  }
   .drawers-element__desktop .drawers-element__heading {
     display: block;
     padding-right: 8.75rem;
@@ -128,7 +166,8 @@
     color: var(--color-foreground);
   }
   .drawers-element__desktop .drawers-element__headings {
-    position: relative;
+    position: sticky;
+    top: var(--header-height);
   }
   .drawers-element__desktop .drawers-element__headings .marker {
     display: block;
@@ -142,15 +181,15 @@
     transition: top 300ms ease-out;
   }
 
-  .drawers-element__desktop .drawers-element__block {
-    grid-area: block;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 300ms ease-out;
+  .drawers-element__desktop .drawers-element__blocks {
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
   }
-  .drawers-element__desktop .drawers-element__block.active {
-    opacity: 1;
-    pointer-events: unset;
+  .drawers-element__desktop .drawers-element__block {
+    scroll-margin-top: var(--header-height);
+    border-top: 1px solid var(--light-brown);
+    padding: 1.25rem 0 0;
   }
   .drawers-element__desktop .drawers-element__content {
     margin-bottom: 2.5rem;
@@ -160,37 +199,31 @@
     grid-template-columns: repeat(20, minmax(0, 1fr));
     gap: 1.25rem;
   }
-  .drawers-element__desktop .drawers-element__first-image {
+  .drawers-element__desktop .drawers-element__block:not(:has(.drawers-element__first-image-content)):has(.drawers-element__second-image-content) .drawers-element__first-image {
     grid-column: 1 / span 11;
   }
-  .drawers-element__desktop .drawers-element__first-image img {
-    width: 100%;
-    object-fit: cover;
-    aspect-ratio: 572 / 730;
-  }
-  .drawers-element__desktop .drawers-element__first-image-caption {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 0.75rem;
-  }
-  .drawers-element__desktop .drawers-element__first-image-caption .fig {
-    white-space: pre;
-  }
-  .drawers-element__desktop .drawers-element__second-image {
+  .drawers-element__desktop .drawers-element__block:not(:has(.drawers-element__first-image-content)):has(.drawers-element__second-image-content) .drawers-element__second-image {
     grid-column: 12 / span 9;
   }
-  .drawers-element__desktop .drawers-element__second-image img {
-    width: 100%;
-    object-fit: cover;
-    aspect-ratio: 453 / 575;
+  .drawers-element__desktop .drawers-element__block:not(:has(.drawers-element__second-image-content)):has(.drawers-element__first-image-content) .drawers-element__first-image {
+    grid-column: 1 / span 9;
   }
-  .drawers-element__desktop .drawers-element__second-image-caption {
+  .drawers-element__desktop .drawers-element__block:not(:has(.drawers-element__second-image-content)):has(.drawers-element__first-image-content) .drawers-element__second-image {
+    grid-column: 10 / span 11;
+  }
+  .drawers-element__desktop .drawers-element__block:has(.drawers-element__first-image-content):has(.drawers-element__second-image-content) .drawers-element__first-image {
+    grid-column: 1 / span 10;
+  }
+  .drawers-element__desktop .drawers-element__block:has(.drawers-element__first-image-content):has(.drawers-element__second-image-content) .drawers-element__second-image {
+    grid-column: 11 / span 10;
+  }
+  .drawers-element__desktop :is(.drawers-element__first-image-caption, .drawers-element__second-image-caption) {
     display: flex;
     justify-content: space-between;
     margin-top: 0.75rem;
   }
-  .drawers-element__desktop .drawers-element__second-image-caption .fig {
-    white-space: pre;
+  .drawers-element__desktop :is(.drawers-element__first-image-content, .drawers-element__second-image-content) {
+    margin-top: 1.25rem;
   }
 
   .drawers-element__mobile details {
@@ -244,8 +277,15 @@
   .drawers-element__mobile .drawers-element__second-image {
     width: 70%;
   }
-  .drawers-element__mobile :is(.drawers-element__first-image-caption, .drawers-element__second-image-caption) .fig {
-    white-space: pre;
+  .drawers-element__mobile :is(.drawers-element__first-image-content, .drawers-element__second-image-content) {
+    margin-top: 1.25rem;
+  }
+
+
+  .drawers :is(img, video) {
+    width: 100%;
+    object-fit: cover;
+    aspect-ratio: 453 / 575;
   }
 {% endstyle %}
 
@@ -269,6 +309,16 @@
           "label": "Content"
         },
         {
+          "type": "header",
+          "content": "First Media"
+        },
+        {
+          "type": "video",
+          "id": "first_video",
+          "label": "First Video",
+          "info": "If left blank, image used instead."
+        },
+        {
           "type": "image_picker",
           "id": "first_image",
           "label": "First Image"
@@ -279,6 +329,21 @@
           "label": "First Caption"
         },
         {
+          "type": "richtext",
+          "id": "first_image_content",
+          "label": "First Image Content"
+        },
+        {
+          "type": "header",
+          "content": "Second Media"
+        },
+        {
+          "type": "video",
+          "id": "second_video",
+          "label": "Second Video",
+          "info": "If left blank, image used instead."
+        },
+        {
           "type": "image_picker",
           "id": "second_image",
           "label": "Second Image"
@@ -287,6 +352,11 @@
           "type": "text",
           "id": "second_caption",
           "label": "Second Caption"
+        },
+        {
+          "type": "richtext",
+          "id": "second_image_content",
+          "label": "Second Image Content"
         },
       ]
     },
