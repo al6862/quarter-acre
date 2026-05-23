@@ -5,12 +5,15 @@ class ProductFeaturedMedia extends HTMLElement {
 
   connectedCallback() {
     this.bindedHandleViewClick = this.handleViewClick.bind(this);
+    this.bindedHandleScroll = this.handleScroll.bind(this);
 
     this.querySelectorAll('.views-nav span:is(.first-view, .second-view)')?.forEach((ele) => ele.addEventListener('click', this.bindedHandleViewClick));
+    this.addEventListener('scrollend', this.bindedHandleScroll);
   }
   
   disconnectedCallback() {
     this.querySelectorAll('.views-nav span:is(.first-view, .second-view)')?.forEach((ele) => ele.removeEventListener('click', this.bindedHandleViewClick));
+    this.removeEventListener('scrollend', this.bindedHandleScroll);
   }
 
   handleViewClick(event) {
@@ -19,15 +22,34 @@ class ProductFeaturedMedia extends HTMLElement {
       event.currentTarget.classList.add('active');
       this.querySelector('.second-view').classList.remove('active');
 
-      this.querySelector('.product__featured-media.active').classList.remove('active');
-      this.querySelector(`.product__featured-media[data-index="${activeMediaIndex - 1}"]`).classList.add('active');
+      this.querySelectorAll('.product__featured-media :is(img, video):not(:first-child)').forEach(ele => ele.classList.remove('active'));
+      this.querySelectorAll('.product__featured-media :is(img, video):first-child').forEach(ele => ele.classList.add('active'));
+
+      this.closest('product-info').querySelectorAll('.product__media-thumbnail :is(img, video):not(:first-child)').forEach(ele => ele.classList.remove('active'));
+      this.closest('product-info').querySelectorAll('.product__media-thumbnail :is(img, video):first-child').forEach(ele => ele.classList.add('active'));
     } else {
       event.currentTarget.classList.add('active');
       this.querySelector('.first-view').classList.remove('active');
 
-      this.querySelector('.product__featured-media.active').classList.remove('active');
-      this.querySelector(`.product__featured-media[data-index="${activeMediaIndex + 1}"]`).classList.add('active');
+      this.querySelectorAll('.product__featured-media :is(img, video):not(:first-child)').forEach(ele => ele.classList.add('active'));
+      this.querySelectorAll('.product__featured-media :is(img, video):first-child').forEach(ele => ele.classList.remove('active'));
+
+      this.closest('product-info').querySelectorAll('.product__media-thumbnail :is(img, video):not(:first-child)').forEach(ele => ele.classList.add('active'));
+      this.closest('product-info').querySelectorAll('.product__media-thumbnail :is(img, video):first-child').forEach(ele => ele.classList.remove('active'));
     }
+  }
+
+  handleScroll(event) {
+    const newActiveIndex = Math.round(this.scrollLeft / this.offsetWidth);
+
+    this.querySelector('.product__featured-media.active').classList.remove('active');
+    this.querySelector(`.product__featured-media[data-index='${newActiveIndex}']`).classList.add('active');
+
+    this.closest('product-info').querySelector('.product__media-thumbnail.active').classList.remove('active');
+    this.closest('product-info').querySelector(`.product__media-thumbnail[data-index='${newActiveIndex}']`).classList.add('active');
+    this.closest('product-info').querySelector(`.product__media-thumbnail[data-index='${newActiveIndex}']`).scrollIntoView({ behavior: "smooth", container: 'nearest', inline: "center" });
+
+    this.querySelector('.pag .current-slide').textContent = newActiveIndex + 1;
   }
 }
 
@@ -62,9 +84,7 @@ class ProductThumbnails extends HTMLElement {
 
     this.closest('product-info').querySelectorAll('.product__featured-media').forEach((ele) => {
       if (ele.dataset.index == event.currentTarget.dataset.index) {
-        ele.classList.add('active');
-      } else {
-        ele.classList.remove('active');
+        ele.scrollIntoView({ behavior: "smooth", container: 'nearest', inline: "center" });
       }
     })
   }

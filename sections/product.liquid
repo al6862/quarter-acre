@@ -16,135 +16,69 @@
   data-product-id="{{ product.id }}"
   data-url="{{ product.url }}"
 >
-  <div class="product__featured-media-container mobile-hidden">
+  <div class="product__featured-media-container">
     <product-featured-media data-is-chicken-view="{{ product.metafields.custom.add_chicken_view }}" id="featured-media">
-      {% liquid
-        if product.metafields.custom.add_chicken_view
-          assign featured_media_limit = 8
-          assign no_featured_media_limit = 10
-        else
-          assign featured_media_limit = 4
-          assign no_featured_media_limit = 5
-        endif
-      %}
-      {% if product.selected_or_first_available_variant.featured_media %}
-        <div data-index="0" class="product__featured-media variant-media active">
-          {% if product.selected_or_first_available_variant.featured_media.media_type == 'video'  %}
-            {{ product.selected_or_first_available_variant.featured_media | video_tag: image_size: '1440x', loop: true, controls: false, muted: true, autoplay: true }}
-          {% else %}
-            {{ product.selected_or_first_available_variant.featured_media | image_url: width: 1440 | image_tag }}
-          {% endif %}
-        </div>
-        {% for media in product.media limit: featured_media_limit %}
-          <div data-index="{{ forloop.index }}" class="product__featured-media">
+      {% for media in product.media %}
+        {% assign index_mod_2 = forloop.index0 | modulo: 2 %}
+        {% if index_mod_2 == 0 %}
+          <div data-index="{{ forloop.index0 | divided_by: 2 }}" class="product__featured-media{% if forloop.index0 == 0 %} active{% endif %}">
             {% if media.media_type == 'video'  %}
-              {{ media | video_tag: image_size: '1440x', loop: true, controls: false, muted: true, autoplay: true }}
+              {{ media | video_tag: image_size: '1440x', loop: true, controls: false, muted: true, autoplay: true, class: 'active' }}
             {% else %}
-              {{ media | image_url: width: 1440 | image_tag }}
+              {{ media | image_url: width: 1440 | image_tag: class: 'active' }}
+            {% endif %}
+
+            {% assign index_plus_1 = forloop.index0 | plus: 1 %}
+            {% assign chicken_view_media = product.media[index_plus_1] %}
+            {% if chicken_view_media.media_type == 'video'  %}
+              {{ chicken_view_media | video_tag: image_size: '1440x', loop: true, controls: false, muted: true, autoplay: true }}
+            {% else %}
+              {{ chicken_view_media | image_url: width: 1440 | image_tag }}
             {% endif %}
           </div>
-        {% endfor %}
-      {% else %}
-        {% for media in product.media limit: no_featured_media_limit %}
-          <div data-index="{{ forloop.index0 }}" class="product__featured-media{% if forloop.index0 == 0 %} active{% endif %}">
-            {% if media.media_type == 'video'  %}
-              {{ media | video_tag: image_size: '1440x', loop: true, controls: false, muted: true, autoplay: true }}
-            {% else %}
-              {{ media | image_url: width: 1440 | image_tag }}
-            {% endif %}
-          </div>
-        {% endfor %}
-      {% endif %}
-      <h1 class="big-h1">{{ product.title }}</h1>
-      {% if product.metafields.custom.add_chicken_view %}
-        <div class="views-nav chart" aria-controls="featured-media">
-          <span>View</span>
-          <span class="first-view active">1</span>
-          <span class="second-view">2</span>
-        </div>
-      {% endif %}
+        {% endif %}
+      {% endfor %}
+      <h1 class="big-h1 mobile-hidden">{{ product.title }}</h1>
+      <div class="views-nav body-bold" aria-controls="featured-media">
+        <span>View</span>
+        <span class="first-view active">1</span>
+        <span class="second-view">2</span>
+      </div>
+      <div class="pag body-bold desktop-hidden">
+        <span class="current-slide">1</span>
+        <span>/</span>
+        <span>{{ product.media.size | divided_by: 2 }}</span>
+      </div>
     </product-featured-media>
   </div>
 
-  <div class="product__mobile-slideshow swiper desktop-hidden">
-    <div class="swiper-wrapper">
-      {% if product.selected_or_first_available_variant.featured_media %}
-        <div class="swiper-slide">
-          {% if product.selected_or_first_available_variant.featured_media.media_type == 'video'  %}
-            {{ product.selected_or_first_available_variant.featured_media | video_tag: image_size: '1980x', loop: true, controls: false, muted: true, autoplay: true }}
-          {% else %}
-            {{ product.selected_or_first_available_variant.featured_media | image_url: width: 1980 | image_tag }}
-          {% endif %}
-        </div>
-      {% endif %}
-      {% for media in product.media %}
-        {% unless media.id == product.selected_or_first_available_variant.featured_media.id %}
-          <div class="swiper-slide">
-            {% if media.media_type == 'video'  %}
-              {{ media | video_tag: image_size: '1980x', loop: true, controls: false, muted: true, autoplay: true }}
-            {% else %}
-              {{ media | image_url: width: 1980 | image_tag }}
-            {% endif %}
-          </div>
-        {% endunless %}
-      {% endfor %}
-    </div>
-    <div class="fig swiper-pagination"></div>
-  </div>
-
   <div class="product__content">
-    <div class="product__media-thumbnails-container mobile-hidden">
+    <div class="product__media-thumbnails-container">
       <product-thumbnails aria-controls="featured-media">
-        {% liquid
-          assign chicken_view_limit = 10
-          assign no_chicken_view_limit = 5
-        %}
-        {% if product.selected_or_first_available_variant.featured_media %}
-          {% liquid
-            assign chicken_view_limit = 8
-            assign no_chicken_view_limit = 4
-          %}
-          <div data-index="0" class="product__media-thumbnail active">
-            {% if product.selected_or_first_available_variant.featured_media.media_type == 'video'  %}
-              {{ product.selected_or_first_available_variant.featured_media | video_tag: image_size: '1440x', loop: true, controls: false, muted: true, autoplay: true }}
-            {% else %}
-              {{ product.selected_or_first_available_variant.featured_media | image_url: width: 1440 | image_tag }}
-            {% endif %}
-          </div>
-        {% endif %}
-
-        {% if product.metafields.custom.add_chicken_view %}
-          {% for media in product.media limit: chicken_view_limit %}
-            {% assign index_mod_2 = forloop.index0 | modulo: 2 %}
-            {% if index_mod_2 == 0 %}
-              <div 
-                data-index="{% if product.selected_or_first_available_variant.featured_media %}{{ forloop.index }}{% else %}{{ forloop.index0 }}{% endif %}" 
-                class="product__media-thumbnail{% if product.selected_or_first_available_variant.featured_media == blank and forloop.index0 == 0 %} active{% endif %}"
-              >
-                {% if media.media_type == 'video'  %}
-                  {{ media | video_tag: image_size: '1440x', loop: true, controls: false, muted: true, autoplay: true }}
-                {% else %}
-                  {{ media | image_url: width: 1440 | image_tag }}
-                {% endif %}
-                <span class="border-circle"></span>
-              </div>
-            {% endif %}
-          {% endfor %}
-        {% else %}
-          {% for media in product.media limit: no_chicken_view_limit %}
+        {% for media in product.media %}
+          {% assign index_mod_2 = forloop.index0 | modulo: 2 %}
+          {% if index_mod_2 == 0 %}
             <div 
-              data-index="{% if product.selected_or_first_available_variant.featured_media %}{{ forloop.index }}{% else %}{{ forloop.index0 }}{% endif %}" 
-              class="product__media-thumbnail{% if product.selected_or_first_available_variant.featured_media == blank and forloop.index0 == 0 %} active{% endif %}"
-            >              
+              data-index="{{ forloop.index0 | divided_by: 2 }}" 
+              class="product__media-thumbnail{% if forloop.index0 == 0 %} active{% endif %}"
+            >
               {% if media.media_type == 'video'  %}
-                {{ media | video_tag: image_size: '1440x', loop: true, controls: false, muted: true, autoplay: true }}
+                {{ media | video_tag: image_size: '480x', loop: true, controls: false, muted: true, autoplay: true, class: 'acti8ve' }}
               {% else %}
-                {{ media | image_url: width: 1440 | image_tag }}
+                {{ media | image_url: width: 480 | image_tag: class: 'active' }}
               {% endif %}
-              <span class="border-circle"></span>
+
+              {% assign index_plus_1 = forloop.index0 | plus: 1 %}
+              {% assign chicken_view_media = product.media[index_plus_1] %}
+              {% if chicken_view_media.media_type == 'video'  %}
+                {{ chicken_view_media | video_tag: image_size: '480x', loop: true, controls: false, muted: true, autoplay: true }}
+              {% else %}
+                {{ chicken_view_media | image_url: width: 480 | image_tag }}
+              {% endif %}
+                <span class="border-circle"></span>
             </div>
-          {% endfor %}
-        {% endif %}
+          {% endif %}
+        {% endfor %}
       </product-thumbnails>
     </div>
 
@@ -331,8 +265,12 @@
 
 
   .product__featured-media-container {
-    height: 100vh;
+    height: 63vh;
     position: relative;
+
+    @media screen and (min-width: 990px) {
+      height: 100vh;
+    }
   }
   .product__featured-media-container h1 {
     position: absolute;
@@ -341,15 +279,30 @@
     transform: translateY(-50%);
     color: var(--white);
   }
+  product-featured-media {
+    display: flex;
+    height: 100%;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
   .product__featured-media {
+    scroll-snap-align: start;
+    flex-shrink: 0;
+    width: 100%;
+    position: relative;
+  }
+  .product__featured-media :is(img, video) {
     position: absolute;
     height: 100%;
     width: 100%;
     object-fit: cover;
-    transition: opacity 150ms ease-out;
+    transition: visibility 150ms ease-out, opacity 150ms ease-out;
+    visibility: hidden;
     opacity: 0;
   }
-  .product__featured-media.active {
+  .product__featured-media :is(img, video).active {
+    visibility: visible;
     opacity: 1;
   }
   .product__featured-media :is(img, video) {
@@ -360,11 +313,24 @@
 
   .product__featured-media-container .views-nav {
     position: absolute;
-    bottom: 1.25rem;
-    left: 1.25rem;
     display: flex;
     gap: 2rem;
     color: var(--white);
+
+    @media screen and (max-width: 989px) {
+      top: 50%;
+      right: 1.25rem;
+      transform: translateY(-50%);
+    }
+
+    @media screen and (min-width: 990px) {
+      bottom: 1.25rem;
+      left: 1.25rem;
+    }
+  }
+  .product__featured-media-container .views-nav > * {
+    text-box: trim-both cap alphabetic;
+    line-height: 1;
   }
   .product__featured-media-container .views-nav span:is(.first-view, .second-view) {
     position: relative;
@@ -386,7 +352,21 @@
   .product__featured-media-container:has(.product__featured-media.variant-media.active) .views-nav {
     display: none;
   }
+  .product__featured-media-container .pag {
+    color: var(--white);
+    position: absolute;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 1.25rem;
+  }
 
+  @media screen and (max-width: 989px) {
+    .product__media-thumbnails-container {
+      padding: 0.25rem 0 0;
+    }
+  }
   product-thumbnails {
     overflow-x: auto;
     scrollbar-width: none;
@@ -404,32 +384,42 @@
     height: 100%;
     position: relative;
   }
-  .product__media-thumbnail:nth-child(3) {
+  .product__media-thumbnail :is(img, video) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: visibility 150ms ease-out, opacity 150ms ease-out;
+    visibility: hidden;
+    opacity: 0;
+  }
+  .product__media-thumbnail :is(img, video).active {
+    visibility: visible;
+    opacity: 1;
+  }
+  .product__media-thumbnail:nth-child(3n+3) {
     width: 36%;
   }
-  .product__media-thumbnail:nth-child(1) img {
+  .product__media-thumbnail:nth-child(3n+1) {
     aspect-ratio: 237 / 278;
   }
-  .product__media-thumbnail:nth-child(2) img {
+  .product__media-thumbnail:nth-child(3n+2) {
     aspect-ratio: 237 / 190;
   }
-  .product__media-thumbnail:nth-child(3) img {
+  .product__media-thumbnail:nth-child(3n+3) {
     aspect-ratio: 278 / 278;
+  }
+  .product__media-thumbnail:nth-child(3n+3) :is(img, video) {
     border-radius: 50%;
   }
-  .product__media-thumbnail:nth-child(4) img {
-    aspect-ratio: 237 / 278;
-  }
-  .product__media-thumbnail:nth-child(5) img {
-    aspect-ratio: 237 / 190;
-  }
-  .product__media-thumbnail:not(:nth-child(3)).active::after{
+  .product__media-thumbnail:not(:nth-child(3n+3)).active::after{
     content: '';
     border-bottom: 2px solid var(--light-brown);
     position: absolute;
     inset: 0;
   }
-  .product__media-thumbnail:nth-child(3).active .border-circle {
+  .product__media-thumbnail:nth-child(3n+3).active .border-circle {
     display: block;
     height: 50%;
     width: 100%;
@@ -437,7 +427,7 @@
     position: absolute;
     bottom: 0;
   }
-  .product__media-thumbnail:nth-child(3).active .border-circle::after {
+  .product__media-thumbnail:nth-child(3n+3).active .border-circle::after {
     content: "";
     position: absolute;
     right: 0;
@@ -455,8 +445,11 @@
   }
   @media screen and (max-width: 989px) {
     .product__content {
-      padding: 1.25rem 0.625rem 0;
       gap: 1.25rem;
+    }
+
+    .product__content > :is(h1, .product__description-variant-selects, .product__description) {
+      padding: 0 0.625rem;
     }
   }
   @media screen and (min-width: 990px) {
