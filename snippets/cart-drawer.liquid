@@ -47,7 +47,7 @@
 
                 <div class="cart-item__details">
                   <div class="cart-item__title-variants-quantity">
-                    <a href="{{ item.url }}" class="cart-item__title chart">{{- item.product.title | escape -}}</a>
+                    <a href="{{ item.url }}" class="cart-item__title cta">{{- item.product.title | escape -}}</a>
 
                     {% if item.product.has_only_default_variant == false %}
                       <div class="cart-item__options">
@@ -89,7 +89,7 @@
                         {{ 'icon-trash.svg' | inline_asset_content }}
                       </button>
                     </cart-remove-button>
-                    <span class="cart-item__price">
+                    <span class="cart-item__price body-bold">
                       {{ item.final_line_price | money_without_trailing_zeros }}
                     </span>
                   </div>
@@ -102,9 +102,12 @@
         <div class="cart-drawer__footer">
           <div id="cart-errors" class="body-small" role="alert"></div>
 
-          <div class="cart-drawer-footer__totals" role="status">
-            <span class="totals__heading body-small">Subtotal ({{ cart.item_count }})</span>
-            <span class="totals__total-value body-small">{{ cart.total_price | money_without_trailing_zeros }}</span>
+          <div>
+            <div class="cart-drawer-footer__totals" role="status">
+              <span class="totals__heading body-bold">Subtotal ({{ cart.item_count }})</span>
+              <span class="totals__total-value body-bold">{{ cart.total_price | money_without_trailing_zeros }}</span>
+            </div>
+            <span class="cart-drawer-footer__taxes-disclaimer body-bold">Taxes and shipping calculated at checkout</span>
           </div>
 
           <button
@@ -131,7 +134,6 @@
 {% stylesheet %}
   .cart-drawer__container {
     background-color: var(--eggshell);
-    color: var(--light-brown);
     height: 100vh;
     position: fixed;
     top: 0;
@@ -140,11 +142,19 @@
     transition: transform 300ms ease-out;
   }
   @media screen and (min-width: 990px) {
-    cart-drawer.open::before {
+    cart-drawer::before {
       content: '';
       position: fixed;
       inset: 0;
       width: 100vw;
+      background-color: #000;
+      opacity: 0;
+      visibility: hidden;
+      transition: visibility 300ms ease-out, opacity 300ms ease-out;
+    }
+    cart-drawer.open::before {
+      opacity: 0.6;
+      visibility: visible;
     }
   }
   cart-drawer.open {
@@ -180,7 +190,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 2rem 1.25rem;
+    padding: 1.25rem;
   }
 
   .close-cart-drawer-button {
@@ -362,6 +372,11 @@
   }
   .cart-quantity__input::placeholder {
     color: inherit;
+  }
+
+  .cart-drawer-footer__taxes-disclaimer {
+    display: block;
+    margin-top: 0.5rem;
   }
 {% endstylesheet %}
 
