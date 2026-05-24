@@ -1,13 +1,18 @@
 <div class="split-media-content{% if section.settings.layout == 'media_on_left' %} media-on-left{% endif %}">
   <div class="split-media-content__content">
-    <div class="split-media-content__content-eyebrow-heading">
-      {% if section.settings.content_eyebrow != blank %}
-        <span class="split-media-content__content-eyebrow">{{ section.settings.content_eyebrow }}</span>
+    <div class="split-media-content__content-eyebrow-content">
+      {% if section.settings.eyebrow != blank %}
+        <span class="split-media-content__content-eyebrow body-bold">{{ section.settings.eyebrow }}</span>
       {% endif %}
-      {% if section.settings.content_heading != blank %}
-        <h1>{{ section.settings.content_heading }}</h1>
+      {% if section.settings.content != blank %}
+        <div class="split-media-content__content-content rte">{{ section.settings.content }}</div>
       {% endif %}
     </div>
+
+    {% assign image_block = section.blocks | find: 'type', 'image' %}
+    {% if image_block %}
+      {{ image_block.settings.image | image_url: width: 1440 | image_tag: class: 'mobile-hidden' }}
+    {% endif %}
 
     {% assign has_rows = section.blocks | has: 'type', 'row' %}
     {% if has_rows %}
@@ -33,44 +38,82 @@
     {% endif %}
   </div>
 
-  {% assign image_blocks = section.blocks | where: 'type', 'image' %}
   <div class="split-media-content__media">
-    {% if image_blocks.size > 0 %}
-      <div class="split-media-content__big-media{% if image_blocks.size > 1 %} mobile-hidden{% endif %}">
-        {{ image_blocks.first.settings.image | image_url: width: 1440 | image_tag }}
-      </div>
-    {% endif %}
-
-    {% if image_blocks.size > 1 %}
-      <div class="split-media-content__small-media mobile-hidden">
-        {% for block in image_blocks %}
-          {% if forloop.index0 > 0 %}
-            {{ block.settings.image | image_url: width: 1440 | image_tag }}
+    {% assign image_grid_block = section.blocks | find: 'type', 'image_grid' %}
+    {% if image_grid_block %}
+      <image-grid>
+        <div class="image-grid__block active">
+          {% if image_grid_block.settings.first_image != blank %}
+            {{ image_grid_block.settings.first_image | image_url: width: 960 | image_tag }}
           {% endif %}
-        {% endfor %}
-      </div>
-
-      <div class="split-media-content__mobile-media swiper desktop-hidden">
-        <div class="swiper-wrapper">
-        {% for block in image_blocks %}
-          <div class="swiper-slide">
-            {{ block.settings.image | image_url: width: 1440 | image_tag }}
-          </div>
-        {% endfor %}
+          {% if image_grid_block.settings.first_eyebrow != blank %}
+            <div class="image-grid-block__eyebrow">
+              <span class="fig">(e)</span>
+              <span class="body-bold">{{ image_grid_block.settings.first_eyebrow }}</span>
+            </div>
+          {% endif %}
+          {% if image_grid_block.settings.first_content != blank %}
+            <span class="image-grid-block__content">{{ image_grid_block.settings.first_content }}</span>
+          {% endif %}
         </div>
-        <div class="fig swiper-pagination"></div>
+        <div class="image-grid__block">
+          {% if image_grid_block.settings.second_image != blank %}
+            {{ image_grid_block.settings.second_image | image_url: width: 960 | image_tag }}
+          {% endif %}
+          {% if image_grid_block.settings.second_eyebrow != blank %}
+            <div class="image-grid-block__eyebrow">
+              <span class="fig">(e)</span>
+              <span class="body-bold">{{ image_grid_block.settings.second_eyebrow }}</span>
+            </div>
+          {% endif %}
+          {% if image_grid_block.settings.second_content != blank %}
+            <span class="image-grid-block__content">{{ image_grid_block.settings.second_content }}</span>
+          {% endif %}
+        </div>
+        <div class="image-grid__block">
+          {% if image_grid_block.settings.third_image != blank %}
+            {{ image_grid_block.settings.third_image | image_url: width: 960 | image_tag }}
+          {% endif %}
+          {% if image_grid_block.settings.third_eyebrow != blank %}
+            <div class="image-grid-block__eyebrow">
+              <span class="fig">(e)</span>
+              <span class="body-bold">{{ image_grid_block.settings.third_eyebrow }}</span>
+            </div>
+          {% endif %}
+          {% if image_grid_block.settings.third_content != blank %}
+            <span class="image-grid-block__content">{{ image_grid_block.settings.third_content }}</span>
+          {% endif %}
+        </div>
+
+        <div class="image-grid__thumbnails">
+          {% if image_grid_block.settings.first_thumbnail != blank %}
+            {{ image_grid_block.settings.first_thumbnail | image_url: width: 480 | image_tag: class: 'active' }}
+          {% endif %}
+          {% if image_grid_block.settings.second_thumbnail != blank %}
+            {{ image_grid_block.settings.second_thumbnail | image_url: width: 480 | image_tag }}
+          {% endif %}
+          {% if image_grid_block.settings.third_thumbnail != blank %}
+            {{ image_grid_block.settings.third_thumbnail | image_url: width: 480 | image_tag }}
+          {% endif %}
+        </div>
+      </image-grid>
+    {% elsif section.settings.video != blank or section.settings.image != blank %}
+      <div class="split-media-content__big-media">
+        {% if section.settings.video != blank %}
+          {{ section.settings.video | video_tag: image_size: '1440x', loop: true, controls: false, muted: true, autoplay: true }}
+        {% elsif section.settings.image != blank %}
+          {{ section.settings.image | image_url: width: 1440 | image_tag }}
+        {% endif %}
+
+        {% if section.settings.media_caption != blank %}
+          <span class="split-media-content__media-caption rte">{{ section.settings.media_caption }}</span>
+        {% endif %}
       </div>
     {% endif %}
 
-    {% if section.settings.media_eyebrow != blank or section.settings.media_caption != blank %}
-      <div class="split-media-content__media-eyebrow-content">
-        {% if section.settings.media_eyebrow != blank %}
-          <span class="split-media-content__media-eyebrow fig">{{ section.settings.media_eyebrow }}</span>
-        {% endif %}
-        {% if section.settings.media_caption != blank %}
-          <span class="split-media-content__media-content">{{ section.settings.media_caption }}</span>
-        {% endif %}
-      </div>
+    {% assign image_block = section.blocks | find: 'type', 'image' %}
+    {% if image_block %}
+      {{ image_block.settings.image | image_url: width: 1980 | image_tag: class: 'split-media-content__image-block desktop-hidden' }}
     {% endif %}
 
     {% if has_rows %}
@@ -99,9 +142,9 @@
 
 {% stylesheet %}
   .split-media-content {
-    margin-top: 3.75rem;
+    margin-top: 2.5rem;
     border-top: 1px solid var(--light-brown-60);
-    padding: 3.75rem 1.25rem 0;
+    padding: 2.5rem 0.625rem 0;
     display: flex;
     flex-direction: column;
     gap: 2.5rem;
@@ -128,10 +171,11 @@
 
   @media screen and (min-width: 990px) {
     .split-media-content__content {
-      padding: 1.25rem;
+      padding: 0 1.25rem;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      gap: 1.25rem;
     }
   }
   .split-media-content__content-eyebrow {
@@ -139,13 +183,23 @@
     margin-bottom: 1.25rem;
   }
   @media screen and (min-width: 990px) {
-    .split-media-content__content-eyebrow-heading {
+    .split-media-content__content-eyebrow-content {
       width: 85%;
+      margin-top: 1.25rem;
     }
+  }
+  .split-media-content__content-content > * + * {
+    margin-top: 1.25rem;
   }
 
   .split-media-content__rows {
     border-top: 1px solid var(--light-brown);
+    margin: 2.5rem 0 0;
+  }
+  @media screen and (min-width: 990px) {
+    .split-media-content__rows {
+      margin: 0 0 0.5rem;
+    }
   }
   @media screen and (min-width: 990px) {
     .split-media-content__row + .split-media-content__row {
@@ -166,17 +220,15 @@
   @media screen and (min-width: 990px) {
     .split-media-content:not(.media-on-left) .split-media-content__media {
       border-left: 1px solid var(--light-brown-60);
-      padding-left: 1.25rem;
     }
-    .split-media-content:not(.media-on-left) .split-media-content__media-eyebrow-content {
+    .split-media-content:not(.media-on-left) .split-media-content__media :is(.split-media-content__big-media, .split-media-content__media-caption) {
       padding-left: 1.25rem;
     }
 
     .split-media-content.media-on-left .split-media-content__media {
       border-right: 1px solid var(--light-brown-60);
-      padding-right: 1.25rem;
     }
-    .split-media-content.media-on-left .split-media-content__media-eyebrow-content {
+    .split-media-content.media-on-left .split-media-content__media :is(.split-media-content__big-media, .split-media-content__media-caption) {
       padding-right: 1.25rem;
     }
   }
@@ -184,7 +236,22 @@
   .split-media-content__media {
     position: relative;
   }
-  .split-media-content__media-eyebrow-content {
+  @media screen and (max-width: 989px) {
+    .split-media-content__image-block {
+      margin: 1.25rem 0 0;
+    }
+  }
+  .split-media-content__big-media {
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+  .split-media-content__big-media :is(img, video) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .split-media-content__media-caption {
     position: absolute;
     bottom: 1.2rem;
     left: 1.25rem;
@@ -194,87 +261,64 @@
     gap: 1.5rem;
     color: var(--white);
   }
-  .split-media-content__media-eyebrow, .split-media-content__media-content {
-    white-space: pre;
-  }
 
-  @media screen and (min-width: 990px) {
-    .split-media-content__media:has(.split-media-content__small-media) {
-      display: grid;
+  image-grid {
+    display: grid;
+    grid-template-rows: auto auto;
+    grid-template-areas: "block" "thumbnails";
+    gap: 1.25rem;
+
+    @media screen and (min-width: 990px) {
+      padding: 0 1.25rem;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      grid-template-rows: repeat(2, min-content);
-      gap: 0.25rem;
-    }
-    .split-media-content__media:has(.split-media-content__small-media) .split-media-content__big-media {
-      grid-column: 1 / span 2;
-    }
-    .split-media-content__media:has(.split-media-content__small-media) .split-media-content__small-media {
-      grid-column: 3;
-    }
-    .split-media-content__small-media:not(:empty) {
-      display: flex;
-      flex-direction: column;
-      gap: 0.25rem;
-    }
-    .split-media-content__media:has(.split-media-content__small-media) .split-media-content__media-eyebrow-content {
-      grid-column: 1 / span 2;
-      margin-top: 0.75rem;
+      grid-template-areas: "block block thumbnails";
+    gap: 0.25rem;
     }
   }
-  .split-media-content__media:has(.split-media-content__small-media) .split-media-content__media-eyebrow-content {
-    position: unset;
-    padding: unset;
-    color: var(--light-brown);
+  .image-grid__block {
+    grid-area: block;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 150ms ease-out, opacity 150ms ease-out;
   }
+  .image-grid__block.active {
+    visibility: visible;
+    opacity: 1;
+  }
+  .image-grid-block__eyebrow {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.75rem;
+  }
+  .image-grid-block__content {
+    display: block;
+    margin-top: 0.75rem;
 
-  @media screen and (max-width: 989px) {
-    .split-media-content__media:has(.split-media-content__mobile-media) {
-      display: flex;
+    @media screen and (min-width: 990px) {
+      margin-top: 1.25rem;
+    }
+  }
+  .image-grid__thumbnails {
+    grid-area: thumbnails;
+    display: flex;
+    gap: 0.25rem;
+
+    @media screen and (min-width: 990px) {
       flex-direction: column;
     }
-    .split-media-content__media:not(:has(.split-media-content__mobile-media)) .split-media-content__rows {
-      margin-top: 3.75rem;
-    }
-    .split-media-content__media:has(.split-media-content__mobile-media) .split-media-content__rows {
-      order: -1;
-      margin-bottom: 2rem;
-    }
-    .split-media-content__media:has(.split-media-content__mobile-media) .split-media-content__media-eyebrow-content {
-      margin-top: 0.75rem;
-    }
   }
-
-  .split-media-content__mobile-media .swiper-slide {
-    aspect-ratio: 362 / 450;
-    width: 100% !important;
-  }
-  .split-media-content__mobile-media .swiper-slide > * {
-    width: 100%;
-    height: 100%;
+  .image-grid__thumbnails img {
+    cursor: pointer;
+    aspect-ratio: 1 / 1;
     object-fit: cover;
+    flex: 1;
+    min-width: 0;
+    border-bottom: 2px solid transparent;
   }
-  .split-media-content__mobile-media .swiper-pagination {
-    text-align: right;
-    padding: 1rem 1.25rem;
-    color: var(--white);
+  .image-grid__thumbnails img.active {
+    border-bottom: 2px solid var(--light-brown);
   }
 {% endstylesheet %}
-
-{% javascript %}
-  const swiper = new Swiper('.swiper', {
-    // Optional parameters
-    loop: true,
-
-    // If we need pagination
-    pagination: {
-      el: '.swiper-pagination',
-      type: 'fraction',
-      renderFraction: function (currentClass, totalClass) {
-        return '(<span class="' + currentClass + '"></span>' +'/' + '<span class="' + totalClass + '"></span>)';
-      },
-    },
-  });
-{% endjavascript %}
 
 {% schema %}
 {
@@ -287,22 +331,29 @@
     },
     {
       "type": "text",
-      "id": "content_eyebrow",
-      "label": "Content eyebrow"
+      "id": "eyebrow",
+      "label": "Eyebrow"
     },
     {
-      "type": "text",
-      "id": "content_heading",
-      "label": "Content heading",
+      "type": "richtext",
+      "id": "content",
+      "label": "Content",
     },
     {
       "type": "header",
-      "content": "Media"
+      "content": "Media",
+      "info": "If image grid block added, media is not displayed."
     },
     {
-      "type": "text",
-      "id": "media_eyebrow",
-      "label": "Media eyebrow",
+      "type": "video",
+      "id": "video",
+      "label": "Video",
+      "info": "If left blank, image used instead."
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
     },
     {
       "type": "richtext",
@@ -334,12 +385,91 @@
     {
       "type": "image",
       "name": "Image",
-      "limit": 3,
+      "limit": 1,
       "settings": [
         {
           "type": "image_picker",
           "id": "image",
           "label": "Image"
+        },
+      ]
+    },
+    {
+      "type": "image_grid",
+      "name": "Image Grid",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "header",
+          "content": "First Image Block"
+        },
+        {
+          "type": "image_picker",
+          "id": "first_image",
+          "label": "Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "first_thumbnail",
+          "label": "Thumbnail"
+        },
+        {
+          "type": "text",
+          "id": "first_eyebrow",
+          "label": "Eyebrow"
+        },
+        {
+          "type": "text",
+          "id": "first_content",
+          "label": "Content"
+        },
+        {
+          "type": "header",
+          "content": "Second Image Block"
+        },
+        {
+          "type": "image_picker",
+          "id": "second_image",
+          "label": "Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "second_thumbnail",
+          "label": "Thumbnail"
+        },
+        {
+          "type": "text",
+          "id": "second_eyebrow",
+          "label": "Eyebrow"
+        },
+        {
+          "type": "text",
+          "id": "second_content",
+          "label": "Content"
+        },
+        {
+          "type": "header",
+          "content": "Third Image Block"
+        },
+        {
+          "type": "image_picker",
+          "id": "third_image",
+          "label": "Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "third_thumbnail",
+          "label": "Thumbnail"
+        },
+        {
+          "type": "text",
+          "id": "third_eyebrow",
+          "label": "Eyebrow"
+        },
+        {
+          "type": "text",
+          "id": "third_content",
+          "label": "Content"
         },
       ]
     },

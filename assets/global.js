@@ -304,3 +304,32 @@ class IncludeRunModal extends HTMLElement {
 }
 
 customElements.define('include-run-modal', IncludeRunModal);
+
+class ImageGrid extends HTMLElement {
+  constructor() {
+    super();
+  }
+
+  connectedCallback() {
+    this.blocks = Array.from(this.querySelectorAll('.image-grid__block'));
+    this.thumbnails = Array.from(this.querySelectorAll('.image-grid__thumbnails > *'));
+    this.handleClick = this.handleClick.bind(this);
+
+    this.thumbnails.forEach(ele => ele.addEventListener('click', this.handleClick));
+  }
+
+  disconnectedCallback() {
+    this.thumbnails.forEach(ele => ele.removeEventListener('click', this.handleClick));
+  }
+
+  handleClick(event) {
+    const newIndex = this.thumbnails.indexOf(event.currentTarget);
+    this.thumbnails.forEach(ele => ele.classList.remove('active'));
+    event.currentTarget.classList.add('active');
+
+    this.blocks.forEach(ele => ele.classList.remove('active'));
+    this.blocks[newIndex].classList.add('active');
+  }
+}
+
+customElements.define('image-grid', ImageGrid);

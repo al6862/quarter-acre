@@ -11,324 +11,58 @@
   "sections": {
     "main": {
       "type": "product",
-      "settings": {}
-    },
-    "product_sticky_nav_k4hKeG": {
-      "type": "product-sticky-nav",
-      "disabled": true,
-      "name": "Product Sticky Nav",
-      "settings": {}
-    },
-    "split_media_content_QR4QAX": {
-      "type": "split-media-content",
       "blocks": {
-        "image_CffbMH": {
-          "type": "image",
+        "column_nfEA4f": {
+          "type": "column",
           "settings": {
-            "image": "shopify://shop_images/aedf3dedc1776d917d2195e15305398777ea9860.png"
+            "heading": "Materials & Care",
+            "content": "{{ product.metafields.custom.materials_care | metafield_tag }}"
+          }
+        },
+        "column_F93c9J": {
+          "type": "column",
+          "settings": {
+            "heading": "Shipping & Returns",
+            "content": "<p>Free shipping in 2-7 business days. Free online returns within 14 days.<\/p>"
+          }
+        },
+        "column_QfnAPV": {
+          "type": "column",
+          "settings": {
+            "heading": "Questions?",
+            "content": "<p>Email us: concierge@alsolis.com<\/p>"
           }
         }
       },
       "block_order": [
-        "image_CffbMH"
+        "column_nfEA4f",
+        "column_F93c9J",
+        "column_QfnAPV"
       ],
-      "name": "Split Media + Content",
+      "settings": {}
+    },
+    "product_recommendations_dEAthi": {
+      "type": "product-recommendations",
+      "name": "Product Recommendations",
       "settings": {
-        "content_eyebrow": "Details",
-        "content_heading": "Simple, modular, and built to last. Made from marine-grade plywood with a precision interlocking structure, it brings a quiet, architectural presence to your backyard.",
-        "media_eyebrow": "",
-        "media_caption": "",
-        "layout": "content_on_left"
+        "heading": "Styled With",
+        "intent": "complementary",
+        "product_max": 4
       }
     },
-    "split_media_content_prfcyG": {
-      "type": "split-media-content",
-      "blocks": {
-        "row_UYjJr9": {
-          "type": "row",
-          "settings": {
-            "heading": "Frame",
-            "subheading": "Dimensions",
-            "content": "34 x 12 x 9’’"
-          }
-        },
-        "row_iiRy3g": {
-          "type": "row",
-          "settings": {
-            "heading": "Run",
-            "subheading": "Dimensions",
-            "content": "34 x 12 x 9’’"
-          }
-        },
-        "row_3aL7C3": {
-          "type": "row",
-          "settings": {
-            "heading": "Capacity",
-            "subheading": "# of Chickens",
-            "content": "4-6 Chickens"
-          }
-        },
-        "row_9FUezV": {
-          "type": "row",
-          "settings": {
-            "heading": "Frame",
-            "subheading": "Materials",
-            "content": "Machine Grade Ply"
-          }
-        },
-        "row_nraeki": {
-          "type": "row",
-          "settings": {
-            "heading": "Accessories",
-            "subheading": "Materials",
-            "content": "Heavy Duty Steel"
-          }
-        },
-        "image_ydtcBb": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/original_4a6a255a851fa344d2f5510107075c66_1.png"
-          }
-        }
-      },
-      "block_order": [
-        "row_UYjJr9",
-        "row_iiRy3g",
-        "row_3aL7C3",
-        "row_9FUezV",
-        "row_nraeki",
-        "image_ydtcBb"
-      ],
-      "name": "Split Media + Content",
+    "featured_collection_4Q4BPK": {
+      "type": "featured-collection",
+      "name": "Featured Collection",
       "settings": {
-        "content_eyebrow": "Assembly",
-        "content_heading": "Designed to feel straightforward from the start. Each panel is labeled and pre-drilled, allowing the structure to come together with minimal tools and time.",
-        "media_eyebrow": "",
-        "media_caption": "",
-        "layout": "media_on_left"
+        "collection": "{{ product.metafields.custom.vendor_collection.value }}",
+        "eyebrow": "More From",
+        "product_max": 8
       }
-    },
-    "media_slider_4beXia": {
-      "type": "media-slider",
-      "blocks": {
-        "slide_iD7q8n": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/c89002d398500a7e8b497aaa5f41eeeb.png",
-            "eyebrow": "fig. (a)",
-            "content": "<p>Roof (2x2)</p><p>Material: Bamboo</p><p>This is adjustable lamp that can be filled at various angles and the shape.</p>"
-          }
-        },
-        "slide_mtfpK3": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/c89002d398500a7e8b497aaa5f41eeeb_3.png",
-            "eyebrow": "fig. (b)",
-            "content": "<p>Base (12x34)</p><p>Material: Plywood</p><p>This is adjustable lamp that can be filled at various angles and the shape.</p>"
-          }
-        },
-        "slide_w3Gxq3": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/c89002d398500a7e8b497aaa5f41eeeb_2.png",
-            "eyebrow": "fig. (c)",
-            "content": "<p>Roosting Bar (34x34)</p><p>Material: Recycled Steel</p><p>This is adjustable lamp that can be filled at various angles and the shape.</p>"
-          }
-        },
-        "slide_D9WpqT": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/c89002d398500a7e8b497aaa5f41eeeb_1.png",
-            "eyebrow": "fig. (d)",
-            "content": "<p>Nesting Box (12x12)</p><p>Material: Recycled Steel</p><p>This is adjustable lamp that can be filled at various angles and the shape.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "slide_iD7q8n",
-        "slide_mtfpK3",
-        "slide_w3Gxq3",
-        "slide_D9WpqT"
-      ],
-      "name": "Media Slider",
-      "settings": {}
-    },
-    "split_media_content_BtDBpN": {
-      "type": "split-media-content",
-      "blocks": {
-        "image_nxNJrn": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/fd32b358782b23afe017b4b99ccd077c7225a48b.png"
-          }
-        }
-      },
-      "block_order": [
-        "image_nxNJrn"
-      ],
-      "name": "Split Media + Content",
-      "settings": {
-        "content_eyebrow": "Cleaning",
-        "content_heading": "A smooth interior surface and removable panels for quick, hassle-free cleaning.",
-        "media_eyebrow": "",
-        "media_caption": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex.</p>",
-        "layout": "content_on_left"
-      }
-    },
-    "drawers_7HjxCW": {
-      "type": "drawers",
-      "blocks": {
-        "drawer_mWbBfy": {
-          "type": "drawer",
-          "settings": {
-            "heading": "Easy Door",
-            "content": "<p>Wide access doors with ventilation are designed to make feeding, cleaning, and everyday care feel simple and intuitive.</p>",
-            "first_image": "shopify://shop_images/original_1997ecc3cf0d0edc8b383b93cfad3fa2_13.png",
-            "first_caption": "Nesting Box",
-            "second_image": "shopify://shop_images/original_1997ecc3cf0d0edc8b383b93cfad3fa2_14.png",
-            "second_caption": "Egg Collection"
-          }
-        },
-        "drawer_RPhigr": {
-          "type": "drawer",
-          "settings": {
-            "heading": "Nest Boxes",
-            "content": "<p>Integrated nest boxes provide a quiet, comfortable space for laying while remaining easily accessible for collection.</p>",
-            "first_image": "shopify://shop_images/eca484019ebe1a6fe3995503d40d8e4c011f3ac0-2250x3000_4_d21389de-5cd3-431e-9d27-d3c5bb77cf14.png",
-            "first_caption": "Egg Collection",
-            "second_image": "shopify://shop_images/787717c2a050d143b2776359565d76314cfa18f9.png",
-            "second_caption": "Nesting Box"
-          }
-        },
-        "drawer_fm4biT": {
-          "type": "drawer",
-          "settings": {
-            "heading": "Roosting Bar",
-            "content": "<p>A built-in roosting bar gives chickens a secure, elevated place to rest overnight, and easy to remove and clean when needed.</p>",
-            "first_image": "shopify://shop_images/original_1997ecc3cf0d0edc8b383b93cfad3fa2_14_1.png",
-            "first_caption": "Egg Collection",
-            "second_image": "shopify://shop_images/original_1997ecc3cf0d0edc8b383b93cfad3fa2_14_2.png",
-            "second_caption": "Egg Collection"
-          }
-        }
-      },
-      "block_order": [
-        "drawer_mWbBfy",
-        "drawer_RPhigr",
-        "drawer_fm4biT"
-      ],
-      "name": "Drawers",
-      "settings": {}
-    },
-    "split_media_content_RdUV3X": {
-      "type": "split-media-content",
-      "blocks": {
-        "row_khVBUw": {
-          "type": "row",
-          "settings": {
-            "heading": "Compatible Paint",
-            "subheading": "Customization",
-            "content": "<a href=\"/collections/frontpage\" title=\"Home page\">Visit</a>"
-          }
-        },
-        "row_8CVphX": {
-          "type": "row",
-          "settings": {
-            "heading": "Compatible Door",
-            "subheading": "Customization",
-            "content": "<a href=\"/collections/frontpage\" title=\"Home page\">Visit</a>"
-          }
-        },
-        "row_4kNGym": {
-          "type": "row",
-          "settings": {
-            "heading": "Water Feeder",
-            "subheading": "Customization",
-            "content": "<a href=\"/collections/frontpage\" title=\"Home page\">Visit</a>"
-          }
-        },
-        "image_drnaMn": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/9ed9395e7ff8f1d120dd7ae59ab201062e23ec00.png"
-          }
-        },
-        "image_z7h3bz": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/c9d14647b20421a27ffd4565ea8dc089badaaf08.png"
-          }
-        },
-        "image_rxXmTD": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/7f5ce5d54a02a5b100aeaec91a535cd6e30b8f41.png"
-          }
-        }
-      },
-      "block_order": [
-        "row_khVBUw",
-        "row_8CVphX",
-        "row_4kNGym",
-        "image_drnaMn",
-        "image_z7h3bz",
-        "image_rxXmTD"
-      ],
-      "name": "Split Media + Content",
-      "settings": {
-        "content_eyebrow": "Details",
-        "content_heading": "Customize your coop to fit the  style and vibe of your backyard. This coop is ready to paint and adapt whether it blends into the landscape or stands out as a focal point, the structure is designed to evolve with your space.",
-        "media_eyebrow": "fig.                (f)",
-        "media_caption": "<p>This Coop is painted using Home Depot’s outdoor paint in the shade Winter Green. All paint is weather proof and can be applied with any hardware brush.</p>",
-        "layout": "media_on_left"
-      }
-    },
-    "reviews_Y99CwK": {
-      "type": "reviews",
-      "blocks": {
-        "review_yGwKig": {
-          "type": "review",
-          "settings": {
-            "image": "shopify://shop_images/deb0d1fb0cd8dec611f116f16ec02f12d7e307c3.jpg",
-            "name": "Martha B.",
-            "quote": "<p>”We absolutely love this coop. It arrived super well-built and thoughtfully designed, but what really sold us was being able to make it our own. We painted it to match our house and added little details for the kids, which made it feel less like a generic farm product and more like part of our home.”</p>"
-          }
-        },
-        "review_HwTVQj": {
-          "type": "review",
-          "settings": {
-            "image": "shopify://shop_images/342706b4f91b72d5138cfd989f91b3a140856bbd.jpg",
-            "name": "Amber",
-            "quote": "<p>Amber Lorem Ipsum</p>"
-          }
-        },
-        "review_pgcMiA": {
-          "type": "review",
-          "settings": {
-            "image": "shopify://shop_images/1fd1130cde077d065325ab1fe8e14b00989db5f0.png",
-            "name": "Rachael",
-            "quote": "<p>Rachael Lorem Ipsum</p>"
-          }
-        }
-      },
-      "block_order": [
-        "review_yGwKig",
-        "review_HwTVQj",
-        "review_pgcMiA"
-      ],
-      "name": "Reviews",
-      "settings": {}
     }
   },
   "order": [
     "main",
-    "product_sticky_nav_k4hKeG",
-    "split_media_content_QR4QAX",
-    "split_media_content_prfcyG",
-    "media_slider_4beXia",
-    "split_media_content_BtDBpN",
-    "drawers_7HjxCW",
-    "split_media_content_RdUV3X",
-    "reviews_Y99CwK"
+    "product_recommendations_dEAthi",
+    "featured_collection_4Q4BPK"
   ]
 }
