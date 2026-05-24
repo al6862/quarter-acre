@@ -170,7 +170,7 @@
             "first_image_content": "",
             "second_image": "shopify://shop_images/original_1997ecc3cf0d0edc8b383b93cfad3fa2_14.png",
             "second_caption": "Egg Collection",
-            "second_image_content": ""
+            "second_image_content": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex.</p>"
           }
         },
         "drawer_RPhigr": {
@@ -180,7 +180,8 @@
             "content": "<p>Integrated nest boxes provide a quiet, comfortable space for laying while remaining easily accessible for collection.</p>",
             "first_image": "shopify://shop_images/eca484019ebe1a6fe3995503d40d8e4c011f3ac0-2250x3000_4_d21389de-5cd3-431e-9d27-d3c5bb77cf14.png",
             "first_caption": "Egg Collection",
-            "first_image_content": "",
+            "first_image_content": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex.</p>",
+            "second_video": "shopify://files/videos/quarter.acre_1760391000_3742571787830839146_54964256270.mp4",
             "second_image": "shopify://shop_images/787717c2a050d143b2776359565d76314cfa18f9.png",
             "second_caption": "Nesting Box",
             "second_image_content": ""
@@ -193,10 +194,10 @@
             "content": "<p>A built-in roosting bar gives chickens a secure, elevated place to rest overnight, and easy to remove and clean when needed.</p>",
             "first_image": "shopify://shop_images/original_1997ecc3cf0d0edc8b383b93cfad3fa2_14_1.png",
             "first_caption": "Egg Collection",
-            "first_image_content": "",
+            "first_image_content": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex.</p>",
             "second_image": "shopify://shop_images/original_1997ecc3cf0d0edc8b383b93cfad3fa2_14_2.png",
             "second_caption": "Egg Collection",
-            "second_image_content": ""
+            "second_image_content": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex.</p>"
           }
         }
       },
