@@ -166,14 +166,40 @@ class DrawersElement extends HTMLElement {
 
     this.bindedHandleDesktopClick = this.handleDesktopClick.bind(this);
     this.bindedHandleMobileClick = this.handleMobileClick.bind(this);
+    this.bindedHandleObserve = this.handleObserve.bind(this);
+
+    const options = {
+      rootMargin: "-54px 0px 0px 0px",
+    };
+    this.observer = new IntersectionObserver(this.bindedHandleObserve, options);
+    this.drawerBlocks.forEach((ele) => this.observer.observe(ele));
 
     this.drawerHeadings.forEach((ele) => ele.addEventListener('click', this.bindedHandleDesktopClick));
     this.detailSummaries.forEach((ele) => ele.addEventListener('click', this.bindedHandleMobileClick));
   }
 
   disconnectedCallback() {
+    this.observer.disconnect();
     this.drawerHeadings.forEach((ele) => ele.removeEventListener('click', this.bindedHandleDesktopClick));
     this.detailSummaries.forEach((ele) => ele.removeEventListener('click', this.bindedHandleMobileClick));
+  }
+
+  handleObserve(entries) {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const currIndex = entry.target.dataset.index;
+
+        this.marker.style.top = `calc(1.375rem + (2.75rem + 1px) * ${currIndex} - 0.5 * 0.5625rem)`;
+
+        this.drawerHeadings.forEach((ele) => {
+          if (ele.dataset.index == currIndex) {
+            ele.classList.add('active');
+          } else {
+            ele.classList.remove('active');
+          }
+        })
+      }
+    });
   }
 
   handleDesktopClick(event) {
