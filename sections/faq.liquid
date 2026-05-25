@@ -1,0 +1,161 @@
+{% if section.blocks.size > 0 %}
+  <faq-element class="faq">
+    <div class="faq__nav mobile-hidden">
+      {% assign heading_index = 0 %}
+      {% for block in section.blocks %}
+        {% if block.type == 'heading' %}
+          <a data-index="{{ heading_index }}" class="{% if forloop.index0 == 0 %}active{% endif %}" href="#{{ block.settings.heading | handleize }}">{{ block.settings.heading }}</a>
+          {% assign heading_index = heading_index | plus: 1 %}
+        {% endif %}
+      {% endfor %}
+      <span class="marker"></span>
+    </div>
+    <div class="faq__questions">
+      {% assign heading_index = 0 %}
+      {% for block in section.blocks %}
+        {% if block.type == 'heading' %}
+          <h1 data-index="{{ heading_index }}" class="faq-question__heading" id="{{ block.settings.heading | handleize }}">{{ block.settings.heading }}</h1>
+          {% assign heading_index = heading_index | plus: 1 %}
+        {% elsif block.type == 'question' %}
+          <details>
+            <summary class="body-bold">
+              {{ block.settings.heading }}
+              {{ 'icon-open.svg' | inline_asset_content }}
+            </summary>
+            <div class="faq-question__content-container">
+              <div class="faq-question__content rte">
+                {{ block.settings.content }}
+              </div>
+            </div>
+          </details>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </faq-element>
+{% endif %}
+
+{% stylesheet %}
+  :root:has(faq-element) {
+    scroll-behavior: smooth;
+  }
+  faq-element {
+    margin-top: calc(var(--header-height) + 3.75rem);
+    padding: 0 1.25rem;    
+    display: flex;
+    align-items: start;
+    gap: 8.625rem;
+  }
+  .faq__nav {
+    flex-shrink: 0;
+    width: 15%;
+    position: sticky;
+    top: var(--header-height);
+  }
+  .faq__nav a {
+    display: block;
+    line-height: 2.75rem;
+    border-top: 1px solid var(--light-brown-30);
+    color: var(--grey);
+    text-wrap: nowrap;
+    cursor: pointer;
+    transition: color 300ms ease-out, border 300ms ease-out;
+  }
+  .faq__nav a.active {
+    border-top: 1px solid var(--light-brown);
+    color: var(--color-foreground);
+  }
+  .faq__nav .marker {
+    display: block;
+    width: 0.5625rem;
+    height: 0.5625rem;
+    border-radius: 50%;
+    background-color: var(--dark-brown);
+    position: absolute;
+    top: calc(1.375rem + 1px - 0.5 * 0.5625rem);
+    right: 0;
+    transition: top 300ms ease-out;
+  }
+
+  .faq__questions {
+    flex-grow: 1;
+    padding-bottom: 7.5rem;
+  }
+  .faq__questions .faq-question__heading {
+    scroll-margin-top: var(--header-height);
+    padding: 0 0 2rem;
+  }
+  .faq__questions .faq-question__heading:not(:first-of-type) {
+    margin-top: 3.75rem;
+  }
+
+  .faq__questions details {
+    border-top: 1px solid var(--light-brown-30)
+  }
+  .faq__questions details summary {
+    cursor: pointer;
+  }
+  .faq__questions details summary::marker {
+    display: none;
+  }
+  .faq__questions details summary {
+    padding: 1.25rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .faq-question__content-container {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 300ms ease-out;
+    overflow: hidden;
+  }
+  .faq__questions details.open .faq-question__content-container {
+    grid-template-rows: 1fr;
+  }
+  .faq-question__content {
+    min-height: 0;
+  }
+  .faq-question__content > *:last-child {
+    margin-bottom: 1.25rem;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "FAQ",
+  "blocks": [
+    {
+      "type": "heading",
+      "name": "Heading",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading"
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "name": "Question",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Content"
+        }
+      ],
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ"
+    }
+  ]
+}
+{% endschema %}

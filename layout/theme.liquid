@@ -28,7 +28,7 @@
     {{ content_for_header }}
   </head>
 
-  <body>
+  <body data-template="{{ template.name }}">
     {%- render 'cart-drawer' -%}
 
     {% sections 'header-group' %}

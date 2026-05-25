@@ -208,27 +208,10 @@
       "name": "Drawers",
       "settings": {}
     },
-    "split_media_content_RdUV3X": {
-      "type": "split-media-content",
+    "split_image_grid_content_MEUC3G": {
+      "type": "split-image-grid-content",
       "blocks": {
-        "image_grid_F6ixJ7": {
-          "type": "image_grid",
-          "settings": {
-            "first_image": "shopify://shop_images/original_1997ecc3cf0d0edc8b383b93cfad3fa2_10.png",
-            "first_thumbnail": "shopify://shop_images/original_1997ecc3cf0d0edc8b383b93cfad3fa2_12_1.png",
-            "first_eyebrow": "Winter Green",
-            "first_content": "Sally G painted her coop using Home Depot’s outdoor paint in the shade Winter Green to match her garden. Weather proof paint can be applied with any hardware brush.",
-            "second_image": "shopify://shop_images/d83bfaf06df60c7c2feaf199b02819542a1f833d.png",
-            "second_thumbnail": "shopify://shop_images/d83bfaf06df60c7c2feaf199b02819542a1f833d.png",
-            "second_eyebrow": "White",
-            "second_content": "White Content",
-            "third_image": "shopify://shop_images/de1da031299f601fe6a430edd50955451025085b.png",
-            "third_thumbnail": "shopify://shop_images/de1da031299f601fe6a430edd50955451025085b.png",
-            "third_eyebrow": "Red",
-            "third_content": "Red Content"
-          }
-        },
-        "row_khVBUw": {
+        "row_xDifqr": {
           "type": "row",
           "settings": {
             "heading": "Compatible Paint",
@@ -236,7 +219,7 @@
             "content": "<a href=\"/collections/frontpage\" title=\"Home page\">Visit</a>"
           }
         },
-        "row_8CVphX": {
+        "row_NkNy8f": {
           "type": "row",
           "settings": {
             "heading": "Compatible Door",
@@ -244,7 +227,7 @@
             "content": "<a href=\"/collections/frontpage\" title=\"Home page\">Visit</a>"
           }
         },
-        "row_4kNGym": {
+        "row_JKFYtw": {
           "type": "row",
           "settings": {
             "heading": "Water Feeder",
@@ -254,16 +237,26 @@
         }
       },
       "block_order": [
-        "image_grid_F6ixJ7",
-        "row_khVBUw",
-        "row_8CVphX",
-        "row_4kNGym"
+        "row_xDifqr",
+        "row_NkNy8f",
+        "row_JKFYtw"
       ],
-      "name": "Split Media + Content",
+      "name": "Split Image Grid + Content",
       "settings": {
         "eyebrow": "Make it your own",
         "content": "<h1>Customize your coop to fit the  style and vibe of your backyard. This coop is ready to paint and adapt whether it blends into the landscape or stands out as a focal point, the structure is designed to evolve with your space.</h1>",
-        "media_caption": "<p>This Coop is painted using Home Depot’s outdoor paint in the shade Winter Green. All paint is weather proof and can be applied with any hardware brush.</p>",
+        "first_image": "shopify://shop_images/original_1997ecc3cf0d0edc8b383b93cfad3fa2_10.png",
+        "first_thumbnail": "shopify://shop_images/original_1997ecc3cf0d0edc8b383b93cfad3fa2_12_1.png",
+        "first_eyebrow": "Winter Green",
+        "first_content": "Sally G painted her coop using Home Depot’s outdoor paint in the shade Winter Green to match her garden. Weather proof paint can be applied with any hardware brush.",
+        "second_image": "shopify://shop_images/de1da031299f601fe6a430edd50955451025085b.png",
+        "second_thumbnail": "shopify://shop_images/de1da031299f601fe6a430edd50955451025085b.png",
+        "second_eyebrow": "Red",
+        "second_content": "Red Content",
+        "third_image": "shopify://shop_images/d83bfaf06df60c7c2feaf199b02819542a1f833d.png",
+        "third_thumbnail": "shopify://shop_images/d83bfaf06df60c7c2feaf199b02819542a1f833d.png",
+        "third_eyebrow": "White",
+        "third_content": "White Content",
         "layout": "media_on_left"
       }
     },
@@ -287,7 +280,7 @@
     "media_slider_4beXia",
     "split_media_content_BtDBpN",
     "drawers_7HjxCW",
-    "split_media_content_RdUV3X",
+    "split_image_grid_content_MEUC3G",
     "split_media_content_4KrWya"
   ]
 }

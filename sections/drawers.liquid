@@ -4,7 +4,7 @@
       <div class="drawers-element__headings">
         {% for block in section.blocks %}
           {% if block.settings.heading != blank %}
-            <span class="chart drawers-element__heading{% if forloop.index0 == 0 %} active{% endif %}" data-index="{{ forloop.index0 }}">{{ block.settings.heading }}</span>
+            <span class="drawers-element__heading{% if forloop.index0 == 0 %} active{% endif %}" data-index="{{ forloop.index0 }}">{{ block.settings.heading }}</span>
           {% endif %}
         {% endfor %}
         <span class="marker"></span>
@@ -153,7 +153,6 @@
 
   .drawers-element__desktop .drawers-element__heading {
     display: block;
-    padding-right: 8.75rem;
     line-height: 2.75rem;
     border-top: 1px solid var(--light-brown-30);
     color: var(--grey);
@@ -166,6 +165,8 @@
     color: var(--color-foreground);
   }
   .drawers-element__desktop .drawers-element__headings {
+    width: 15%;
+    flex-shrink: 0;
     position: sticky;
     top: var(--header-height);
   }
@@ -182,6 +183,7 @@
   }
 
   .drawers-element__desktop .drawers-element__blocks {
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
     gap: 5rem;
@@ -239,6 +241,7 @@
     padding: 1.25rem 0;
     display: flex;
     justify-content: space-between;
+    align-items: center;
   }
 
   .drawers-element__mobile .drawers-element__container {
@@ -250,11 +253,8 @@
   .drawers-element__mobile .drawers-element__content-images-container {
     min-height: 0;
   }
-  .drawers-element__mobile details[open] .drawers-element__container {
+  .drawers-element__mobile details.open .drawers-element__container {
     grid-template-rows: 1fr;
-  }
-  .drawers-element__mobile details.closing .drawers-element__container {
-    grid-template-rows: 0fr;
   }
   .drawers-element__mobile details .icon-open .plus-line {
     transition: opacity 300ms ease-out;
