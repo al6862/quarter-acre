@@ -1,0 +1,178 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "page",
+      "disabled": true,
+      "settings": {}
+    },
+    "faq_FtGPdQ": {
+      "type": "faq",
+      "blocks": {
+        "heading_x8qLyG": {
+          "type": "heading",
+          "settings": {
+            "heading": "Shipping"
+          }
+        },
+        "question_JTLjjF": {
+          "type": "question",
+          "settings": {
+            "heading": "Where do you ship?",
+            "content": "<p>We ship anywhere in the contiguous US. Join our mailing list for updates as we expand internationally.</p>"
+          }
+        },
+        "question_TtLtCK": {
+          "type": "question",
+          "settings": {
+            "heading": "When will my order ship?",
+            "content": "<p><em>U.S. Orders:</em><br/>In-stock non-furniture items are typically fulfilled and shipped out within 2-3 business days unless otherwise noted on the website. Please note that orders placed on a Friday may not ship until Monday.<br/><br/>NOTE: Due to International supply chain disruptions, our Signature Crates are experiencing shipping delays.  While our Crates typically ship within a 1-2 week window, orders may experience additional shipping delays of up to 4 weeks  Crates are delivered in the order they are purchased, secure yours now to ensure the earliest delivery. <br/><br/><em>Canada Orders:<br/></em>In-stock non-furniture items are typically fulfilled and shipped out within 2-7 business days unless otherwise noted on the website.<br/><br/>Once the package has left the United States, it’s estimated to deliver to you within 10-14 business days.<br/><br/>Please note that expedited shipping to Canada is not available at this time.</p>"
+          }
+        },
+        "question_YHHDhh": {
+          "type": "question",
+          "settings": {
+            "heading": "Where do you ship?",
+            "content": "<p>We ship anywhere in the contiguous US. Join our mailing list for updates as we expand internationally.</p>"
+          }
+        },
+        "heading_caaPef": {
+          "type": "heading",
+          "settings": {
+            "heading": "Returns & Exchanges"
+          }
+        },
+        "question_kQFWeh": {
+          "type": "question",
+          "settings": {
+            "heading": "When will my order ship?",
+            "content": "<p><em>U.S. Orders:</em><br/>In-stock non-furniture items are typically fulfilled and shipped out within 2-3 business days unless otherwise noted on the website. Please note that orders placed on a Friday may not ship until Monday.<br/><br/>NOTE: Due to International supply chain disruptions, our Signature Crates are experiencing shipping delays.  While our Crates typically ship within a 1-2 week window, orders may experience additional shipping delays of up to 4 weeks  Crates are delivered in the order they are purchased, secure yours now to ensure the earliest delivery. <br/><br/><em>Canada Orders:<br/></em>In-stock non-furniture items are typically fulfilled and shipped out within 2-7 business days unless otherwise noted on the website.<br/><br/>Once the package has left the United States, it’s estimated to deliver to you within 10-14 business days.<br/><br/>Please note that expedited shipping to Canada is not available at this time.</p>"
+          }
+        },
+        "question_GbHEf3": {
+          "type": "question",
+          "settings": {
+            "heading": "When will my order ship?",
+            "content": "<p><em>U.S. Orders:</em><br/>In-stock non-furniture items are typically fulfilled and shipped out within 2-3 business days unless otherwise noted on the website. Please note that orders placed on a Friday may not ship until Monday.<br/><br/>NOTE: Due to International supply chain disruptions, our Signature Crates are experiencing shipping delays.  While our Crates typically ship within a 1-2 week window, orders may experience additional shipping delays of up to 4 weeks  Crates are delivered in the order they are purchased, secure yours now to ensure the earliest delivery. <br/><br/><em>Canada Orders:<br/></em>In-stock non-furniture items are typically fulfilled and shipped out within 2-7 business days unless otherwise noted on the website.<br/><br/>Once the package has left the United States, it’s estimated to deliver to you within 10-14 business days.<br/><br/>Please note that expedited shipping to Canada is not available at this time.</p>"
+          }
+        },
+        "question_xxbnqm": {
+          "type": "question",
+          "settings": {
+            "heading": "When will my order ship?",
+            "content": "<p><em>U.S. Orders:</em><br/>In-stock non-furniture items are typically fulfilled and shipped out within 2-3 business days unless otherwise noted on the website. Please note that orders placed on a Friday may not ship until Monday.<br/><br/>NOTE: Due to International supply chain disruptions, our Signature Crates are experiencing shipping delays.  While our Crates typically ship within a 1-2 week window, orders may experience additional shipping delays of up to 4 weeks  Crates are delivered in the order they are purchased, secure yours now to ensure the earliest delivery. <br/><br/><em>Canada Orders:<br/></em>In-stock non-furniture items are typically fulfilled and shipped out within 2-7 business days unless otherwise noted on the website.<br/><br/>Once the package has left the United States, it’s estimated to deliver to you within 10-14 business days.<br/><br/>Please note that expedited shipping to Canada is not available at this time.</p>"
+          }
+        },
+        "heading_DX4RB8": {
+          "type": "heading",
+          "settings": {
+            "heading": "Billing"
+          }
+        },
+        "question_4RH6Vd": {
+          "type": "question",
+          "settings": {
+            "heading": "When will my order ship?",
+            "content": "<p><em>U.S. Orders:</em><br/>In-stock non-furniture items are typically fulfilled and shipped out within 2-3 business days unless otherwise noted on the website. Please note that orders placed on a Friday may not ship until Monday.<br/><br/>NOTE: Due to International supply chain disruptions, our Signature Crates are experiencing shipping delays.  While our Crates typically ship within a 1-2 week window, orders may experience additional shipping delays of up to 4 weeks  Crates are delivered in the order they are purchased, secure yours now to ensure the earliest delivery. <br/><br/><em>Canada Orders:<br/></em>In-stock non-furniture items are typically fulfilled and shipped out within 2-7 business days unless otherwise noted on the website.<br/><br/>Once the package has left the United States, it’s estimated to deliver to you within 10-14 business days.<br/><br/>Please note that expedited shipping to Canada is not available at this time.</p>"
+          }
+        },
+        "question_JgcXaY": {
+          "type": "question",
+          "settings": {
+            "heading": "When will my order ship?",
+            "content": "<p><em>U.S. Orders:</em><br/>In-stock non-furniture items are typically fulfilled and shipped out within 2-3 business days unless otherwise noted on the website. Please note that orders placed on a Friday may not ship until Monday.<br/><br/>NOTE: Due to International supply chain disruptions, our Signature Crates are experiencing shipping delays.  While our Crates typically ship within a 1-2 week window, orders may experience additional shipping delays of up to 4 weeks  Crates are delivered in the order they are purchased, secure yours now to ensure the earliest delivery. <br/><br/><em>Canada Orders:<br/></em>In-stock non-furniture items are typically fulfilled and shipped out within 2-7 business days unless otherwise noted on the website.<br/><br/>Once the package has left the United States, it’s estimated to deliver to you within 10-14 business days.<br/><br/>Please note that expedited shipping to Canada is not available at this time.</p>"
+          }
+        },
+        "question_cTzQCN": {
+          "type": "question",
+          "settings": {
+            "heading": "When will my order ship?",
+            "content": "<p><em>U.S. Orders:</em><br/>In-stock non-furniture items are typically fulfilled and shipped out within 2-3 business days unless otherwise noted on the website. Please note that orders placed on a Friday may not ship until Monday.<br/><br/>NOTE: Due to International supply chain disruptions, our Signature Crates are experiencing shipping delays.  While our Crates typically ship within a 1-2 week window, orders may experience additional shipping delays of up to 4 weeks  Crates are delivered in the order they are purchased, secure yours now to ensure the earliest delivery. <br/><br/><em>Canada Orders:<br/></em>In-stock non-furniture items are typically fulfilled and shipped out within 2-7 business days unless otherwise noted on the website.<br/><br/>Once the package has left the United States, it’s estimated to deliver to you within 10-14 business days.<br/><br/>Please note that expedited shipping to Canada is not available at this time.</p>"
+          }
+        },
+        "question_9AjNNg": {
+          "type": "question",
+          "settings": {
+            "heading": "When will my order ship?",
+            "content": "<p><em>U.S. Orders:</em><br/>In-stock non-furniture items are typically fulfilled and shipped out within 2-3 business days unless otherwise noted on the website. Please note that orders placed on a Friday may not ship until Monday.<br/><br/>NOTE: Due to International supply chain disruptions, our Signature Crates are experiencing shipping delays.  While our Crates typically ship within a 1-2 week window, orders may experience additional shipping delays of up to 4 weeks  Crates are delivered in the order they are purchased, secure yours now to ensure the earliest delivery. <br/><br/><em>Canada Orders:<br/></em>In-stock non-furniture items are typically fulfilled and shipped out within 2-7 business days unless otherwise noted on the website.<br/><br/>Once the package has left the United States, it’s estimated to deliver to you within 10-14 business days.<br/><br/>Please note that expedited shipping to Canada is not available at this time.</p>"
+          }
+        },
+        "heading_NKy6rD": {
+          "type": "heading",
+          "settings": {
+            "heading": "Order Questions"
+          }
+        },
+        "question_4RcADC": {
+          "type": "question",
+          "settings": {
+            "heading": "When will my order ship?",
+            "content": "<p><em>U.S. Orders:</em><br/>In-stock non-furniture items are typically fulfilled and shipped out within 2-3 business days unless otherwise noted on the website. Please note that orders placed on a Friday may not ship until Monday.<br/><br/>NOTE: Due to International supply chain disruptions, our Signature Crates are experiencing shipping delays.  While our Crates typically ship within a 1-2 week window, orders may experience additional shipping delays of up to 4 weeks  Crates are delivered in the order they are purchased, secure yours now to ensure the earliest delivery. <br/><br/><em>Canada Orders:<br/></em>In-stock non-furniture items are typically fulfilled and shipped out within 2-7 business days unless otherwise noted on the website.<br/><br/>Once the package has left the United States, it’s estimated to deliver to you within 10-14 business days.<br/><br/>Please note that expedited shipping to Canada is not available at this time.</p>"
+          }
+        },
+        "question_8Qndfp": {
+          "type": "question",
+          "settings": {
+            "heading": "When will my order ship?",
+            "content": "<p><em>U.S. Orders:</em><br/>In-stock non-furniture items are typically fulfilled and shipped out within 2-3 business days unless otherwise noted on the website. Please note that orders placed on a Friday may not ship until Monday.<br/><br/>NOTE: Due to International supply chain disruptions, our Signature Crates are experiencing shipping delays.  While our Crates typically ship within a 1-2 week window, orders may experience additional shipping delays of up to 4 weeks  Crates are delivered in the order they are purchased, secure yours now to ensure the earliest delivery. <br/><br/><em>Canada Orders:<br/></em>In-stock non-furniture items are typically fulfilled and shipped out within 2-7 business days unless otherwise noted on the website.<br/><br/>Once the package has left the United States, it’s estimated to deliver to you within 10-14 business days.<br/><br/>Please note that expedited shipping to Canada is not available at this time.</p>"
+          }
+        },
+        "heading_7npRXt": {
+          "type": "heading",
+          "settings": {
+            "heading": "Product Questions"
+          }
+        },
+        "question_GXxFLn": {
+          "type": "question",
+          "settings": {
+            "heading": "When will my order ship?",
+            "content": "<p><em>U.S. Orders:</em><br/>In-stock non-furniture items are typically fulfilled and shipped out within 2-3 business days unless otherwise noted on the website. Please note that orders placed on a Friday may not ship until Monday.<br/><br/>NOTE: Due to International supply chain disruptions, our Signature Crates are experiencing shipping delays.  While our Crates typically ship within a 1-2 week window, orders may experience additional shipping delays of up to 4 weeks  Crates are delivered in the order they are purchased, secure yours now to ensure the earliest delivery. <br/><br/><em>Canada Orders:<br/></em>In-stock non-furniture items are typically fulfilled and shipped out within 2-7 business days unless otherwise noted on the website.<br/><br/>Once the package has left the United States, it’s estimated to deliver to you within 10-14 business days.<br/><br/>Please note that expedited shipping to Canada is not available at this time.</p>"
+          }
+        },
+        "question_8E4VpE": {
+          "type": "question",
+          "settings": {
+            "heading": "When will my order ship?",
+            "content": "<p><em>U.S. Orders:</em><br/>In-stock non-furniture items are typically fulfilled and shipped out within 2-3 business days unless otherwise noted on the website. Please note that orders placed on a Friday may not ship until Monday.<br/><br/>NOTE: Due to International supply chain disruptions, our Signature Crates are experiencing shipping delays.  While our Crates typically ship within a 1-2 week window, orders may experience additional shipping delays of up to 4 weeks  Crates are delivered in the order they are purchased, secure yours now to ensure the earliest delivery. <br/><br/><em>Canada Orders:<br/></em>In-stock non-furniture items are typically fulfilled and shipped out within 2-7 business days unless otherwise noted on the website.<br/><br/>Once the package has left the United States, it’s estimated to deliver to you within 10-14 business days.<br/><br/>Please note that expedited shipping to Canada is not available at this time.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_x8qLyG",
+        "question_JTLjjF",
+        "question_TtLtCK",
+        "question_YHHDhh",
+        "heading_caaPef",
+        "question_kQFWeh",
+        "question_GbHEf3",
+        "question_xxbnqm",
+        "heading_DX4RB8",
+        "question_4RH6Vd",
+        "question_JgcXaY",
+        "question_cTzQCN",
+        "question_9AjNNg",
+        "heading_NKy6rD",
+        "question_4RcADC",
+        "question_8Qndfp",
+        "heading_7npRXt",
+        "question_GXxFLn",
+        "question_8E4VpE"
+      ],
+      "name": "FAQ",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main",
+    "faq_FtGPdQ"
+  ]
+}
