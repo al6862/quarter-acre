@@ -39,18 +39,63 @@
   </div>
 
   <div class="split-media-content__media">
-    {% if section.settings.video != blank or section.settings.image != blank %}
-      <div class="split-media-content__big-media">
-        {% if section.settings.video != blank %}
-          {{ section.settings.video | video_tag: image_size: '1440x', loop: true, controls: false, muted: true, autoplay: true }}
-        {% elsif section.settings.image != blank %}
-          {{ section.settings.image | image_url: width: 1440 | image_tag }}
-        {% endif %}
+    {% if section.settings.first_thumbnail or section.settings.second_thumbnail or section.settings.third_thumbnail %}
+      <image-grid>
+        <div class="image-grid__block active">
+          {% if section.settings.first_image != blank %}
+            {{ section.settings.first_image | image_url: width: 960 | image_tag }}
+          {% endif %}
+          {% if section.settings.first_eyebrow != blank %}
+            <div class="image-grid-block__eyebrow">
+              <span class="fig">(e)</span>
+              <span class="body-bold">{{ section.settings.first_eyebrow }}</span>
+            </div>
+          {% endif %}
+          {% if section.settings.first_content != blank %}
+            <span class="image-grid-block__content">{{ section.settings.first_content }}</span>
+          {% endif %}
+        </div>
+        <div class="image-grid__block">
+          {% if section.settings.second_image != blank %}
+            {{ section.settings.second_image | image_url: width: 960 | image_tag }}
+          {% endif %}
+          {% if section.settings.second_eyebrow != blank %}
+            <div class="image-grid-block__eyebrow">
+              <span class="fig">(e)</span>
+              <span class="body-bold">{{ section.settings.second_eyebrow }}</span>
+            </div>
+          {% endif %}
+          {% if section.settings.second_content != blank %}
+            <span class="image-grid-block__content">{{ section.settings.second_content }}</span>
+          {% endif %}
+        </div>
+        <div class="image-grid__block">
+          {% if section.settings.third_image != blank %}
+            {{ section.settings.third_image | image_url: width: 960 | image_tag }}
+          {% endif %}
+          {% if section.settings.third_eyebrow != blank %}
+            <div class="image-grid-block__eyebrow">
+              <span class="fig">(e)</span>
+              <span class="body-bold">{{ section.settings.third_eyebrow }}</span>
+            </div>
+          {% endif %}
+          {% if section.settings.third_content != blank %}
+            <span class="image-grid-block__content">{{ section.settings.third_content }}</span>
+          {% endif %}
+        </div>
 
-        {% if section.settings.media_caption != blank %}
-          <span class="split-media-content__media-caption rte">{{ section.settings.media_caption }}</span>
-        {% endif %}
-      </div>
+        <div class="image-grid__thumbnails">
+          {% if section.settings.first_thumbnail != blank %}
+            {{ section.settings.first_thumbnail | image_url: width: 480 | image_tag: class: 'active' }}
+          {% endif %}
+          {% if section.settings.second_thumbnail != blank %}
+            {{ section.settings.second_thumbnail | image_url: width: 480 | image_tag }}
+          {% endif %}
+          {% if section.settings.third_thumbnail != blank %}
+            {{ section.settings.third_thumbnail | image_url: width: 480 | image_tag }}
+          {% endif %}
+        </div>
+      </image-grid>
     {% endif %}
 
     {% assign image_block = section.blocks | find: 'type', 'image' %}
@@ -265,7 +310,7 @@
 
 {% schema %}
 {
-  "name": "Split Media + Content",
+  "name": "Split IG + Content",
   "disabled_on": {"groups": ["header", "footer"]},
   "settings": [
     {
@@ -284,24 +329,79 @@
     },
     {
       "type": "header",
-      "content": "Media",
-      "info": "If image grid block added, media is not displayed."
+      "content": "Image Grid",
     },
     {
-      "type": "video",
-      "id": "video",
-      "label": "Video",
-      "info": "If left blank, image used instead."
+      "type": "paragraph",
+      "content": "First Image Block"
     },
     {
       "type": "image_picker",
-      "id": "image",
+      "id": "first_image",
       "label": "Image"
     },
     {
-      "type": "richtext",
-      "id": "media_caption",
-      "label": "Media caption",
+      "type": "image_picker",
+      "id": "first_thumbnail",
+      "label": "Thumbnail"
+    },
+    {
+      "type": "text",
+      "id": "first_eyebrow",
+      "label": "Eyebrow"
+    },
+    {
+      "type": "text",
+      "id": "first_content",
+      "label": "Content"
+    },
+    {
+      "type": "paragraph",
+      "content": "Second Image Block"
+    },
+    {
+      "type": "image_picker",
+      "id": "second_image",
+      "label": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "second_thumbnail",
+      "label": "Thumbnail"
+    },
+    {
+      "type": "text",
+      "id": "second_eyebrow",
+      "label": "Eyebrow"
+    },
+    {
+      "type": "text",
+      "id": "second_content",
+      "label": "Content"
+    },
+    {
+      "type": "paragraph",
+      "content": "Third Image Block"
+    },
+    {
+      "type": "image_picker",
+      "id": "third_image",
+      "label": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "third_thumbnail",
+      "label": "Thumbnail"
+    },
+    {
+      "type": "text",
+      "id": "third_eyebrow",
+      "label": "Eyebrow"
+    },
+    {
+      "type": "text",
+      "id": "third_content",
+      "label": "Content"
     },
     {
       "type": "header",
@@ -317,7 +417,7 @@
           "value": "content_on_left"
         },
         {
-          "label": "Media on left",
+          "label": "Image grid on left",
           "value": "media_on_left"
         }
       ],
@@ -331,10 +431,6 @@
       "limit": 1,
       "settings": [
         {
-          "type": "paragraph",
-          "content": "Shown on the content side.",
-        },
-        {
           "type": "image_picker",
           "id": "image",
           "label": "Image"
@@ -345,10 +441,6 @@
       "type": "row",
       "name": "Row",
       "settings": [
-        {
-          "type": "paragraph",
-          "content": "Shown on the content side.",
-        },
         {
           "type": "text",
           "id": "heading",
@@ -369,7 +461,7 @@
   ],
   "presets": [
     {
-      "name": "Split Media + Content"
+      "name": "Split Image Grid + Content"
     }
   ]
 }

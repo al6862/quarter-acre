@@ -18,7 +18,7 @@
   }
 
   header {
-    --header-color: var(--white);
+    --header-color: var(--color-foreground);
     --header-bg-color: transparent;
     position: fixed;
     top: 0;
@@ -33,6 +33,9 @@
     grid-template-columns: 1fr max-content 1fr;
     align-items: center;
     transition: color 300ms ease-out, background-color 300ms ease-out;
+  }
+  body[data-template="index"] header, body[data-template="product"] header {
+    --header-color: var(--white);
   }
   header.scrolled {
     --header-color: var(--color-foreground);
