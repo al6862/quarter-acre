@@ -15,7 +15,6 @@
     },
     "product_sticky_nav_k4hKeG": {
       "type": "product-sticky-nav",
-      "disabled": true,
       "name": "Product Sticky Nav",
       "settings": {}
     },
