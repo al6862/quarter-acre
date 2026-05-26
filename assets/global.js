@@ -223,20 +223,102 @@ class DrawersElement extends HTMLElement {
   }
 
   handleMobileClick(event) {
+    event.preventDefault();
     const details = event.currentTarget.closest('details');
     if (details.hasAttribute('open')) {
-      event.preventDefault();
-
-      details.classList.add('closing');
+      details.classList.remove('open');
       details.querySelector('.drawers-element__container').addEventListener('transitionend', () => {
-        details.classList.remove('closing');
         details.removeAttribute('open');
       }, {once: true});
+    } else {
+      details.setAttribute('open', '');
+      setTimeout(() => details.classList.add('open'));
     }
   }
 }
 
 customElements.define('drawers-element', DrawersElement);
+
+class FAQElement extends HTMLElement {
+  constructor() {
+    super();
+  }
+
+  connectedCallback() {
+    this.drawerHeadings = this.querySelectorAll('.faq__nav > a');
+    this.drawerBlocks = this.querySelectorAll('.faq-question__heading');
+    this.marker = this.querySelector('.faq__nav .marker');
+    this.detailSummaries = this.querySelectorAll('.faq__questions summary');
+
+    this.bindedHandleHeadingClick = this.handleHeadingClick.bind(this);
+    this.bindedHandleSummaryClick = this.handleSummaryClick.bind(this);
+    this.bindedHandleObserve = this.handleObserve.bind(this);
+
+    const options = {
+      rootMargin: "-54px 0px 0px 0px",
+    };
+    this.observer = new IntersectionObserver(this.bindedHandleObserve, options);
+    this.drawerBlocks.forEach((ele) => this.observer.observe(ele));
+
+    this.drawerHeadings.forEach((ele) => ele.addEventListener('click', this.bindedHandleHeadingClick));
+    this.detailSummaries.forEach((ele) => ele.addEventListener('click', this.bindedHandleSummaryClick));
+  }
+
+  disconnectedCallback() {
+    this.observer.disconnect();
+    this.drawerHeadings.forEach((ele) => ele.removeEventListener('click', this.bindedHandleHeadingClick));
+    this.detailSummaries.forEach((ele) => ele.removeEventListener('click', this.bindedHandleSummaryClick));
+  }
+
+  handleObserve(entries) {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const currIndex = entry.target.dataset.index;
+
+        this.marker.style.top = `calc(1.375rem + (2.75rem + 1px) * ${currIndex} - 0.5 * 0.5625rem)`;
+
+        this.drawerHeadings.forEach((ele) => {
+          if (ele.dataset.index == currIndex) {
+            ele.classList.add('active');
+          } else {
+            ele.classList.remove('active');
+          }
+        })
+      }
+    });
+  }
+
+  handleHeadingClick(event) {
+    const currIndex = event.currentTarget.dataset.index;
+
+    this.marker.style.top = `calc(1.375rem + (2.75rem + 1px) * ${currIndex} - 0.5 * 0.5625rem)`;
+
+    this.drawerHeadings.forEach((ele) => {
+      if (ele.dataset.index == currIndex) {
+        ele.classList.add('active');
+      } else {
+        ele.classList.remove('active');
+      }
+    })
+  }
+
+  handleSummaryClick(event) {
+    event.preventDefault();
+    const details = event.currentTarget.closest('details');
+    if (details.hasAttribute('open')) {
+      details.classList.remove('open');
+      details.querySelector('.faq-question__content-container').addEventListener('transitionend', () => {
+        details.removeAttribute('open');
+      }, {once: true});
+    } else {
+      details.setAttribute('open', '');
+      setTimeout(() => details.classList.add('open'));
+    }
+  }
+}
+
+customElements.define('faq-element', FAQElement);
+
 
 class StickyNav extends HTMLElement {
   constructor() {
