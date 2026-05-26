@@ -168,7 +168,7 @@ h1, .h1 {
 .rte a {
   text-decoration: underline;
 }
-.rte * + p {
+.rte * + * {
   margin-top: 1em;
 }
 
@@ -200,4 +200,16 @@ button[type="button"]:hover, .button:hover {
 .button--white {
   background-color: var(--white);
   color: var(--dark-brown);
+}
+
+/* POLICY PAGES */
+.shopify-policy__container {
+  max-width: unset !important;
+  margin: calc(var(--header-height) + 3.75rem) 0 0 !important;
+  padding: 0 1.25rem !important;
+}
+
+.shopify-policy__title {
+  text-align: left !important;
+  margin: 0 0 2rem !important;
 }
