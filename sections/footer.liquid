@@ -88,17 +88,32 @@
           {% endif %}
         </div>
       {% endif %}
+
+      <div class="footer__policies-credits">
+        <div class="footer__policies">
+          {% for policy in shop.policies %}
+            <a href="{{ policy.url }}">{{ policy.title }}</a>
+          {% endfor %}
+        </div>
+
+        <span>Site by <a href="https://www.human-nyc.com/" target="_blank" rel="noopener noreferrer">Human</a></span>
+      </div>
     </div>
 
     <div class="footer__mobile-content desktop-hidden">
-      {% if section.settings.list_id != blank %}
-        <div class="footer__newsletter">
-          <div class="footer__newsletter-heading rte">{{ section.settings.heading }}</div>
-          <span class="footer__newsletter-eyebrow">{{ section.settings.eyebrow }}</span>
-          <div class="footer__newsletter-form">{{ section.settings.list_id }}</div>
-          <span class="footer__newsletter-disclaimer">{{ section.settings.disclaimer }}</span>
+      <div class="footer__title-newsletter">
+        <div class="footer__title">
+          {{ 'icon-wordmark.svg' | inline_asset_content }}
         </div>
-      {% endif %}
+        {% if section.settings.list_id != blank %}
+          <div class="footer__newsletter">
+            <div class="footer__newsletter-heading rte">{{ section.settings.heading }}</div>
+            <span class="footer__newsletter-eyebrow">{{ section.settings.eyebrow }}</span>
+            <div class="footer__newsletter-form">{{ section.settings.list_id }}</div>
+            <span class="footer__newsletter-disclaimer">{{ section.settings.disclaimer }}</span>
+          </div>
+        {% endif %}
+      </div>
 
       {% if has_menus %}
         <div class="footer__menus">
@@ -138,18 +153,14 @@
         </div>
       {% endif %}
 
-      <div class="footer__title">
-        {{ 'icon-wordmark.svg' | inline_asset_content }}
-        
-        {% if has_social_links %}
-          <div class="footer__mobile-social-links">
-            {% for block in section.blocks %}
-              {% if block.type == 'social_link' and block.settings.text != blank and block.settings.url != blank %}
-                <a href="{{ block.settings.url }}">{{ block.settings.text }}</a>
-              {% endif %}
-            {% endfor %}
-          </div>
-        {% endif %}
+      <div class="footer__policies-credits">
+        <div class="footer__policies">
+          {% for policy in shop.policies %}
+            <a href="{{ policy.url }}">{{ policy.title }}</a>
+          {% endfor %}
+        </div>
+
+        <span>Site by <a href="https://www.human-nyc.com/" target="_blank" rel="noopener noreferrer">Human</a></span>
       </div>
     </div>
   </div>
@@ -157,17 +168,16 @@
 
 {% stylesheet %}
   footer {
-    color: var(--light-brown);
-    padding: 3.75rem 1.25rem 2.5rem;
+    padding: 2.5rem 1.25rem;
   }
   @media screen and (min-width: 990px) {
     footer {
-      padding: 1.25rem 1.25rem 3.75rem;
+      padding: 1.25rem 1.25rem;
     }
   }
 
   .footer__container {
-    border-top: 1px solid var(--light-brown);
+    border-top: 1px solid var(--light-brown-30);
     padding: 0.75rem 0 0;
   }
   @media screen and (min-width: 990px) {
@@ -302,6 +312,25 @@
     margin-top: 0.75rem;
     display: flex;
     gap: 2.5rem;
+  }
+
+  .footer__policies-credits {
+    grid-column: 1 / span 2;
+    color: var(--light-brown-30);
+    border-top: 1px solid var(--light-brown-30);
+    padding-top: 0.75rem;
+    display: flex;
+    justify-content: space-between;
+  }
+  .footer__policies {
+    display: flex;
+    gap: 1.25rem;
+  }
+
+  .footer__title-newsletter {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
   }
 {% endstylesheet %}
 
