@@ -319,7 +319,6 @@ class FAQElement extends HTMLElement {
 
 customElements.define('faq-element', FAQElement);
 
-
 class StickyNav extends HTMLElement {
   constructor() {
     super();
