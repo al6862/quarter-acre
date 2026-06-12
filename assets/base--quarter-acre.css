@@ -115,7 +115,7 @@ body, .body {
 h1, .h1 {
   font-family: var(--font-suisse-intl);
   font-weight: 400;
-  font-size: 1.75rem;
+  font-size: 2rem;
   line-height: 133%;
   letter-spacing: -0.03em;
 }
