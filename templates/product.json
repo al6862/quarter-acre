@@ -270,6 +270,50 @@
         "media_caption": "",
         "layout": "content_on_left"
       }
+    },
+    "media_gallery_yh84P8": {
+      "type": "media-gallery",
+      "blocks": {
+        "slide_HNzN3E": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/0177930ce273bdd1ff8339a36a10179d1ef6f91e.jpg",
+            "link": "https://www.instagram.com/human.nyc/"
+          }
+        },
+        "slide_XnYcJD": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/745dc879300011f53ec3e258bd7fbd8b299309ef.jpg",
+            "link": ""
+          }
+        },
+        "slide_WihdxT": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/16029885465bbb509a316ee7234abd182ed5afc0.jpg",
+            "link": ""
+          }
+        },
+        "slide_tTBDPW": {
+          "type": "slide",
+          "settings": {
+            "video": "shopify://files/videos/quarter.acre_1762869711_3763546305617332134_54964256270.mp4",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide_HNzN3E",
+        "slide_XnYcJD",
+        "slide_WihdxT",
+        "slide_tTBDPW"
+      ],
+      "name": "Media Gallery",
+      "settings": {
+        "left_content": "<p>@Quarter.acre</p>",
+        "right_content": "<p><a href=\"https://www.instagram.com/\" title=\"https://www.instagram.com/\">Follow</a></p>"
+      }
     }
   },
   "order": [
@@ -281,6 +325,7 @@
     "split_media_content_BtDBpN",
     "drawers_7HjxCW",
     "split_image_grid_content_MEUC3G",
-    "split_media_content_4KrWya"
+    "split_media_content_4KrWya",
+    "media_gallery_yh84P8"
   ]
 }
