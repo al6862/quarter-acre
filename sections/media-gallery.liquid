@@ -21,7 +21,7 @@
         {% endif %}
 
           {% if block.settings.video != blank %}
-            {{ block.settings.video | video_tag: image_size: '676x', loop: true, controls: false, muted: true, autoplay: true, class: desktop_media_class }}
+            {{ block.settings.video | video_tag: image_size: '676x', loop: true, controls: false, muted: true, autoplay: true }}
           {% elsif block.settings.image != blank %}
             {{ block.settings.image | image_url: width: 676 | image_tag }}
           {% endif %}
