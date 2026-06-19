@@ -42,7 +42,7 @@
                 >
                 <label for="{{ section.id }}-{{ option.position }}-initial-{{ product.handle }}" class="chart">
                   <span class="label__value-swatch">
-                    <span>{{ selected_value }}{% if option_forloop_index == 1 %} | {{ selected_value.variant.price | money_without_trailing_zeros }}{% endif %}</span>
+                    <span>{{ selected_value }}</span>
                     {% if selected_value.swatch.color %}
                       <span class="swatch" style="--swatch-color: {{ selected_value.swatch.color }}"></span>
                     {% endif %}
@@ -75,7 +75,7 @@
                         >
                         <label for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 -}}-{{ product.handle }}" class="chart">
                           <span class="label__value-swatch">
-                            <span>{{ value }}{% if option_forloop_index == 1 %} | {{ value.variant.price | money_without_trailing_zeros }}{% endif %}</span>
+                            <span>{{ value }}</span>
                             {% if value.swatch.color %}
                               <span class="swatch" style="--swatch-color: {{ value.swatch.color }}"></span>
                             {% endif %}
@@ -109,7 +109,7 @@
                         >
                         <label for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 -}}-{{ product.handle }}" class="chart">
                           <span class="label__value-swatch">
-                            <span>{{ value }}{% if option_forloop_index == 1 %} | {{ value.variant.price | money_without_trailing_zeros }}{% endif %}</span>
+                            <span>{{ value }}</span>
                             {% if value.swatch.color %}
                               <span class="swatch" style="--swatch-color: {{ value.swatch.color }}"></span>
                             {% endif %}
@@ -190,6 +190,10 @@
 </sticky-nav>
 
 {% stylesheet %}
+  :root:has(sticky-nav) {
+    --sticky-nav-height: 5.75rem;
+  }
+  
   .shopify-section:has(sticky-nav) {
     z-index: 20;
     position: fixed;
@@ -213,6 +217,7 @@
   }
 
   sticky-nav product-info {
+    height: var(--sticky-nav-height);
     padding: 1.25rem;
     background-color: var(--eggshell);
   }

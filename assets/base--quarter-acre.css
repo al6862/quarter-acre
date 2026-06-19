@@ -115,9 +115,14 @@ body, .body {
 h1, .h1 {
   font-family: var(--font-suisse-intl);
   font-weight: 400;
-  font-size: 2rem;
+  font-size: 1.5rem;
   line-height: 133%;
   letter-spacing: -0.03em;
+}
+@media screen and (min-width: 990px) {
+  h1, .h1 {
+    font-size: 2rem;
+  }
 }
 
 .chart {

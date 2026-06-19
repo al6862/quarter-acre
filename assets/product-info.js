@@ -5,38 +5,58 @@ class ProductFeaturedMedia extends HTMLElement {
 
   connectedCallback() {
     this.bindedHandleViewClick = this.handleViewClick.bind(this);
+    this.bindedHandleChangeViewClick = this.handleChangeViewClick.bind(this);
     this.bindedHandleScroll = this.handleScroll.bind(this);
 
     this.querySelectorAll('.views-nav span:is(.first-view, .second-view)')?.forEach((ele) => ele.addEventListener('click', this.bindedHandleViewClick));
-    this.addEventListener('scrollend', this.bindedHandleScroll);
+    this.querySelector('.views-nav__change-view').addEventListener('click', this.bindedHandleChangeViewClick);
+    this.addEventListener('scroll', this.bindedHandleScroll);
   }
   
   disconnectedCallback() {
     this.querySelectorAll('.views-nav span:is(.first-view, .second-view)')?.forEach((ele) => ele.removeEventListener('click', this.bindedHandleViewClick));
+    this.querySelector('.views-nav__change-view').removeEventListener('click', this.bindedHandleChangeViewClick);
     this.removeEventListener('scrollend', this.bindedHandleScroll);
   }
 
   handleViewClick(event) {
-    const activeMediaIndex = parseInt(this.querySelector('.product__featured-media.active').dataset.index);
     if (event.currentTarget.classList.contains('first-view')) {
       event.currentTarget.classList.add('active');
       this.querySelector('.second-view').classList.remove('active');
-
-      this.querySelectorAll('.product__featured-media :is(img, video):not(:first-child)').forEach(ele => ele.classList.remove('active'));
-      this.querySelectorAll('.product__featured-media :is(img, video):first-child').forEach(ele => ele.classList.add('active'));
-
-      this.closest('product-info').querySelectorAll('.product__media-thumbnail :is(img, video):not(:first-child)').forEach(ele => ele.classList.remove('active'));
-      this.closest('product-info').querySelectorAll('.product__media-thumbnail :is(img, video):first-child').forEach(ele => ele.classList.add('active'));
+      this.changeToFirstView();
     } else {
       event.currentTarget.classList.add('active');
       this.querySelector('.first-view').classList.remove('active');
-
-      this.querySelectorAll('.product__featured-media :is(img, video):not(:first-child)').forEach(ele => ele.classList.add('active'));
-      this.querySelectorAll('.product__featured-media :is(img, video):first-child').forEach(ele => ele.classList.remove('active'));
-
-      this.closest('product-info').querySelectorAll('.product__media-thumbnail :is(img, video):not(:first-child)').forEach(ele => ele.classList.add('active'));
-      this.closest('product-info').querySelectorAll('.product__media-thumbnail :is(img, video):first-child').forEach(ele => ele.classList.remove('active'));
+      this.changeToSecondView();
     }
+  }
+
+  handleChangeViewClick(event) {
+    if (this.querySelector('.second-view').classList.contains('active')) {
+      this.querySelector('.first-view').classList.add('active');
+      this.querySelector('.second-view').classList.remove('active');
+      this.changeToFirstView();
+    } else {
+      this.querySelector('.second-view').classList.add('active');
+      this.querySelector('.first-view').classList.remove('active');
+      this.changeToSecondView();
+    }
+  }
+
+  changeToFirstView() {
+    this.querySelectorAll('.product__featured-media :is(img, video):not(:first-child)').forEach(ele => ele.classList.remove('active'));
+    this.querySelectorAll('.product__featured-media :is(img, video):first-child').forEach(ele => ele.classList.add('active'));
+
+    this.closest('product-info').querySelectorAll('.product__media-thumbnail :is(img, video):not(:first-child)').forEach(ele => ele.classList.remove('active'));
+    this.closest('product-info').querySelectorAll('.product__media-thumbnail :is(img, video):first-child').forEach(ele => ele.classList.add('active'));
+  }
+
+  changeToSecondView() {
+    this.querySelectorAll('.product__featured-media :is(img, video):not(:first-child)').forEach(ele => ele.classList.add('active'));
+    this.querySelectorAll('.product__featured-media :is(img, video):first-child').forEach(ele => ele.classList.remove('active'));
+
+    this.closest('product-info').querySelectorAll('.product__media-thumbnail :is(img, video):not(:first-child)').forEach(ele => ele.classList.add('active'));
+    this.closest('product-info').querySelectorAll('.product__media-thumbnail :is(img, video):first-child').forEach(ele => ele.classList.remove('active'));
   }
 
   handleScroll(event) {
@@ -47,7 +67,9 @@ class ProductFeaturedMedia extends HTMLElement {
 
     this.closest('product-info').querySelector('.product__media-thumbnail.active').classList.remove('active');
     this.closest('product-info').querySelector(`.product__media-thumbnail[data-index='${newActiveIndex}']`).classList.add('active');
-    this.closest('product-info').querySelector(`.product__media-thumbnail[data-index='${newActiveIndex}']`).scrollIntoView({ behavior: "smooth", container: 'nearest', inline: "center" });
+    if (window.innerWidth >= 990) {
+      this.closest('product-info').querySelector(`.product__media-thumbnail[data-index='${newActiveIndex}']`).scrollIntoView({ behavior: "smooth", container: 'nearest', inline: "center" });
+    }
 
     this.querySelector('.pag .current-slide').textContent = newActiveIndex + 1;
   }
@@ -72,8 +94,6 @@ class ProductThumbnails extends HTMLElement {
   }
 
   handleThumbnailClick(event) {
-    event.currentTarget.scrollIntoView({ behavior: "smooth", container: 'nearest', inline: "center" });
-
     this.mediaThumbnails.forEach((ele) => {
       if (ele.dataset.index == event.currentTarget.dataset.index) {
         ele.classList.add('active');
@@ -84,9 +104,19 @@ class ProductThumbnails extends HTMLElement {
 
     this.closest('product-info').querySelectorAll('.product__featured-media').forEach((ele) => {
       if (ele.dataset.index == event.currentTarget.dataset.index) {
+        this.closest('product-info').querySelector('product-featured-media').removeEventListener('scroll', this.closest('product-info').querySelector('product-featured-media').bindedHandleScroll);
         ele.scrollIntoView({ behavior: "smooth", container: 'nearest', inline: "center" });
+        this.closest('product-info').querySelector('product-featured-media').addEventListener('scrollend', () => {
+          this.closest('product-info').querySelector('product-featured-media').addEventListener('scroll', this.closest('product-info').querySelector('product-featured-media').bindedHandleScroll);
+        }, {once: true});
       }
     })
+
+    if (window.innerWidth >= 990) {
+      event.currentTarget.scrollIntoView({ behavior: "smooth", container: 'nearest', inline: "center" });
+    }
+
+    this.closest('product-info').querySelector('product-featured-media').querySelector('.pag .current-slide').textContent = parseInt(event.currentTarget.dataset.index) + 1;
   }
 }
 
