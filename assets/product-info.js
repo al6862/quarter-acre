@@ -94,6 +94,7 @@ class ProductThumbnails extends HTMLElement {
   }
 
   handleThumbnailClick(event) {
+    this.closest('product-info').querySelector('product-featured-media').removeEventListener('scroll', this.closest('product-info').querySelector('product-featured-media').bindedHandleScroll);
     this.mediaThumbnails.forEach((ele) => {
       if (ele.dataset.index == event.currentTarget.dataset.index) {
         ele.classList.add('active');
@@ -104,11 +105,7 @@ class ProductThumbnails extends HTMLElement {
 
     this.closest('product-info').querySelectorAll('.product__featured-media').forEach((ele) => {
       if (ele.dataset.index == event.currentTarget.dataset.index) {
-        this.closest('product-info').querySelector('product-featured-media').removeEventListener('scroll', this.closest('product-info').querySelector('product-featured-media').bindedHandleScroll);
         ele.scrollIntoView({ behavior: "smooth", container: 'nearest', inline: "center" });
-        this.closest('product-info').querySelector('product-featured-media').addEventListener('scrollend', () => {
-          this.closest('product-info').querySelector('product-featured-media').addEventListener('scroll', this.closest('product-info').querySelector('product-featured-media').bindedHandleScroll);
-        }, {once: true});
       }
     })
 
@@ -117,6 +114,9 @@ class ProductThumbnails extends HTMLElement {
     }
 
     this.closest('product-info').querySelector('product-featured-media').querySelector('.pag .current-slide').textContent = parseInt(event.currentTarget.dataset.index) + 1;
+    this.closest('product-info').querySelector('product-featured-media').addEventListener('scrollend', () => {
+      this.closest('product-info').querySelector('product-featured-media').addEventListener('scroll', this.closest('product-info').querySelector('product-featured-media').bindedHandleScroll);
+    }, {once: true});
   }
 }
 
