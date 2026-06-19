@@ -1,4 +1,4 @@
-<header>
+<header-element>
   <div class="header__menu">
     {% for link in section.settings.menu.links %}
       {{ link.title | link_to: link.url, class: 'nav' }}
@@ -10,16 +10,16 @@
   </h2>
 
   <button class="header__cart nav" aria-haspopup="dialog" aria-controls="cart-drawer" aria-expanded="false">Cart {{ cart.item_count }}</button>
-</header>
+</header-element>
 
 {% stylesheet %}
   :root {
     --header-height: 3.375rem;
   }
 
-  header {
+  header-element {
     --header-color: var(--color-foreground);
-    --header-bg-color: transparent;
+    --header-bg-color: var(--color-background);
     position: fixed;
     top: 0;
     left: 0;
@@ -34,15 +34,16 @@
     align-items: center;
     transition: color 300ms ease-out, background-color 300ms ease-out;
   }
-  body[data-template="index"] header, body[data-template="product"] header {
+  :is(body[data-template="index"], body[data-template="product"]) header-element {
     --header-color: var(--white);
+    --header-bg-color: transparent;
   }
-  header.scrolled {
+  :is(body[data-template="index"], body[data-template="product"]) header-element.scrolled-past-top {
     --header-color: var(--color-foreground);
     --header-bg-color: var(--color-background);
   }
   @media screen and (min-width: 990px) {
-    header {
+    header-element {
       padding: 0 2.5rem;
     }
   }

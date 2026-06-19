@@ -29,7 +29,7 @@
                 {% endif %}
               </div>
               {% if block.settings.content != blank %}
-                <div class="row-content rte chart">{{ block.settings.content }}</div>
+                <div class="row-content rte body-bold">{{ block.settings.content }}</div>
               {% endif %}
             </div>
           {% endif %}
@@ -72,7 +72,7 @@
                 {% endif %}
               </div>
               {% if block.settings.content != blank %}
-                <div class="row-content rte chart">{{ block.settings.content }}</div>
+                <div class="row-content rte body-bold">{{ block.settings.content }}</div>
               {% endif %}
             </div>
           {% endif %}
@@ -151,12 +151,15 @@
   .split-media-content__row {
     display: flex;
     justify-content: space-between;
-    padding: 0.375rem 0;
+    margin: 0.75rem 0 0;
   }
   @media screen and (min-width: 990px) {
     .split-media-content__row {
       padding: 0.75rem 0;
     }
+  }
+  .split-media-content__row .row-content {
+    color: var(--grey);
   }
 
   @media screen and (min-width: 990px) {

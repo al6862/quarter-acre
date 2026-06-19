@@ -1,25 +1,20 @@
-<div class="split-media-content{% if section.settings.layout == 'media_on_left' %} media-on-left{% endif %}">
-  <div class="split-media-content__content">
-    <div class="split-media-content__content-eyebrow-content">
+<div class="split-image-grid-content{% if section.settings.layout == 'media_on_left' %} media-on-left{% endif %}">
+  <div class="split-image-grid-content__content">
+    <div class="split-image-grid-content__content-eyebrow-content">
       {% if section.settings.eyebrow != blank %}
-        <span class="split-media-content__content-eyebrow body-bold">{{ section.settings.eyebrow }}</span>
+        <span class="split-image-grid-content__content-eyebrow body-bold">{{ section.settings.eyebrow }}</span>
       {% endif %}
       {% if section.settings.content != blank %}
-        <div class="split-media-content__content-content rte">{{ section.settings.content }}</div>
+        <div class="split-image-grid-content__content-content rte">{{ section.settings.content }}</div>
       {% endif %}
     </div>
 
-    {% assign image_block = section.blocks | find: 'type', 'image' %}
-    {% if image_block %}
-      {{ image_block.settings.image | image_url: width: 1440 | image_tag: class: 'mobile-hidden' }}
-    {% endif %}
-
     {% assign has_rows = section.blocks | has: 'type', 'row' %}
     {% if has_rows %}
-      <div class="split-media-content__rows mobile-hidden">
+      <div class="split-image-grid-content__rows">
         {% for block in section.blocks %}
           {% if block.type == 'row' %}
-            <div class="split-media-content__row">
+            <div class="split-image-grid-content__row">
               <div class="row-heading">
                 {% if block.settings.heading != blank %}
                   <span class="chart">{{ block.settings.heading }}</span>
@@ -29,7 +24,7 @@
                 {% endif %}
               </div>
               {% if block.settings.content != blank %}
-                <div class="row-content rte chart">{{ block.settings.content }}</div>
+                <div class="row-content rte body-bold">{{ block.settings.content }}</div>
               {% endif %}
             </div>
           {% endif %}
@@ -38,7 +33,7 @@
     {% endif %}
   </div>
 
-  <div class="split-media-content__media">
+  <div class="split-image-grid-content__media">
     {% if section.settings.first_thumbnail or section.settings.second_thumbnail or section.settings.third_thumbnail %}
       <image-grid>
         <div class="image-grid__block active">
@@ -97,47 +92,20 @@
         </div>
       </image-grid>
     {% endif %}
-
-    {% assign image_block = section.blocks | find: 'type', 'image' %}
-    {% if image_block %}
-      {{ image_block.settings.image | image_url: width: 1980 | image_tag: class: 'split-media-content__image-block desktop-hidden' }}
-    {% endif %}
-
-    {% if has_rows %}
-      <div class="split-media-content__rows desktop-hidden">
-        {% for block in section.blocks %}
-          {% if block.type == 'row' %}
-            <div class="split-media-content__row">
-              <div class="row-heading">
-                {% if block.settings.heading != blank %}
-                  <span class="chart">{{ block.settings.heading }}</span>
-                {% endif %}
-                {% if block.settings.subheading != blank %}
-                  <span class="chart-italic row-heading__subheading">{{ block.settings.subheading }}</span>
-                {% endif %}
-              </div>
-              {% if block.settings.content != blank %}
-                <div class="row-content rte chart">{{ block.settings.content }}</div>
-              {% endif %}
-            </div>
-          {% endif %}
-        {% endfor %}
-      </div>
-    {% endif %}
   </div>
 </div>
 
 {% stylesheet %}
-  .split-media-content {
+  .split-image-grid-content {
     margin-top: 2.5rem;
     border-top: 1px solid var(--light-brown-60);
-    padding: 2.5rem 0.625rem 0;
+    padding: 2.5rem 1.25rem 0;
     display: flex;
     flex-direction: column;
     gap: 2.5rem;
   }
   @media screen and (min-width: 990px) {
-    .split-media-content {
+    .split-image-grid-content {
       margin-top: 1.25rem;
       padding: 1.25rem 0 0;
       display: grid;
@@ -145,19 +113,19 @@
       gap: 0;
     }
 
-    .split-media-content.media-on-left  > *:first-child {
+    .split-image-grid-content.media-on-left  > *:first-child {
       grid-column: 2;
       grid-row: 1;
     }
 
-    .split-media-content.media-on-left  > *:nth-child(2) {
+    .split-image-grid-content.media-on-left  > *:nth-child(2) {
       grid-column: 1;
       grid-row: 1;
     }
   }
 
   @media screen and (min-width: 990px) {
-    .split-media-content__content {
+    .split-image-grid-content__content {
       padding: 0 1.25rem;
       display: flex;
       flex-direction: column;
@@ -165,80 +133,83 @@
       gap: 1.25rem;
     }
   }
-  .split-media-content__content-eyebrow {
+  .split-image-grid-content__content-eyebrow {
     display: block;
     margin-bottom: 1.25rem;
   }
   @media screen and (min-width: 990px) {
-    .split-media-content__content-eyebrow-content {
+    .split-image-grid-content__content-eyebrow-content {
       width: 85%;
       margin-top: 1.25rem;
     }
   }
-  .split-media-content__content-content > * + * {
+  .split-image-grid-content__content-content > * + * {
     margin-top: 1.25rem;
   }
 
-  .split-media-content__rows {
+  .split-image-grid-content__rows {
     border-top: 1px solid var(--light-brown);
     margin: 2.5rem 0 0;
   }
   @media screen and (min-width: 990px) {
-    .split-media-content__rows {
+    .split-image-grid-content__rows {
       margin: 0 0 0.5rem;
     }
   }
   @media screen and (min-width: 990px) {
-    .split-media-content__row + .split-media-content__row {
+    .split-image-grid-content__row + .split-image-grid-content__row {
       border-top: 1px solid var(--light-brown-30);
     }
   }
-  .split-media-content__row {
+  .split-image-grid-content__row {
     display: flex;
     justify-content: space-between;
-    padding: 0.375rem 0;
+    margin: 0.75rem 0 0;
   }
   @media screen and (min-width: 990px) {
-    .split-media-content__row {
+    .split-image-grid-content__row {
       padding: 0.75rem 0;
     }
   }
+  .split-image-grid-content__row .row-content {
+    color: var(--grey);
+  }
 
   @media screen and (min-width: 990px) {
-    .split-media-content:not(.media-on-left) .split-media-content__media {
+    .split-image-grid-content:not(.media-on-left) .split-image-grid-content__media {
       border-left: 1px solid var(--light-brown-60);
     }
-    .split-media-content:not(.media-on-left) .split-media-content__media :is(.split-media-content__big-media, .split-media-content__media-caption) {
+    .split-image-grid-content:not(.media-on-left) .split-image-grid-content__media :is(.split-image-grid-content__big-media, .split-image-grid-content__media-caption) {
       padding-left: 1.25rem;
     }
 
-    .split-media-content.media-on-left .split-media-content__media {
+    .split-image-grid-content.media-on-left .split-image-grid-content__media {
       border-right: 1px solid var(--light-brown-60);
     }
-    .split-media-content.media-on-left .split-media-content__media :is(.split-media-content__big-media, .split-media-content__media-caption) {
+    .split-image-grid-content.media-on-left .split-image-grid-content__media :is(.split-image-grid-content__big-media, .split-image-grid-content__media-caption) {
       padding-right: 1.25rem;
     }
   }
 
-  .split-media-content__media {
+  .split-image-grid-content__media {
     position: relative;
   }
   @media screen and (max-width: 989px) {
-    .split-media-content__image-block {
+    .split-image-grid-content__image-block {
       margin: 1.25rem 0 0;
     }
   }
-  .split-media-content__big-media {
+  .split-image-grid-content__big-media {
     width: 100%;
     height: 100%;
     position: relative;
   }
-  .split-media-content__big-media :is(img, video) {
+  .split-image-grid-content__big-media :is(img, video) {
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
-  .split-media-content__media-caption {
+  .split-image-grid-content__media-caption {
     position: absolute;
     bottom: 1.2rem;
     left: 1.25rem;
@@ -253,18 +224,21 @@
     display: grid;
     grid-template-rows: auto auto;
     grid-template-areas: "block" "thumbnails";
-    gap: 1.25rem;
+    column-gap: 1.25rem;
     align-items: start;
 
     @media screen and (min-width: 990px) {
       padding: 0 1.25rem;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       grid-template-areas: "block block thumbnails";
-    gap: 0.25rem;
+      column-gap: 0.25rem;
     }
   }
   .image-grid__block {
     grid-area: block;
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
     visibility: hidden;
     opacity: 0;
     transition: visibility 150ms ease-out, opacity 150ms ease-out;
@@ -272,6 +246,10 @@
   .image-grid__block.active {
     visibility: visible;
     opacity: 1;
+  }
+  .image-grid__block img {
+    flex-grow: 1;
+    object-fit: cover;
   }
   .image-grid-block__eyebrow {
     display: flex;
@@ -425,18 +403,6 @@
     }
   ],
   "blocks": [
-    {
-      "type": "image",
-      "name": "Image",
-      "limit": 1,
-      "settings": [
-        {
-          "type": "image_picker",
-          "id": "image",
-          "label": "Image"
-        },
-      ]
-    },
     {
       "type": "row",
       "name": "Row",

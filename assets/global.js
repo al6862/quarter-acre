@@ -73,6 +73,24 @@ class HeaderDrawer extends HTMLElement {
 
 customElements.define('header-drawer', HeaderDrawer);
 
+class HeaderElement extends HTMLElement {
+  constructor() {
+    super();
+  }
+
+  connectedCallback() {
+    window.addEventListener('scroll', (event) => {
+      if (window.scrollY == 0) {
+        this.classList.remove('scrolled-past-top');
+      } else {
+        this.classList.add('scrolled-past-top');
+      }
+    })
+  }
+}
+
+customElements.define('header-element', HeaderElement);
+
 class DesktopReviewSlideshow extends HTMLElement {
   constructor() {
     super();
