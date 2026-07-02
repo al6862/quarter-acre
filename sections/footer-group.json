@@ -8,8 +8,72 @@
  * ------------------------------------------------------------
  */
 {
-  "name": "footer-group",
-  "type": "header",
-  "sections": {},
-  "order": []
+  "type": "footer",
+  "name": "t:general.footer",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "social_link_BdDx9m": {
+          "type": "social_link",
+          "settings": {
+            "text": "hello@quarteracres.com",
+            "url": "mailto:hello@quarteracres.com"
+          }
+        },
+        "social_link_FYyU7h": {
+          "type": "social_link",
+          "settings": {
+            "text": "@quarteracres",
+            "url": "https://www.instagram.com/human.nyc"
+          }
+        },
+        "text_col_8Ymxrh": {
+          "type": "text_col",
+          "settings": {
+            "first_row_content": "<p>Roscoe Motel</p><p>2054 Old Route 17, <br/>Roscoe, NY 12776</p>",
+            "second_row_content": "<p><a href=\"/products/the-chicken-coop\" title=\"The Chicken Coop\">Learn More</a></p>"
+          }
+        },
+        "text_col_qnacC4": {
+          "type": "text_col",
+          "settings": {
+            "first_row_content": "<p>The Little Store</p><p>64 Stewart Avenue, <br/>Roscoe, NY 12776</p>",
+            "second_row_content": "<p><a href=\"/products/the-chicken-coop\" title=\"The Chicken Coop\">Book an Appointment</a></p>"
+          }
+        },
+        "menu_iiqqyC": {
+          "type": "menu",
+          "settings": {
+            "header": "Info",
+            "menu": "footer"
+          }
+        },
+        "menu_YQRGc6": {
+          "type": "menu",
+          "settings": {
+            "header": "Social",
+            "menu": "footer-social-menu-desktop"
+          }
+        }
+      },
+      "block_order": [
+        "social_link_BdDx9m",
+        "social_link_FYyU7h",
+        "text_col_8Ymxrh",
+        "text_col_qnacC4",
+        "menu_iiqqyC",
+        "menu_YQRGc6"
+      ],
+      "settings": {
+        "heading": "<p>Sign Up for our newsletter to receive seasonal promotions, product updates, and snail mail</p>",
+        "eyebrow": "Our Newsletter",
+        "list_id": "<div class=\"klaviyo-form-TmrPfg\"></div>",
+        "disclaimer": "By signing up you are agreeing to our Privacy Policy"
+      }
+    }
+  },
+  "order": [
+    "footer"
+  ]
 }
