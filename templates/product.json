@@ -95,7 +95,7 @@
         "slide_iD7q8n": {
           "type": "slide",
           "settings": {
-            "image": "shopify://shop_images/c89002d398500a7e8b497aaa5f41eeeb.png",
+            "image": "shopify://shop_images/c89002d398500a7e8b497aaa5f41eeeb_4.png",
             "eyebrow": "fig. (a)",
             "content": "<p>Roof (2x2)</p><p>Material: Bamboo</p><p>This is adjustable lamp that can be filled at various angles and the shape.</p>"
           }
@@ -140,7 +140,7 @@
         "image_nxNJrn": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/76521ac95d40ed402852b65931f4708ab8ec1a90.png"
+            "image": "shopify://shop_images/76521ac95d40ed402852b65931f4708ab8ec1a90_1.png"
           }
         }
       },
@@ -180,7 +180,7 @@
             "first_image": "shopify://shop_images/eca484019ebe1a6fe3995503d40d8e4c011f3ac0-2250x3000_4_d21389de-5cd3-431e-9d27-d3c5bb77cf14.png",
             "first_caption": "Egg Collection",
             "first_image_content": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex.</p>",
-            "second_image": "shopify://shop_images/787717c2a050d143b2776359565d76314cfa18f9.png",
+            "second_image": "shopify://shop_images/787717c2a050d143b2776359565d76314cfa18f9_1.png",
             "second_caption": "Nesting Box",
             "second_image_content": ""
           }
@@ -190,7 +190,7 @@
           "settings": {
             "heading": "Roosting Bar",
             "content": "<p>A built-in roosting bar gives chickens a secure, elevated place to rest overnight, and easy to remove and clean when needed.</p>",
-            "first_image": "shopify://shop_images/original_1997ecc3cf0d0edc8b383b93cfad3fa2_14_1.png",
+            "first_image": "shopify://shop_images/original_1997ecc3cf0d0edc8b383b93cfad3fa2_14_1_42bac3b1-5736-4dc6-baf4-e74ad9cec639.png",
             "first_caption": "Egg Collection",
             "first_image_content": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex.</p>",
             "second_image": "shopify://shop_images/original_1997ecc3cf0d0edc8b383b93cfad3fa2_14_2.png",
@@ -248,12 +248,12 @@
         "first_thumbnail": "shopify://shop_images/original_1997ecc3cf0d0edc8b383b93cfad3fa2_12_1.png",
         "first_eyebrow": "Winter Green",
         "first_content": "Sally G painted her coop using Home Depot’s outdoor paint in the shade Winter Green to match her garden. Weather proof paint can be applied with any hardware brush.",
-        "second_image": "shopify://shop_images/de1da031299f601fe6a430edd50955451025085b.png",
-        "second_thumbnail": "shopify://shop_images/de1da031299f601fe6a430edd50955451025085b.png",
+        "second_image": "shopify://shop_images/de1da031299f601fe6a430edd50955451025085b_1.png",
+        "second_thumbnail": "shopify://shop_images/de1da031299f601fe6a430edd50955451025085b_1.png",
         "second_eyebrow": "Red",
         "second_content": "Red Content",
-        "third_image": "shopify://shop_images/d83bfaf06df60c7c2feaf199b02819542a1f833d.png",
-        "third_thumbnail": "shopify://shop_images/d83bfaf06df60c7c2feaf199b02819542a1f833d.png",
+        "third_image": "shopify://shop_images/d83bfaf06df60c7c2feaf199b02819542a1f833d_1.png",
+        "third_thumbnail": "shopify://shop_images/d83bfaf06df60c7c2feaf199b02819542a1f833d_1.png",
         "third_eyebrow": "White",
         "third_content": "White Content",
         "layout": "media_on_left"
@@ -297,7 +297,6 @@
         "slide_tTBDPW": {
           "type": "slide",
           "settings": {
-            "video": "shopify://files/videos/quarter.acre_1762869711_3763546305617332134_54964256270.mp4",
             "link": ""
           }
         }
