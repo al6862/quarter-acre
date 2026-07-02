@@ -180,7 +180,6 @@
             "first_image": "shopify://shop_images/eca484019ebe1a6fe3995503d40d8e4c011f3ac0-2250x3000_4_d21389de-5cd3-431e-9d27-d3c5bb77cf14.png",
             "first_caption": "Egg Collection",
             "first_image_content": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex.</p>",
-            "second_video": "shopify://files/videos/quarter.acre_1760391000_3742571787830839146_54964256270.mp4",
             "second_image": "shopify://shop_images/787717c2a050d143b2776359565d76314cfa18f9.png",
             "second_caption": "Nesting Box",
             "second_image_content": ""
@@ -244,7 +243,7 @@
       "name": "Split Image Grid + Content",
       "settings": {
         "eyebrow": "Make it your own",
-        "content": "<h1>Customize your coop to fit the  style and vibe of your backyard. This coop is ready to paint and adapt whether it blends into the landscape or stands out as a focal point, the structure is designed to evolve with your space.</h1>",
+        "content": "<h1>Customize your coop to fit the style and vibe of your backyard. This coop is ready to paint and adapt whether it blends into the landscape or stands out as a focal point, the structure is designed to evolve with your space.</h1>",
         "first_image": "shopify://shop_images/original_1997ecc3cf0d0edc8b383b93cfad3fa2_10.png",
         "first_thumbnail": "shopify://shop_images/original_1997ecc3cf0d0edc8b383b93cfad3fa2_12_1.png",
         "first_eyebrow": "Winter Green",
@@ -298,7 +297,6 @@
         "slide_tTBDPW": {
           "type": "slide",
           "settings": {
-            "video": "shopify://files/videos/quarter.acre_1762869711_3763546305617332134_54964256270.mp4",
             "link": ""
           }
         }
