@@ -16,7 +16,7 @@
         "eyebrow": "",
         "content": "",
         "cta_text": "Shop Our Coop",
-        "cta_url": "",
+        "cta_url": "shopify://pages/about",
         "desktop_image": "shopify://shop_images/aedf3dedc1776d917d2195e15305398777ea9860.png",
         "mobile_image": "shopify://shop_images/original_4a6a255a851fa344d2f5510107075c66_1_2.png"
       }
