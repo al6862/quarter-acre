@@ -10,3 +10,4 @@ jobs:
         uses: shopify/theme-check-action@v2
         with:
           token: ${{ github.token }}
+          version: 4.9.6
