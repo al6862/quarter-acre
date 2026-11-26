@@ -430,3 +430,60 @@ class ImageGrid extends HTMLElement {
 }
 
 customElements.define('image-grid', ImageGrid);
+
+class AnnouncementBar extends HTMLElement {
+  connectedCallback() {
+    this.messages = Array.from(this.querySelectorAll('.announcement-bar__message'));
+    if (this.messages.length < 2) return;
+
+    this.index = 0;
+    this.pauseButton = this.querySelector('[data-action="pause"]');
+    this.paused = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    this.handleClick = this.handleClick.bind(this);
+    this.addEventListener('click', this.handleClick);
+    this.updatePauseState();
+  }
+
+  disconnectedCallback() {
+    this.removeEventListener('click', this.handleClick);
+    this.stop();
+  }
+
+  handleClick(event) {
+    const button = event.target.closest('[data-action]');
+    if (!button) return;
+
+    const action = button.dataset.action;
+    if (action === 'prev') this.show(this.index - 1);
+    if (action === 'next') this.show(this.index + 1);
+    if (action === 'pause') {
+      this.paused = !this.paused;
+      this.updatePauseState();
+    }
+  }
+
+  show(index) {
+    this.messages[this.index].classList.remove('active');
+    this.index = (index + this.messages.length) % this.messages.length;
+    this.messages[this.index].classList.add('active');
+    if (!this.paused) this.start();
+  }
+
+  start() {
+    this.stop();
+    this.timer = setInterval(() => this.show(this.index + 1), 5000);
+  }
+
+  stop() {
+    clearInterval(this.timer);
+  }
+
+  updatePauseState() {
+    this.classList.toggle('is-paused', this.paused);
+    this.pauseButton.setAttribute('aria-label', this.paused ? 'Play announcements' : 'Pause announcements');
+    this.paused ? this.stop() : this.start();
+  }
+}
+
+customElements.define('announcement-bar', AnnouncementBar);

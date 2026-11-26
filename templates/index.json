@@ -20,9 +20,59 @@
         "desktop_image": "shopify://shop_images/aedf3dedc1776d917d2195e15305398777ea9860.png",
         "mobile_image": "shopify://shop_images/original_4a6a255a851fa344d2f5510107075c66_1_2.png"
       }
+    },
+    "product_grid_xfLn9C": {
+      "type": "product-grid",
+      "blocks": {
+        "product_fLVcnX": {
+          "type": "product",
+          "settings": {
+            "product": "the-chicken-coop",
+            "variant_title": "No Run",
+            "title": "The Chicken Coop",
+            "tagline": "For owners without a fenced yard"
+          }
+        },
+        "product_kjapGR": {
+          "type": "product",
+          "settings": {
+            "product": "the-chicken-coop",
+            "variant_title": "Include Run",
+            "title": "The Run",
+            "tagline": "For owners without a fenced yard"
+          }
+        },
+        "product_p4fenk": {
+          "type": "product",
+          "settings": {
+            "product": "the-run-extender",
+            "variant_title": "",
+            "title": "The Run Extender",
+            "tagline": "For owners without a fenced yard"
+          }
+        }
+      },
+      "block_order": [
+        "product_fLVcnX",
+        "product_kjapGR",
+        "product_p4fenk"
+      ],
+      "name": "Product Grid",
+      "settings": {
+        "heading": "The Backyard Set-up",
+        "link_text": "Shop All",
+        "link_url": "shopify://pages/contact",
+        "button_label": "Pre-Order",
+        "compare_image": "shopify://shop_images/original_1997ecc3cf0d0edc8b383b93cfad3fa2_6.png",
+        "compare_heading": "Not sure which setup?",
+        "compare_text": "Compare run lengths, flock sizes and prices side by side.",
+        "compare_button_text": "Compare Setups",
+        "compare_button_url": "shopify://pages/about"
+      }
     }
   },
   "order": [
-    "full_bleed_media_AHwzdM"
+    "full_bleed_media_AHwzdM",
+    "product_grid_xfLn9C"
   ]
 }

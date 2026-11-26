@@ -1,0 +1,279 @@
+<div class="product-grid">
+    <div class="product-grid__header">
+        {% if section.settings.heading != blank %}
+            <h2 class="product-grid__heading">{{ section.settings.heading }}</h2>
+        {% endif %}
+        {% if section.settings.link_text != blank and section.settings.link_url != blank %}
+            <a href="{{ section.settings.link_url }}" class="product-grid__link">{{ section.settings.link_text }}</a>
+        {% endif %}
+    </div>
+
+    <div class="product-grid__items">
+        {% if section.settings.compare_heading != blank %}
+            <div class="product-grid__compare">
+                {% if section.settings.compare_image != blank %}
+                    {{ section.settings.compare_image | image_url: width: 800 | image_tag: class: 'product-grid__compare-image', loading: 'lazy', sizes: '(min-width: 990px) 25vw, 50vw' }}
+                {% endif %}
+                <div class="product-grid__compare-content">
+                    <p class="product-grid__compare-heading">{{ section.settings.compare_heading }}</p>
+                    {% if section.settings.compare_text != blank %}
+                        <p class="product-grid__compare-text">{{ section.settings.compare_text }}</p>
+                    {% endif %}
+                </div>
+                {% if section.settings.compare_button_text != blank and section.settings.compare_button_url != blank %}
+                    <a href="{{ section.settings.compare_button_url }}" class="button button--outline product-grid__compare-button">{{ section.settings.compare_button_text }}</a>
+                {% endif %}
+            </div>
+        {% endif %}
+        {% for block in section.blocks %}
+            {%  assign card_product = block.settings.product %}
+            {%  if card_product != blank %}
+                {% assign variant = card_product.selected_or_first_available_variant %}
+                {% if block.settings.variant_title != blank %}
+                    {% assign matched_variant = card_product.variants | where: 'title', block.settings.variant_title | first %}
+                    {% if matched_variant %}
+                        {% assign variant = matched_variant %}
+                    {% endif %}
+                {% endif %}
+                {% assign card_image = variant.featured_image | default: card_product.featured_image %}
+
+                <div class="product-card" {{ block.shopify_attributes }}>
+                    <a href="{{ variant.url }}" class="product-card__media">
+                        {% if card_image %}
+                            {{ card_image | image_url: width: 800 | image_tag: loading: 'lazy', sizes: '(min-width: 990px) 25vw, 50vw' }}
+                        {% endif %}
+                    </a>
+                    <div class="product-card__info">
+                        <a href="{{ variant.url }}" class="product-card__title">{{ block.settings.title | default: card_product.title }}</a>
+                        {% if block.settings.tagline != blank %}
+                            <p class="product-card__tagline">{{ block.settings.tagline }}</p>
+                        {% endif %}
+                        {% assign rating = card_product.metafields.reviews.rating.value %}
+                        {% assign rating_count = card_product.metafields.reviews.rating_count.value %}
+                        {% if rating != blank %}
+                            <p class="product-card__rating">
+                                <span class="product-card__rating-star" aria-hidden="true">{{ 'star.svg' | inline_asset_content }}</span>
+                                <span class="product-card__rating-count">({{ rating_count }} {% if rating_count == 1 %}review{% else %}reviews{% endif %})</span>
+                            </p>
+                        {% endif %}
+                    </div>
+                    <a href="{{ variant.url }}" class="button button--outline product-card__button">
+                        <span>{{ section.settings.button_label }}</span>
+                         <span class="product-card__button-dot" aria-hidden="true"></span>
+                        <span>{{ variant.price | money_without_trailing_zeros }}</span>
+                        {% if variant.compare_at_price > variant.price %}
+                            <s class="product-card__compare-price">{{ variant.compare_at_price | money_without_trailing_zeros }}</s>
+                        {% endif %}
+                    </a>
+                </div>
+            {% endif %}
+        {% endfor %}
+
+    </div>
+</div>
+
+{% stylesheet %}
+    .product-grid {
+        padding: 2.5rem 0 3.125rem;
+    }
+    .product-grid__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        margin-bottom: 1.25rem;
+        padding: 0 var(--page-gutter);
+    }
+    .product-grid__heading, .product-grid__link {
+        color: var(--brown);
+        font-weight: 500;
+        line-height: 145%;
+        letter-spacing: 0.01em;
+    }
+    .product-grid__heading {
+        font-size: 0.75rem;
+    }
+    .product-grid__link {
+        font-size: 0.8125rem;
+        text-decoration: underline;
+    }
+    .product-grid__items {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.75rem;
+        padding: 0 0.5rem;
+    }
+    @media screen and (min-width: 990px) {
+        .product-grid__items {
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 1rem;
+            padding: 0 var(--page-gutter);
+        }
+    }
+    .product-card {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+    .product-card__media {
+        display: block;
+        overflow: hidden;
+        aspect-ratio: 187 / 210;
+    }
+    .product-card__media img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    .product-card__info {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    .product-card__title {
+        color: var(--brown);
+        font-weight: 500;
+        font-size: 1.125rem;
+        line-height: 128%;
+        letter-spacing: -0.03em;
+    }
+    .product-card__tagline {
+        color: var(--brown-70);
+        font-weight: 400;
+        font-size: 0.8125rem;
+        line-height: 135%;
+        letter-spacing: 0.01em;
+    }
+    .product-card__rating {
+        color: var(--brown);
+        background-color: var(--white);
+        align-self: flex-start;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.25rem;
+        padding: 0.1875rem 0.375rem;
+        font-weight: 400;
+        font-size: 0.6875rem;
+        line-height: 135%;
+        letter-spacing: 0.01em;
+    }
+    .product-card__rating-count {
+        color: var(--dark-grey);
+    }
+    .product-card__button {
+        height: 3.0625rem;
+        gap: 0.9375rem;
+        color: var(--brown);
+        border: 1px solid var(--brown-70);
+        font-weight: 500;
+        font-size: 0.8125rem;
+        line-height: 145%;
+        letter-spacing: 0.01em;
+        margin-top: 0.375rem;
+    }
+    .product-card__button-dot {
+        width: 0.25rem;
+        height: 0.25rem;
+        border-radius: 50%;
+        background-color: currentColor;
+    }
+    .product-card__compare-price {
+        opacity: 0.7;
+    }
+    .product-grid__compare {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        padding: 0.5rem;
+        border: 1px solid var(--brown-10);
+    }
+    .product-grid__compare-image {
+        width: 100%;
+        aspect-ratio: 169 / 224;
+        object-fit: cover;
+    }
+    .product-grid__compare-content {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    .product-grid__compare-heading {
+        color: var(--brown);
+        font-weight: 500;
+        font-size: 0.75rem;
+        line-height: 145%;
+        letter-spacing: 0.01em;
+    }
+    .product-grid__compare-text {
+        color: var(--brown-70);
+        font-weight: 400;
+        font-size: 0.8125rem;
+        line-height: 145%;
+        letter-spacing: 0.01em;
+    }
+    .product-grid__compare-button {
+        height: 2.375rem;
+        color: var(--brown);
+        border-color: var(--brown);
+        font-weight: 500;
+        font-size: 0.8125rem;
+        line-height: 145%;
+        letter-spacing: 0.01em;
+    }
+    @media screen and (min-width: 990px) {
+        .product-grid__compare-button {
+            width: auto;
+            align-self: flex-start;
+            padding: 0 1.25rem;
+        }
+        .product-card {
+            gap: 2rem;
+        }
+        .product-card__media {
+            aspect-ratio: 332 / 373;
+        }
+        .product-grid__compare-image {
+            aspect-ratio: 290 / 352;
+        }
+        .product-card__button {
+            margin-top: 0;
+        }
+        .product-grid__compare {
+            gap: 1.25rem;
+            padding: 1.25rem;
+        }
+    }
+{% endstylesheet %}
+{% schema %}
+{
+    "name": "Product Grid",
+    "disabled_on": { "groups": ["header", "footer"] },
+    "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "The Backyard Set-up" },
+        { "type": "text", "id": "link_text", "label": "Link text", "default": "Shop All"},
+        { "type": "url", "id": "link_url", "label": "Link URL"},
+        { "type": "text", "id": "button_label", "label": "Product button label", "default": "Pre-Order" },
+        { "type": "header", "content": "Compare card"},
+        { "type": "image_picker", "id": "compare_image", "label": "Not sure which setup?" },
+        { "type": "text", "id": "compare_heading", "label": "Heading", "default": "Not sure which setup?" },
+        { "type": "textarea", "id": "compare_text", "label": "Text" },
+        { "type": "text", "id": "compare_button_text", "label": "Button text", "default": "Compare Setups" },
+        { "type": "url", "id": "compare_button_url", "label": "Button URL" }
+    ],
+    "blocks": [
+        {
+            "type": "product",
+            "name": "Product card",
+            "limit": 3,
+            "settings": [
+                { "type": "product", "id": "product", "label": "Product" },
+                { "type": "text", "id": "variant_title", "label": "Variant", "info": "Variant name from Shopify admin (leave blank for default variant)."},
+                { "type": "text", "id": "title", "label": "Card title", "info": "Leave blank to use the product title." },
+                { "type": "text", "id": "tagline", "label": "TagLine"}
+            ]
+        }
+    ],
+    "presets": [{ "name": "Product Grid" }]
+}
+{% endschema %}
