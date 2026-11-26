@@ -25,7 +25,7 @@
           <div class="rte">{{ section.settings.content }}</div>
         {% endif %}
         {% if section.settings.cta_url != blank and section.settings.cta_text != blank %}
-          <a href="{{ section.settings.cta_url }}" class="button button--white">{{ section.settings.cta_text }}</a>
+          <a href="{{ section.settings.cta_url }}" class="button button--white button--compact">{{ section.settings.cta_text }}</a>
         {% endif %}
       </div>
     {% endif %}
@@ -35,26 +35,36 @@
 {% stylesheet %}
   .full-bleed-media {
     width: 100%;
-    height: 100vh;
+    aspect-ratio: 402/600;
     position: relative;
+    margin-top: var(--announcement-height, 0px);
+  }
+  @media screen and (min-width: 990px) {
+    .full-bleed-media {
+      aspect-ratio: 1440 / 897;
+    }
   }
   .full-bleed-media :is(video, img) {
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
+  
   .full-bleed-media__content {
     color: var(--white);
     position: absolute;
-    bottom: 1.875rem;
-    left: 1.25rem;
-    right: 1.25rem;
+    inset: 0;
+    padding: 0 var(--page-gutter) 6rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    text-align: center;
   }
   @media screen and (min-width: 990px) {
     .full-bleed-media__content {
-      max-width: 34.375rem;
-      bottom: 3.75rem;
-      left: 2.5rem;
+      padding-bottom: 0;
+      justify-content: center;
     }
   }
 
@@ -63,11 +73,6 @@
   }
   .full-bleed-media__content .button {
     margin-top: 2.5rem;
-  }
-  @media screen and (min-width: 990px) {
-    .full-bleed-media__content .button {
-      max-width: 19.6875rem;
-    }
   }
 {% endstylesheet %}
 

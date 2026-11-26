@@ -11,6 +11,31 @@
   "type": "header",
   "name": "t:general.header",
   "sections": {
+    "announcement_bar_ceerPL": {
+      "type": "announcement-bar",
+      "blocks": {
+        "message_NYgfFP": {
+          "type": "message",
+          "settings": {
+            "text": "Free Shipping on All Orders",
+            "link": ""
+          }
+        },
+        "message_hUJULz": {
+          "type": "message",
+          "settings": {
+            "text": "Hey",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "message_NYgfFP",
+        "message_hUJULz"
+      ],
+      "name": "Announcement Bar",
+      "settings": {}
+    },
     "header": {
       "type": "header",
       "settings": {
@@ -19,6 +44,7 @@
     }
   },
   "order": [
+    "announcement_bar_ceerPL",
     "header"
   ]
 }

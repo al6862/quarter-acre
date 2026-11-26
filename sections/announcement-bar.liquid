@@ -1,0 +1,100 @@
+<announcement-bar class="announcement-bar">
+    <div class="announcement-bar__messages">
+        {% for block in section.blocks %}
+            <p class="announcement-bar__message{% if forloop.first %} active{% endif %}" {{ block.shopify_attributes }}>
+                {%  if block.settings.link != blank %}
+                    <a href="{{ block.settings.link }}">{{ block.settings.text }}</a>
+                {% else %}
+                    {{ block.settings.text }}
+                {% endif %}
+            </p>
+        {% endfor %}
+    </div>
+    {% if section.blocks.size > 1 %}
+        <div class="announcement-bar__controls">
+            <button class="announcement-bar__control" data-action="prev" aria-label="Previous announcement">
+                {{ 'left-arrow.svg' | inline_asset_content }}
+            </button>
+            <button class="announcement-bar__control" data-action="next" aria-label="Next announcement">
+                {{ 'right-arrow.svg' | inline_asset_content }}
+            </button>
+            <button class="announcement-bar__control" data-action="pause" aria-label="Pause announcements">
+                <span class="announcement-bar__icon-pause">{{ 'icon-pause.svg' | inline_asset_content }}</span>
+                <span class="announcement-bar__icon-play">{{ 'icon-play.svg' | inline_asset_content }}</span>
+            </button>
+        </div>
+    {% endif %}
+</announcement-bar>
+
+{% stylesheet %}
+  :root:has(.announcement-bar) {
+    --announcement-height: 1.625rem;
+  }
+
+  .announcement-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 11;
+    height: var(--announcement-height);
+    padding: 0 0.625rem;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    background-color: var(--eggshell);
+    color: var(--brown-70);
+    font-weight: 400;
+    font-size: 0.6875rem;
+    line-height: 135%;
+    letter-spacing: 0.01em;
+    text-align: center;
+  }
+
+  .announcement-bar__messages {
+    grid-column: 2;
+  }
+  .announcement-bar__controls {
+    grid-column: 3;
+    justify-self: end;
+    display: flex;
+  }
+  .announcement-bar__control {
+    width: 1rem;
+    height: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--brown);
+  }
+
+  .announcement-bar__icon-play,
+  .announcement-bar.is-paused .announcement-bar__icon-pause {
+    display: none;
+  }
+  .announcement-bar.is-paused .announcement-bar__icon-play {
+    display: block;
+  }
+
+  .announcement-bar__message:not(.active) {
+    display: none;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+    "name": "Announcement Bar",
+    "enabled_on": { "groups": ["header"] },
+    "blocks": [
+        {
+            "type": "message",
+            "name": "Message",
+            "settings": [
+                { "type": "text", "id": "text", "label": "Text" },
+                { "type": "url", "id": "link", "label": "Link"}
+            ]
+        }
+    ],
+    "presets": [{ "name": "Announcement Bar" }]
+}
+{% endschema %}

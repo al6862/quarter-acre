@@ -40,19 +40,31 @@
 
 :root {
   --grey: #978D82;
+  --dark-grey: #616161;
   --white: #FFFFFF;
   --eggshell: #F1ECE5;
   --light-brown: #543C23;
   --light-brown-30: #543C234D;
   --light-brown-60: #543C2399;
   --dark-brown: #250400;
-  --light-eggshell: #F8F5F2;
+  --brown: #4D301B;
+  --brown-70: #4D301BB2;
+  --brown-10: #4D301B1A;
+  --light-eggshell: #F9F5F0;
 
   --font-suisse-intl: "Suisse Int'l", helvetica, sans-serif;
   --font-crimson-text: 'Crimson Text', serif;
 
-  --color-background: var(--eggshell);
+  --page-gutter: 1rem;
+
+  --color-background: var(--light-eggshell);
   --color-foreground: var(--dark-brown);
+}
+
+@media screen and (min-width: 990px) {
+  :root {
+    --page-gutter: 2rem;
+  }
 }
 
 .title {
@@ -205,6 +217,16 @@ button[type="button"]:hover, .button:hover {
 .button--white {
   background-color: var(--white);
   color: var(--dark-brown);
+}
+
+.button--compact {
+  width: auto;
+  height: auto;
+  padding: 0.9375rem 1.875rem;
+  font-weight: 500;
+  font-size: 0.8125rem;
+  line-height: 145%;
+  letter-spacing: 0.01em;
 }
 
 /* POLICY PAGES */

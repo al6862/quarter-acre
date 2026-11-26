@@ -14,21 +14,21 @@
 
 {% stylesheet %}
   :root {
-    --header-height: 3.375rem;
+    --header-height: calc(3.375rem + var(--announcement-height, 0px));
   }
 
   header-element {
     --header-color: var(--color-foreground);
     --header-bg-color: var(--color-background);
     position: fixed;
-    top: 0;
+    top: var(--announcement-height, 0px);
     left: 0;
     right: 0;
     z-index: 10;
     color: var(--header-color);
     background-color: var(--header-bg-color);
     height: 3.375rem;
-    padding: 0 1.25rem;
+    padding: 0 var(--page-gutter);
     display: grid;
     grid-template-columns: 1fr max-content 1fr;
     align-items: center;
@@ -42,11 +42,7 @@
     --header-color: var(--color-foreground);
     --header-bg-color: var(--color-background);
   }
-  @media screen and (min-width: 990px) {
-    header-element {
-      padding: 0 2.5rem;
-    }
-  }
+
   .header__menu, .header__mobile-menu-container {
     grid-column: 1;
   }
